@@ -2,8 +2,7 @@
 using Core.IRepositories;
 using Core.IServices;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using MongoDB.Bson;
 
 namespace BebodhCrawler.Controllers
 {
@@ -21,38 +20,40 @@ namespace BebodhCrawler.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<HttpProxy>> Get()
+        public async Task<IEnumerable<string>> Get()
         {
-            var proxies = await _proxyService.GetProxies();
+            var proxies = await _proxyService.RetriveProxies();
             return proxies;
         }
 
         [HttpGet("{id}")]
-        public async Task<HttpProxy> Get(Guid id)
+        public async Task<HttpProxy> Get(ObjectId id)
         {
-            var proxy = await _proxyRepository.Get(id);
+            var proxy = await _proxyRepository.FindByIdAsync(id);
             return proxy;
         }
 
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] HttpProxy httpProxy)
         {
-            await _proxyRepository.Add(httpProxy);
+            await _proxyRepository.InsertOneAsync(httpProxy);
             return Ok();
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Put(Guid id, [FromBody] HttpProxy httpProxy)
-        {
-            await _proxyRepository.Update(id, httpProxy);
-            return Ok();
-        }
+        //[HttpPut("{id}")]
+        //public async Task<ActionResult> Put(ObjectId id, [FromBody] HttpProxy httpProxy)
+        //{
+        //    await _proxyRepository.ReplaceOneAsync(id, httpProxy);
+        //    return Ok();
+        //}
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(Guid id)
+        public async Task<ActionResult> Delete(ObjectId id)
         {
-            await _proxyRepository.Remove(id);
+            await _proxyRepository.DeleteByIdAsync(id);
             return Ok();
         }
+
+
     }
 }

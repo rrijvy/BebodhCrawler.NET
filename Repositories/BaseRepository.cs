@@ -2,6 +2,8 @@
 using Core.Models;
 using MongoDB.Driver;
 using Microsoft.Extensions.Options;
+using System.Linq.Expressions;
+using MongoDB.Bson;
 
 namespace Repositories
 {
@@ -28,15 +30,9 @@ namespace Repositories
                 : Database.GetCollection<T>(mongoDBSettings.Value.CollectionName);
         }
 
-        public virtual async Task Add(T obj)
+        public IQueryable<T> AsQueryable()
         {
-            await DbSet.InsertOneAsync(obj);
-        }
-
-        public virtual async Task<T> Get(Guid id)
-        {
-            var data = await DbSet.FindAsync(Builders<T>.Filter.Eq("_id", id));
-            return data.SingleOrDefault();
+            return DbSet.AsQueryable();
         }
 
         public virtual async Task<List<T>> GetAll()
@@ -45,14 +41,57 @@ namespace Repositories
             return all.ToList();
         }
 
-        public virtual async Task Remove(Guid id)
+        public virtual async Task<IEnumerable<T>> FilterByAsync(Expression<Func<T, bool>> filterExpression)
         {
-            await DbSet.DeleteOneAsync(Builders<T>.Filter.Eq("_id", id));
+            var result = await DbSet.FindAsync(filterExpression);
+            return await result.ToListAsync();
         }
 
-        public async Task Update(Guid id, T obj)
+        public virtual async Task<IEnumerable<TProjected>> FilterByAsync<TProjected>(Expression<Func<T, bool>> filterExpression, Expression<Func<T, TProjected>> projectionExpression)
         {
-            await DbSet.ReplaceOneAsync(Builders<T>.Filter.Eq("_id", id), obj);
+            return await DbSet.Find(filterExpression).Project(projectionExpression).ToListAsync();
+        }
+
+        public virtual async Task<T> FindOneAsync(Expression<Func<T, bool>> filterExpression)
+        {
+            var result = await DbSet.FindAsync(filterExpression);
+            return await result.FirstOrDefaultAsync();
+        }
+
+        public virtual async Task<T> FindByIdAsync(ObjectId id)
+        {
+            var result = await DbSet.FindAsync(Builders<T>.Filter.Eq("_id", id));
+            return result.FirstOrDefault();
+        }
+
+        public virtual async Task InsertOneAsync(T document)
+        {
+            await DbSet.InsertOneAsync(document);
+        }
+
+        public virtual async Task InsertManyAsync(ICollection<T> documents)
+        {
+            await DbSet.InsertManyAsync(documents);
+        }
+
+        public virtual async Task ReplaceOneAsync(ObjectId id, T document)
+        {
+            await DbSet.FindOneAndReplaceAsync(Builders<T>.Filter.Eq("_id", id), document);
+        }
+
+        public virtual async Task DeleteByIdAsync(ObjectId id)
+        {
+            await DbSet.FindOneAndDeleteAsync(Builders<T>.Filter.Eq("_id", id));
+        }
+
+        public virtual async Task DeleteOneAsync(Expression<Func<T, bool>> filterExpression)
+        {
+            await DbSet.DeleteOneAsync(filterExpression);
+        }
+
+        public virtual async Task DeleteManyAsync(Expression<Func<T, bool>> filterExpression)
+        {
+            await DbSet.DeleteManyAsync(filterExpression);
         }
 
         private void ConfigureMongo()

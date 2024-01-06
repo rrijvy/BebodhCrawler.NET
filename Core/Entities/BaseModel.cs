@@ -6,7 +6,7 @@ namespace Core.Entities
 {
     public class BaseModel
     {
-        public Guid Id { get; set; }
+        public ObjectId Id { get; set; }
         public string AddedOn { get; set; }
         public string UpdatedAt { get; set; }
     }

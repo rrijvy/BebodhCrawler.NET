@@ -2,6 +2,7 @@
 using Core.IRepositories;
 using Core.Models;
 using Microsoft.Extensions.Options;
+using MongoDB.Driver;
 
 namespace Repositories
 {
