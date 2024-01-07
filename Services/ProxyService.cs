@@ -1,6 +1,8 @@
 ﻿using Core.Entities;
+using Core.Helpers;
 using Core.IRepositories;
 using Core.IServices;
+using MongoDB.Driver;
 using System.Net;
 
 namespace Services
@@ -20,7 +22,7 @@ namespace Services
             return proxies;
         }
 
-        public async Task<List<string>> RetriveProxies()
+        public async Task<List<HttpProxy>> RetriveProxies()
         {
 
             var proxies = new List<string>();
@@ -28,16 +30,19 @@ namespace Services
             var tasks = new List<Task<string>>();
             var sourceUrls = new List<string>()
             {
-                "https://raw.githubusercontent.com/prxchk/proxy-list/main/http.txt",
-                //"https://raw.githubusercontent.com/zloi-user/hideip.me/main/https.txt",
-                //"https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/http.txt",
-                //"https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/https.txt",
+                ////"https://raw.githubusercontent.com/prxchk/proxy-list/main/http.txt",
+                "https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/http.txt",
                 //"https://raw.githubusercontent.com/saisuiu/Lionkings-Http-Proxys-Proxies/main/free.txt",
                 //"https://raw.githubusercontent.com/MuRongPIG/Proxy-Master/main/http.txt",
-                //"https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/http.txt",
+
                 //"https://raw.githubusercontent.com/caliphdev/Proxy-List/master/http.txt",
                 //"https://raw.githubusercontent.com/Zaeem20/FREE_PROXIES_LIST/master/http.txt",
                 //"https://raw.githubusercontent.com/proxy4parsing/proxy-list/main/http.txt",
+
+                //"https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/https.txt",
+                //"https://raw.githubusercontent.com/zloi-user/hideip.me/main/https.txt",
+
+                //"https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/http.txt",
             };
 
             using (var httpClient = new HttpClient())
@@ -63,7 +68,11 @@ namespace Services
 
             activeProxies = taskResults.Where(x => !string.IsNullOrEmpty(x)).ToList();
 
-            return activeProxies;
+            var httpProxies = activeProxies.Select(x=>Utility.GetProxy(x)).ToList();
+
+            await _proxyRepository.InsertManyAsync(httpProxies);
+
+            return httpProxies;
         }
 
         private async Task<string> CheckProxyIsAlive(string proxyAddress)
@@ -88,6 +97,13 @@ namespace Services
                 Console.WriteLine($"Failed - {proxyAddress}");
                 return string.Empty;
             }
+        }
+
+        public async Task<HttpProxy> GetUnsedActiveProxy()
+        {
+            var proxies = _proxyRepository.AsQueryable().OrderByDescending(x => x.UpdatedAt).Take(1).ToList();
+            var proxy = proxies.FirstOrDefault();
+            return proxy;
         }
     }
 }

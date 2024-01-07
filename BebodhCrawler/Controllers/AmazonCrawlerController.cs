@@ -1,5 +1,7 @@
-﻿using Core.IServices;
+﻿using Core.Helpers;
+using Core.IServices;
 using HtmlAgilityPack;
+using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.IO.Compression;
@@ -12,52 +14,89 @@ namespace BebodhCrawler.Controllers
     public class AmazonCrawlerController : ControllerBase
     {
         private readonly IProxyService _proxyService;
+        private readonly IAmazonCrawlerService _amazonCrawlerService;
 
-        public AmazonCrawlerController(IProxyService proxyService)
+        public AmazonCrawlerController(IProxyService proxyService, IAmazonCrawlerService amazonCrawlerService)
         {
             _proxyService = proxyService;
+            _amazonCrawlerService = amazonCrawlerService;
         }
 
         [HttpGet("AmazonProducts")]
         public async Task<ActionResult> AmazonProducts()
         {
-            //var proxies = await _proxyService.RetriveProxies();
-
-            var productUrl = @"https://www.amazon.com/SAMSUNG-Computer-DisplayPort-Adjustable-LF24T454FQNXGO/dp/B08WGLL83S";
-            var jsonUrl = @"https://jsonplaceholder.typicode.com/todos/1";
-
-            var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36");
-            var handler = new HttpClientHandler
+            try
             {
-                Proxy = new WebProxy($"http://81.21.234.64:6453"),
-                UseProxy = true
-            };
-            var response = await httpClient.GetAsync(productUrl);
-            string htmlAsString = string.Empty;
-            if (response.Content.Headers.ContentEncoding.Contains("gzip"))
-            {
-                Stream stream = await response.Content.ReadAsStreamAsync();
-                GZipStream gzipStream = new GZipStream(stream, CompressionMode.Decompress);
-                StreamReader reader = new StreamReader(gzipStream);
-                htmlAsString = await reader.ReadToEndAsync();
-                Console.WriteLine(htmlAsString);
+                string htmlAsString = string.Empty;
 
+                var proxy = await _proxyService.GetUnsedActiveProxy();
+
+                var productUrl = @"https://www.amazon.com/SAMSUNG-Computer-DisplayPort-Adjustable-LF24T454FQNXGO/dp/B08WGLL83S";
+
+                var httpClient = HttpClientHelper.GetHttpClient(proxy.IpAddress);
+
+                var response = await httpClient.GetAsync(productUrl);
+
+                if (response.Content.Headers.ContentEncoding.Contains("gzip"))
+                {
+                    Stream stream = await response.Content.ReadAsStreamAsync();
+                    GZipStream gzipStream = new GZipStream(stream, CompressionMode.Decompress);
+                    StreamReader reader = new StreamReader(gzipStream);
+                    htmlAsString = await reader.ReadToEndAsync();
+                    Console.WriteLine(htmlAsString);
+
+                }
+                else
+                {
+                    htmlAsString = await response.Content.ReadAsStringAsync();
+                }
+
+
+                var htmlDoc = new HtmlDocument();
+                htmlDoc.LoadHtml(htmlAsString);
+
+                var node = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"productTitle\"]");
+                var firstNode = node.FirstOrDefault();
+                var productName = firstNode.InnerText.Trim();
+
+                return Ok(productName);
             }
-            else
+            catch (Exception ex)
             {
-                htmlAsString = await response.Content.ReadAsStringAsync();
-            }
 
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpGet("GetAmazonProductsByCategory")]
+        public async Task<ActionResult> GetAmazonProductsByCategory()
+        {
+            var category = "monitor";
+
+            var searchUrl = _amazonCrawlerService.GenerateAmazonSearchUrlByCategory(category);
+
+            var proxy = await _proxyService.GetUnsedActiveProxy();
+
+            var httpClient = HttpClientHelper.GetHttpClient(proxy.IpAddress);
+
+            var response = await httpClient.GetAsync(searchUrl);
+
+            var htmlString = await Utility.GetHtmlAsStringAsync(response);
 
             var htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(htmlAsString);
+            htmlDoc.LoadHtml(htmlString);
 
-            var node = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"productTitle\"]");
-            var firstNode = node.FirstOrDefault();
-            var productName = firstNode.InnerText;
+            var nodes = htmlDoc.DocumentNode.SelectNodes("//*[@id=\"productTitle\"]");
 
-            return Ok(productName);
+            var productNames = new List<string>();
+
+            foreach (var node in nodes)
+            {
+                var productName = node.InnerText.Trim();
+                productNames.Add(productName);
+            }
+
+            return Ok(productNames);
         }
     }
 }
