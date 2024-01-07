@@ -15,6 +15,7 @@ namespace Core.IRepositories
         Task<IEnumerable<TProjected>> FilterByAsync<TProjected>(Expression<Func<T, bool>> filterExpression, Expression<Func<T, TProjected>> projectionExpression);
         Task<T> FindOneAsync(Expression<Func<T, bool>> filterExpression);
         Task<T> FindByIdAsync(ObjectId id);
+        Task<IEnumerable<T>> FindAllAsync(Expression<Func<T, bool>> filterExpression);
         Task InsertOneAsync(T document);
         Task InsertManyAsync(ICollection<T> documents);
         Task ReplaceOneAsync(ObjectId id, T document);

@@ -101,27 +101,23 @@ namespace Services
 
         public HttpProxy GetUnusedActiveProxy()
         {
-            var proxies = _proxyRepository.AsQueryable().Where(x => x.IsProxyRunning == false).ToList();
+            var filterDefination = Builders<HttpProxy>.Filter.Eq(x => x.IsProxyRunning, false);
+            var sortDefinition = Builders<HttpProxy>.Sort.Ascending(x => x.UpdatedAt);
 
-            //var proxy = proxies
-            //    .Select(x =>
-            //    {
-            //        x.UpdatedAt = DateTimeOffset.MinValue.ToUnixTimeSeconds().ToString();
-            //        return x;
-            //    });
+            var proxies = _proxyRepository.AsQueryable()
+                .Where(x => !x.IsProxyRunning && !x.BlockedBy.Contains(CrawlerType.AMAZON))
+                .OrderBy(x => x.UpdatedAt).ToList();
 
-            //proxy = proxy
-            //    .OrderBy(x => long.Parse(x.UpdatedAt))
-            //    .Where(x =>
-            //    {
-            //        var isParsed = int.TryParse(Utility.GetElapsedTimeInMinute(x.UpdatedAt), out int elapsedTime);
-            //        if (isParsed && elapsedTime > 5) return true;
-            //        return false;
-            //    }).FirstOrDefault();
+            var proxy = proxies.FirstOrDefault(x =>
+            {
+                if (string.IsNullOrEmpty(x.UpdatedAt)) return true;
 
-            //return proxy;
+                var elapsedTime = Utility.GetElapsedTimeInSecond(x.UpdatedAt);
 
-            return proxies.FirstOrDefault();
+                return elapsedTime > 300000 ? true : false;
+            });
+
+            return proxy;
         }
     }
 }

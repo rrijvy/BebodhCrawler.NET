@@ -15,13 +15,13 @@ namespace Core.Helpers
             return timeStamp;
         }
 
-        public static string GetElapsedTimeInMinute(string lastUsedTimeStamp)
+        public static double GetElapsedTimeInSecond(string lastUsedTimeStamp)
         {
-            if (string.IsNullOrEmpty(lastUsedTimeStamp)) return string.Empty;
+            if (string.IsNullOrEmpty(lastUsedTimeStamp)) return 0;
             DateTimeOffset currentOffset = DateTimeOffset.FromUnixTimeSeconds(long.Parse(Utility.GetCurrentUnixTime()));
             DateTimeOffset lastUsedOffset = DateTimeOffset.FromUnixTimeSeconds(long.Parse(lastUsedTimeStamp));
             var diff = currentOffset - lastUsedOffset;
-            return diff.TotalMinutes.ToString();
+            return diff.TotalSeconds;
         }
 
         public static HttpProxy GetProxy(string proxyAddress)

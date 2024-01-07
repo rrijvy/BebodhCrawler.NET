@@ -76,45 +76,16 @@ namespace BebodhCrawler.Controllers
         [HttpGet("GetAmazonProductsByCategory")]
         public async Task<ActionResult> GetAmazonProductsByCategory()
         {
-            var category = "monitor";
-
-            var searchUrl = _amazonCrawlerService.GenerateAmazonSearchUrlByCategory(category);
-
-            var proxy = _proxyService.GetUnusedActiveProxy();
-
-            var httpClient = HttpClientHelper.GetHttpClient(proxy.IpAddress);
-
-            var response = await httpClient.GetAsync(searchUrl);
-
-            if (response.StatusCode.ToString() == "503")
+            try
             {
-                proxy.IsProxyRunning = false;
-                proxy.UpdatedAt = Utility.GetCurrentUnixTime();
-
-                await _proxyRepository.ReplaceOneAsync(proxy.Id, proxy);
+                var productNames = await _amazonCrawlerService.GetAmazonProductsByCategory();
+                return Ok(productNames);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
             }
 
-            var htmlString = await Utility.GetHtmlAsStringAsync(response);
-
-            var htmlDoc = new HtmlDocument();
-            htmlDoc.LoadHtml(htmlString);
-
-            var productNodes = htmlDoc.DocumentNode.SelectNodes("//div[@data-component-type=\"s-search-result\"]");
-
-            var productNames = new List<string>();
-
-            foreach (var productNode in productNodes)
-            {
-                var productLink = productNode.SelectNodes(".//h2/a")[0].GetAttributeValue("href", "").Trim();
-                var productName = productNode.SelectNodes(".//h2/a/span")[0].InnerText.Trim();
-                var productPrice = productNode.SelectNodes(".//span[@class=\"a-price\"]/span")[0].InnerText.Trim();
-                var productImage = productNode.SelectNodes(".//img[@class=\"s-image\"]")[0].GetAttributeValue("src", "").Trim(); ;
-                var totalReviews = productNode.SelectNodes(".//span[@class=\"a-size-base s-underline-text\"]")[0].InnerText.Trim();
-                var ratings = productNode.SelectNodes(".//span[@class=\"a-icon-alt\"]")[0].InnerText.Trim();
-
-                productNames.Add(productName);
-            }
-            return Ok(productNames);
         }
     }
 }

@@ -4,6 +4,7 @@ using MongoDB.Driver;
 using Microsoft.Extensions.Options;
 using System.Linq.Expressions;
 using MongoDB.Bson;
+using Core.Entities;
 
 namespace Repositories
 {
@@ -56,6 +57,29 @@ namespace Repositories
         {
             var result = await DbSet.FindAsync(filterExpression);
             return await result.FirstOrDefaultAsync();
+        }
+        public virtual async Task<IEnumerable<T>> FindAllAsync(Expression<Func<T, bool>> filterExpression)
+        {
+            var result = await DbSet.FindAsync(filterExpression);
+            return await result.ToListAsync();
+        }
+
+        public virtual async Task<IEnumerable<T>> FindAllAsync(FilterDefinition<T> filterDefinition = null, SortDefinition<T> sortDefinition = null)
+        {
+            if (filterDefinition != null && sortDefinition != null)
+            {
+                var result = await DbSet.Find(filterDefinition).Sort(sortDefinition).ToListAsync();
+                return result;
+            }
+            else if (filterDefinition != null)
+            {
+                var result = await DbSet.Find(filterDefinition).ToListAsync();
+                return result;
+            }
+
+            return Enumerable.Empty<T>();
+
+
         }
 
         public virtual async Task<T> FindByIdAsync(ObjectId id)
