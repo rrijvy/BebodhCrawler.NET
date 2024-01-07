@@ -19,6 +19,7 @@ namespace BebodhCrawler
 
             builder.Services.AddScoped<IProxyRepository, ProxyRepository>();
             builder.Services.AddScoped<IProxyService, ProxyService>();
+            builder.Services.AddScoped<IAmazonCrawlerService, AmazonCrawlerService>();
 
             var app = builder.Build();
 

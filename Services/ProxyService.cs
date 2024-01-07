@@ -30,8 +30,8 @@ namespace Services
             var tasks = new List<Task<string>>();
             var sourceUrls = new List<string>()
             {
-                ////"https://raw.githubusercontent.com/prxchk/proxy-list/main/http.txt",
-                "https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/http.txt",
+                "https://raw.githubusercontent.com/prxchk/proxy-list/main/http.txt",
+                //"https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/http.txt",
                 //"https://raw.githubusercontent.com/saisuiu/Lionkings-Http-Proxys-Proxies/main/free.txt",
                 //"https://raw.githubusercontent.com/MuRongPIG/Proxy-Master/main/http.txt",
 
@@ -68,7 +68,7 @@ namespace Services
 
             activeProxies = taskResults.Where(x => !string.IsNullOrEmpty(x)).ToList();
 
-            var httpProxies = activeProxies.Select(x=>Utility.GetProxy(x)).ToList();
+            var httpProxies = activeProxies.Select(x => Utility.GetProxy(x)).ToList();
 
             await _proxyRepository.InsertManyAsync(httpProxies);
 
@@ -99,11 +99,29 @@ namespace Services
             }
         }
 
-        public async Task<HttpProxy> GetUnsedActiveProxy()
+        public HttpProxy GetUnusedActiveProxy()
         {
-            var proxies = _proxyRepository.AsQueryable().OrderByDescending(x => x.UpdatedAt).Take(1).ToList();
-            var proxy = proxies.FirstOrDefault();
-            return proxy;
+            var proxies = _proxyRepository.AsQueryable().Where(x => x.IsProxyRunning == false).ToList();
+
+            //var proxy = proxies
+            //    .Select(x =>
+            //    {
+            //        x.UpdatedAt = DateTimeOffset.MinValue.ToUnixTimeSeconds().ToString();
+            //        return x;
+            //    });
+
+            //proxy = proxy
+            //    .OrderBy(x => long.Parse(x.UpdatedAt))
+            //    .Where(x =>
+            //    {
+            //        var isParsed = int.TryParse(Utility.GetElapsedTimeInMinute(x.UpdatedAt), out int elapsedTime);
+            //        if (isParsed && elapsedTime > 5) return true;
+            //        return false;
+            //    }).FirstOrDefault();
+
+            //return proxy;
+
+            return proxies.FirstOrDefault();
         }
     }
 }

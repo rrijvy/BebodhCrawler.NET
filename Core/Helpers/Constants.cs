@@ -1,4 +1,6 @@
-﻿namespace Core.Helpers
+﻿using System.Collections.Generic;
+
+namespace Core.Helpers
 {
     public static class Constants
     {

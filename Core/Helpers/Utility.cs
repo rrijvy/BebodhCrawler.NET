@@ -9,11 +9,26 @@ namespace Core.Helpers
 {
     public static class Utility
     {
+        public static string GetCurrentUnixTime()
+        {
+            var timeStamp = new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds().ToString();
+            return timeStamp;
+        }
+
+        public static string GetElapsedTimeInMinute(string lastUsedTimeStamp)
+        {
+            if (string.IsNullOrEmpty(lastUsedTimeStamp)) return string.Empty;
+            DateTimeOffset currentOffset = DateTimeOffset.FromUnixTimeSeconds(long.Parse(Utility.GetCurrentUnixTime()));
+            DateTimeOffset lastUsedOffset = DateTimeOffset.FromUnixTimeSeconds(long.Parse(lastUsedTimeStamp));
+            var diff = currentOffset - lastUsedOffset;
+            return diff.TotalMinutes.ToString();
+        }
+
         public static HttpProxy GetProxy(string proxyAddress)
         {
             return new HttpProxy
             {
-                AddedOn = new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds().ToString(),
+                AddedOn = GetCurrentUnixTime(),
                 IpAddress = proxyAddress,
                 IsActive = false,
                 IsProxyRunning = false,

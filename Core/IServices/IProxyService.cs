@@ -8,6 +8,6 @@ namespace Core.IServices
     {
         Task<List<HttpProxy>> GetProxies();
         Task<List<HttpProxy>> RetriveProxies();
-        Task<HttpProxy> GetUnsedActiveProxy();
+        HttpProxy GetUnusedActiveProxy();
     }
 }
