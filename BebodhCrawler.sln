@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34024.191
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BebodhCrawler", "BebodhCrawler\BebodhCrawler.csproj", "{A9E76E9E-9921-4FAA-B5C4-17447913CEAE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BebodhCrawler", "BebodhCrawler\BebodhCrawler.csproj", "{A9E76E9E-9921-4FAA-B5C4-17447913CEAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{50001165-09D0-4996-8668-3F9092D0B7F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{50001165-09D0-4996-8668-3F9092D0B7F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{AAD6C0A8-4AA2-4EB9-A863-9F5E8DE93FA7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{AAD6C0A8-4AA2-4EB9-A863-9F5E8DE93FA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositories", "Repositories\Repositories.csproj", "{91D5BC2A-E108-4707-872C-E67E250C7CFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositories\Repositories.csproj", "{91D5BC2A-E108-4707-872C-E67E250C7CFF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyRetriever", "ProxyRetriever\ProxyRetriever.csproj", "{EFE13ACC-E24B-4E46-9380-D08078B580B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{8E13F190-8D2E-4BE7-8134-16400949FE97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{91D5BC2A-E108-4707-872C-E67E250C7CFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91D5BC2A-E108-4707-872C-E67E250C7CFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91D5BC2A-E108-4707-872C-E67E250C7CFF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFE13ACC-E24B-4E46-9380-D08078B580B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFE13ACC-E24B-4E46-9380-D08078B580B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFE13ACC-E24B-4E46-9380-D08078B580B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFE13ACC-E24B-4E46-9380-D08078B580B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E13F190-8D2E-4BE7-8134-16400949FE97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E13F190-8D2E-4BE7-8134-16400949FE97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E13F190-8D2E-4BE7-8134-16400949FE97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E13F190-8D2E-4BE7-8134-16400949FE97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

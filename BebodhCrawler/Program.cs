@@ -1,8 +1,5 @@
-using Core.IRepositories;
-using Core.IServices;
+using Common;
 using Core.Models;
-using Repositories;
-using Services;
 
 namespace BebodhCrawler
 {
@@ -17,9 +14,7 @@ namespace BebodhCrawler
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddScoped<IProxyRepository, ProxyRepository>();
-            builder.Services.AddScoped<IProxyService, ProxyService>();
-            builder.Services.AddScoped<IAmazonCrawlerService, AmazonCrawlerService>();
+            HelperService.RegisterDependencies(builder.Services);
 
             var app = builder.Build();
 
