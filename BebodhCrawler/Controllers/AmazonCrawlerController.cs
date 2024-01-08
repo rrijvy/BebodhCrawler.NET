@@ -1,14 +1,9 @@
-﻿using Core.Entities;
-using Core.Helpers;
+﻿using Core.Helpers;
 using Core.IRepositories;
 using Core.IServices;
 using HtmlAgilityPack;
-using Microsoft.AspNetCore.Html;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.IO.Compression;
-using System.Net;
-using System.Xml.Linq;
 
 namespace BebodhCrawler.Controllers
 {
@@ -74,11 +69,11 @@ namespace BebodhCrawler.Controllers
         }
 
         [HttpGet("GetAmazonProductsByCategory")]
-        public async Task<ActionResult> GetAmazonProductsByCategory()
+        public async Task<ActionResult> GetAmazonProductsByCategory(string category)
         {
             try
             {
-                var productNames = await _amazonCrawlerService.GetAmazonProductsByCategory();
+                var productNames = await _amazonCrawlerService.GetAmazonProductsByCategory(category);
                 return Ok(productNames);
             }
             catch (Exception ex)

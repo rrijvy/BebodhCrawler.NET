@@ -12,6 +12,7 @@ namespace Common
         public static void RegisterDependencies(IServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<IProxyRepository, ProxyRepository>();
+            serviceCollection.AddScoped<IProxyBackgroundTaskRepository, ProxyBackgroundTaskRepository>();
             serviceCollection.AddScoped<IProxyService, ProxyService>();
             serviceCollection.AddScoped<IAmazonCrawlerService, AmazonCrawlerService>();
         }

@@ -4,21 +4,28 @@ using System.IO.Compression;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Xml;
+using HtmlAgilityPack;
 
 namespace Core.Helpers
 {
     public static class Utility
     {
-        public static string GetCurrentUnixTime()
+        public static string GetCurrentUnixTimeAsString()
         {
             var timeStamp = new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds().ToString();
             return timeStamp;
         }
 
+        public static long GetCurrentUnixTime()
+        {
+            var timeStamp = new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds();
+            return timeStamp;
+        }
         public static double GetElapsedTimeInSecond(string lastUsedTimeStamp)
         {
             if (string.IsNullOrEmpty(lastUsedTimeStamp)) return 0;
-            DateTimeOffset currentOffset = DateTimeOffset.FromUnixTimeSeconds(long.Parse(Utility.GetCurrentUnixTime()));
+            DateTimeOffset currentOffset = DateTimeOffset.FromUnixTimeSeconds(long.Parse(Utility.GetCurrentUnixTimeAsString()));
             DateTimeOffset lastUsedOffset = DateTimeOffset.FromUnixTimeSeconds(long.Parse(lastUsedTimeStamp));
             var diff = currentOffset - lastUsedOffset;
             return diff.TotalSeconds;
@@ -28,7 +35,7 @@ namespace Core.Helpers
         {
             return new HttpProxy
             {
-                AddedOn = GetCurrentUnixTime(),
+                AddedOn = GetCurrentUnixTimeAsString(),
                 IpAddress = proxyAddress,
                 IsActive = false,
                 IsProxyRunning = false,
@@ -52,5 +59,62 @@ namespace Core.Helpers
                 return htmlString;
             }
         }
+
+        public static string? GetNodeInnerText(HtmlNode parentNode, string xpath, string attribute = null)
+        {
+            try
+            {
+                var node = parentNode.SelectNodes(xpath)?[0];
+                return node?.InnerText.Trim();
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public static decimal GetNodeInnerTextAsDecimal(HtmlNode parentNode, string xpath)
+        {
+            try
+            {
+                var node = parentNode.SelectNodes(xpath)?[0];
+                if (decimal.TryParse(node?.InnerText.Trim(), out decimal value))
+                    return value;
+                return 0;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public static double GetNodeInnerTextAsDouble(HtmlNode parentNode, string xpath)
+        {
+            try
+            {
+                var node = parentNode.SelectNodes(xpath)?[0];
+                if (double.TryParse(node?.InnerText.Trim(), out double value))
+                    return value;
+                return 0;
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+        }
+
+        public static string? GetNodeAttributeValue(HtmlNode parentNode, string xpath, string attributeName)
+        {
+            try
+            {
+                var node = parentNode.SelectNodes(xpath)?[0];
+                return node?.GetAttributeValue(attributeName, "").Trim();
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
     }
 }

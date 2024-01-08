@@ -3,6 +3,7 @@ using Core.Helpers;
 using Core.IRepositories;
 using Core.IServices;
 using MongoDB.Driver;
+using Repositories;
 using System.Net;
 
 namespace Services
@@ -10,10 +11,12 @@ namespace Services
     public class ProxyService : IProxyService
     {
         private readonly IProxyRepository _proxyRepository;
+        private readonly IProxyBackgroundTaskRepository _proxyBackgroundTaskRepository;
 
-        public ProxyService(IProxyRepository proxyRepository)
+        public ProxyService(IProxyRepository proxyRepository, IProxyBackgroundTaskRepository proxyBackgroundTaskRepository)
         {
             _proxyRepository = proxyRepository;
+            _proxyBackgroundTaskRepository = proxyBackgroundTaskRepository;
         }
 
         public async Task<List<HttpProxy>> GetProxies()
@@ -25,16 +28,21 @@ namespace Services
         public async Task<List<HttpProxy>> RetrieveProxies()
         {
             Console.WriteLine("Initiate Retrival.");
-
+            var proxyBackgroundTaskHistory = new ProxyBackgroundTaskHistory
+            {
+                StartedAt = Utility.GetCurrentUnixTime(),
+            };
+            await _proxyBackgroundTaskRepository.InsertOneAsync(proxyBackgroundTaskHistory);
+            proxyBackgroundTaskHistory = _proxyBackgroundTaskRepository.AsQueryable().OrderByDescending(x => x.StartedAt).ToList().FirstOrDefault();
             var proxies = new List<string>();
             var activeProxies = new List<string>();
             var tasks = new List<Task<string>>();
             var sourceUrls = new List<string>()
             {
                 "https://raw.githubusercontent.com/prxchk/proxy-list/main/http.txt",
-                "https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/http.txt",
-                "https://raw.githubusercontent.com/saisuiu/Lionkings-Http-Proxys-Proxies/main/free.txt",
-                "https://raw.githubusercontent.com/MuRongPIG/Proxy-Master/main/http.txt",
+                //"https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/http.txt",
+                //"https://raw.githubusercontent.com/saisuiu/Lionkings-Http-Proxys-Proxies/main/free.txt",
+                //"https://raw.githubusercontent.com/MuRongPIG/Proxy-Master/main/http.txt",
 
                 //"https://raw.githubusercontent.com/caliphdev/Proxy-List/master/http.txt",
                 //"https://raw.githubusercontent.com/Zaeem20/FREE_PROXIES_LIST/master/http.txt",
@@ -72,6 +80,9 @@ namespace Services
             var httpProxies = activeProxies.Select(x => Utility.GetProxy(x)).ToList();
 
             await _proxyRepository.InsertManyAsync(httpProxies);
+
+            proxyBackgroundTaskHistory.EndedAt = Utility.GetCurrentUnixTime();
+            await _proxyBackgroundTaskRepository.ReplaceOneAsync(proxyBackgroundTaskHistory.Id, proxyBackgroundTaskHistory);
 
             return httpProxies;
         }

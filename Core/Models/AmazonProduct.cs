@@ -7,6 +7,6 @@
         public decimal Price { get; set; }
         public string Image { get; set; }
         public double TotalReviews { get; set; }
-        public double Rating { get; set; }
+        public string Rating { get; set; }
     }
 }

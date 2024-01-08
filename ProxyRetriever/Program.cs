@@ -2,6 +2,7 @@
 using Core.IServices;
 using Core.Models;
 using Hangfire;
+using Hangfire.MemoryStorage;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ProxyRetriever
@@ -29,11 +30,12 @@ namespace ProxyRetriever
 
             var sqlServerConnectionString = @"Data Source=DESKTOP-MSFMN85\SQLEXPRESS;Initial Catalog=ProxyRetrieverDB;Integrated Security=True";
 
-            GlobalConfiguration.Configuration.UseSqlServerStorage(sqlServerConnectionString);
+            //GlobalConfiguration.Configuration.UseSqlServerStorage(sqlServerConnectionString);
+            GlobalConfiguration.Configuration.UseMemoryStorage();
 
             var server = new BackgroundJobServer();
 
-            RecurringJob.AddOrUpdate<IProxyService>("_main_", x => x.RetrieveProxies(), "* */12 * * *");
+            RecurringJob.AddOrUpdate<IProxyService>("_main_", x => x.RetrieveProxies(), "*/1 * * * *");
 
             Console.WriteLine("Hangfire Server started. Press any key to exit...");
 

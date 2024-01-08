@@ -22,7 +22,7 @@ namespace BebodhCrawler.Controllers
         [HttpGet]
         public async Task<IEnumerable<HttpProxy>> Get()
         {
-            var proxies = await _proxyRepository.GetAll();
+            var proxies = await _proxyService.RetrieveProxies();
             return proxies;
         }
 
@@ -40,12 +40,12 @@ namespace BebodhCrawler.Controllers
             return Ok();
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult> Put(ObjectId id, [FromBody] HttpProxy httpProxy)
-        {
-            await _proxyRepository.ReplaceOneAsync(id, httpProxy);
-            return Ok();
-        }
+        //[HttpPut("{id}")]
+        //public async Task<ActionResult> Put(ObjectId id, [FromBody] HttpProxy httpProxy)
+        //{
+        //    await _proxyRepository.ReplaceOneAsync(id, httpProxy);
+        //    return Ok();
+        //}
 
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(ObjectId id)

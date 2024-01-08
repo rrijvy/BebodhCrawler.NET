@@ -27,13 +27,13 @@ namespace Services
             return url.ToString();
         }
 
-        public async Task<List<AmazonProduct>> GetAmazonProductsByCategory()
+        public async Task<List<AmazonProduct>> GetAmazonProductsByCategory(string category)
         {
             HttpProxy proxy = null;
 
             try
             {
-                var category = "monitor";
+                //var category = "monitor";
 
                 var amazonProducts = new List<AmazonProduct>();
 
@@ -58,34 +58,12 @@ namespace Services
 
                     foreach (var productNode in productNodes)
                     {
-                        var productLink = productNode.SelectNodes(".//h2/a")[0].GetAttributeValue("href", "").Trim();
-                        var productName = productNode.SelectNodes(".//h2/a/span")[0].InnerText.Trim();
-                        var productPrice = productNode.SelectNodes(".//span[@class=\"a-price\"]/span")[0].InnerText.Trim();
-                        var productImage = productNode.SelectNodes(".//img[@class=\"s-image\"]")[0].GetAttributeValue("src", "").Trim(); ;
-                        var totalReviews = productNode.SelectNodes(".//span[@class=\"a-size-base s-underline-text\"]")[0].InnerText.Trim();
-                        var ratings = productNode.SelectNodes(".//span[@class=\"a-icon-alt\"]")[0].InnerText.Trim();
-
-                        var amazonProduct = new AmazonProduct
-                        {
-                            Name = productName,
-                            Link = productLink,
-                            Image = productImage,
-                        };
-
-                        if (decimal.TryParse(productPrice, out decimal amazonProductPrice))
-                            amazonProduct.Price = amazonProductPrice;
-
-                        if (double.TryParse(totalReviews, out double amazonProductTotalReviews))
-                            amazonProduct.TotalReviews = amazonProductTotalReviews;
-
-                        if (double.TryParse(ratings, out double amazonProductRatings))
-                            amazonProduct.Rating = amazonProductRatings;
-
+                        AmazonProduct amazonProduct = AmazonProductInfoParser(productNode);
                         amazonProducts.Add(amazonProduct);
                     }
 
                     proxy.IsProxyRunning = false;
-                    proxy.UpdatedAt = Utility.GetCurrentUnixTime();
+                    proxy.UpdatedAt = Utility.GetCurrentUnixTimeAsString();
                     await _proxyRepository.ReplaceOneAsync(proxy.Id, proxy);
                 }
                 else
@@ -94,10 +72,10 @@ namespace Services
                     else proxy.BlockedBy.Add(CrawlerType.AMAZON);
 
                     proxy.IsProxyRunning = false;
-                    proxy.UpdatedAt = Utility.GetCurrentUnixTime();
+                    proxy.UpdatedAt = Utility.GetCurrentUnixTimeAsString();
                     await _proxyRepository.ReplaceOneAsync(proxy.Id, proxy);
 
-                    return await GetAmazonProductsByCategory();
+                    return await GetAmazonProductsByCategory(category);
                 }
 
                 return amazonProducts;
@@ -109,15 +87,30 @@ namespace Services
                     if (proxy.BlockedBy == null) proxy.BlockedBy = new List<CrawlerType> { CrawlerType.AMAZON };
                     else proxy.BlockedBy.Add(CrawlerType.AMAZON);
                     proxy.IsProxyRunning = false;
-                    proxy.UpdatedAt = Utility.GetCurrentUnixTime();
+                    proxy.UpdatedAt = Utility.GetCurrentUnixTimeAsString();
                     await _proxyRepository.ReplaceOneAsync(proxy.Id, proxy);
 
-                    return await GetAmazonProductsByCategory();
+                    return await GetAmazonProductsByCategory(category);
                 }
 
                 return null;
             }
 
+        }
+
+        private static AmazonProduct AmazonProductInfoParser(HtmlNode productNode)
+        {
+            var amazonProduct = new AmazonProduct
+            {
+                Link = Utility.GetNodeInnerText(productNode, ".//h2/a | .//a", "href") ?? string.Empty,
+                Name = Utility.GetNodeInnerText(productNode, ".//h2/a/span | .//h2") ?? string.Empty,
+                Price = Utility.GetNodeInnerTextAsDecimal(productNode, ".//span[@class=\"a-price\"]/span"),
+                Image = Utility.GetNodeAttributeValue(productNode, ".//img[@class=\"s-image\"]", "src") ?? string.Empty,
+                TotalReviews = Utility.GetNodeInnerTextAsDouble(productNode, ".//span[@class=\"a-size-base s-underline-text\"] | //a[contains(@href,\"customerReviews\")]/span"),
+                Rating = Utility.GetNodeInnerText(productNode, ".//span[@class=\"a-icon-alt\"]") ?? string.Empty
+            };
+
+            return amazonProduct;
         }
     }
 }
