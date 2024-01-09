@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace BebodhCrawler.Data
+namespace Core.Data
 {
     public class ApplicationUser : IdentityUser
     {

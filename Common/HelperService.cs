@@ -15,6 +15,7 @@ namespace Common
             serviceCollection.AddScoped<IProxyBackgroundTaskRepository, ProxyBackgroundTaskRepository>();
             serviceCollection.AddScoped<IProxyService, ProxyService>();
             serviceCollection.AddScoped<IAmazonCrawlerService, AmazonCrawlerService>();
+            serviceCollection.AddScoped<IAuthService, AuthService>();
         }
     }
 }
