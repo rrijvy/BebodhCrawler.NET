@@ -1,5 +1,6 @@
 using Common;
 using Core.Models;
+using Hangfire;
 
 namespace BebodhCrawler
 {
@@ -10,11 +11,17 @@ namespace BebodhCrawler
             var builder = WebApplication.CreateBuilder(args);
 
             builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDB"));
+            builder.Services.Configure<SqlServerSettings>(builder.Configuration.GetSection("SqlServer"));
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
             HelperService.RegisterDependencies(builder.Services);
+
+            builder.Services.AddHangfire(config => config
+                        .UseSimpleAssemblyNameTypeSerializer()
+                        .UseRecommendedSerializerSettings()
+                        .UseSqlServerStorage(builder.Configuration.GetSection("SqlServer")["ConnectionURI"]));
 
             var app = builder.Build();
 
@@ -28,8 +35,11 @@ namespace BebodhCrawler
 
             app.UseAuthorization();
 
-
             app.MapControllers();
+
+            app.UseHangfireDashboard();
+
+            app.MapHangfireDashboard();
 
             app.Run();
         }
