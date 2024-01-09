@@ -104,7 +104,7 @@ namespace Services
                 }
                 return string.Empty;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Console.WriteLine($"Failed - {proxyAddress}");
                 return string.Empty;

@@ -2,7 +2,7 @@
 using Core.IServices;
 using Core.Models;
 using Hangfire;
-using Hangfire.MemoryStorage;
+using Hangfire.Storage.SQLite;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ProxyRetriever
@@ -28,14 +28,22 @@ namespace ProxyRetriever
 
             if (proxyService == null) return;
 
-            var sqlServerConnectionString = @"Data Source=DESKTOP-MSFMN85\SQLEXPRESS;Initial Catalog=ProxyRetrieverDB;Integrated Security=True";
+            //var sqlServerConnectionString = @"Data Source=DESKTOP-MSFMN85\SQLEXPRESS;Initial Catalog=ProxyRetrieverDB;Integrated Security=True";
+            //GlobalConfiguration.Configuration
+            //    .UseSimpleAssemblyNameTypeSerializer()
+            //    .UseRecommendedSerializerSettings()
+            //    .UseSqlServerStorage(sqlServerConnectionString);
 
-            //GlobalConfiguration.Configuration.UseSqlServerStorage(sqlServerConnectionString);
-            GlobalConfiguration.Configuration.UseMemoryStorage();
+            var sqliteConnectionString = @"scheduler.db";
+            GlobalConfiguration.Configuration
+                .UseSimpleAssemblyNameTypeSerializer()
+                .UseRecommendedSerializerSettings()
+                .UseSQLiteStorage(sqliteConnectionString);
 
-            var server = new BackgroundJobServer();
-
-            RecurringJob.AddOrUpdate<IProxyService>("_main_", x => x.RetrieveProxies(), "*/1 * * * *");
+            using (var server = new BackgroundJobServer())
+            {
+                RecurringJob.AddOrUpdate<IProxyService>("_main_", x => x.RetrieveProxies(), "*/1 * * * *");
+            }
 
             Console.WriteLine("Hangfire Server started. Press any key to exit...");
 
