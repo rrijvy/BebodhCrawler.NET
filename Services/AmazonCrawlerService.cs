@@ -27,6 +27,15 @@ namespace Services
             return url.ToString();
         }
 
+        public string GenerateAmazonPaginatedSearchUrlByCategory(string category, int pageNumber)
+        {
+            var url = new StringBuilder();
+            url.Append($"https://www.amazon.com/s?k={category}&page={pageNumber}");
+            url.Append(category);
+
+            return url.ToString();
+        }
+
         public async Task<List<AmazonProduct>> GetAmazonProductsByCategory(string category)
         {
             HttpProxy proxy = null;
