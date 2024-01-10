@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Servic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repositories", "Repositories\Repositories.csproj", "{91D5BC2A-E108-4707-872C-E67E250C7CFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProxyRetriever", "ProxyRetriever\ProxyRetriever.csproj", "{EFE13ACC-E24B-4E46-9380-D08078B580B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProxyRetriever", "ProxyRetriever\ProxyRetriever.csproj", "{EFE13ACC-E24B-4E46-9380-D08078B580B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{8E13F190-8D2E-4BE7-8134-16400949FE97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{8E13F190-8D2E-4BE7-8134-16400949FE97}"
+EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "TestScrapper", "TestScrapper\TestScrapper.pyproj", "{836E0A43-91BD-437A-8A6B-8411B58C47C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,8 @@ Global
 		{8E13F190-8D2E-4BE7-8134-16400949FE97}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E13F190-8D2E-4BE7-8134-16400949FE97}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E13F190-8D2E-4BE7-8134-16400949FE97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{836E0A43-91BD-437A-8A6B-8411B58C47C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{836E0A43-91BD-437A-8A6B-8411B58C47C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

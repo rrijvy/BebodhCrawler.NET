@@ -4,7 +4,6 @@ using Core.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Newtonsoft.Json.Linq;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -59,10 +58,10 @@ namespace Services
 
                 var token = new JwtSecurityToken(
                     issuer: _jwtSettings.Value.Issuer,
-                    audience: _jwtSettings.Value.Audience,
+                    audience: _jwtSettings.Value.Issuer,
                     claims: claims,
-                    expires: DateTime.Now.AddDays(1), signingCredentials:
-                    new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
+                    expires: DateTime.Now.AddDays(1), 
+                    signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
                 );
 
                 var tokenAsString = new JwtSecurityTokenHandler().WriteToken(token);

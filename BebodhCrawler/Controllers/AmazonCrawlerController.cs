@@ -2,6 +2,7 @@
 using Core.IRepositories;
 using Core.IServices;
 using HtmlAgilityPack;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.IO.Compression;
 
@@ -68,6 +69,7 @@ namespace BebodhCrawler.Controllers
             }
         }
 
+        [Authorize]
         [HttpGet("GetAmazonProductsByCategory")]
         public async Task<ActionResult> GetAmazonProductsByCategory(string category)
         {
@@ -75,6 +77,22 @@ namespace BebodhCrawler.Controllers
             {
                 var productNames = await _amazonCrawlerService.GetAmazonProductsByCategory(category);
                 return Ok(productNames);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpGet("RunScript")]
+        public async Task<ActionResult> RunScript(string category)
+        {
+            try
+            {
+                PythonScriptRunner runner = new PythonScriptRunner();
+                string result = runner.RunPythonScript("path_to_your_script.py", "arg1 arg2 arg3");
+                return Ok();
             }
             catch (Exception ex)
             {
