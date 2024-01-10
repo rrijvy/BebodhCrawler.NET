@@ -4,7 +4,9 @@ using Core.IServices;
 using HtmlAgilityPack;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 using System.IO.Compression;
+using System.Reflection;
 
 namespace BebodhCrawler.Controllers
 {
@@ -86,13 +88,50 @@ namespace BebodhCrawler.Controllers
         }
 
         [HttpGet("RunScript")]
-        public async Task<ActionResult> RunScript(string category)
+        public async Task<ActionResult> RunScript()
         {
             try
             {
-                PythonScriptRunner runner = new PythonScriptRunner();
-                string result = runner.RunPythonScript("path_to_your_script.py", "arg1 arg2 arg3");
-                return Ok();
+                //string currentDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+
+                string pythonPath = @"F:\Codes\.net\BebodhCrawler\TestCrawler\env\Scripts\\python.exe";
+
+                string scriptPath = @"F:\\Codes\\.net\\BebodhCrawler\\TestCrawler\\TestCrawler.py";
+
+                ProcessStartInfo startInfo = new ProcessStartInfo
+                {
+                    FileName = pythonPath,
+                    Arguments = scriptPath,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    UseShellExecute = false,
+                    CreateNoWindow = true
+                };
+
+                using Process process = new Process
+                {
+                    StartInfo = startInfo
+                };
+
+                process.Start();
+                //process.WaitForExit();
+
+                //string output = process.StandardOutput.ReadToEnd();
+                //string error = process.StandardError.ReadToEnd();
+
+                //if (!string.IsNullOrEmpty(output))
+                //{
+                //    Console.WriteLine("Output from Python script:");
+                //    Console.WriteLine(output);
+                //}
+
+                //if (!string.IsNullOrEmpty(error))
+                //{
+                //    Console.WriteLine("Error from Python script:");
+                //    Console.WriteLine(error);
+                //}
+
+                return Ok("Python script executed.");
             }
             catch (Exception ex)
             {

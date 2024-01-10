@@ -2,17 +2,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>836e0a43-91bd-437a-8a6b-8411b58c47c4</ProjectGuid>
+    <ProjectGuid>14122db5-5a55-4aeb-946d-53855d2ce99c</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>TestScrapper.py</StartupFile>
+    <StartupFile>TestCrawler.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>TestScrapper</Name>
-    <RootNamespace>TestScrapper</RootNamespace>
-    <TestFramework>Pytest</TestFramework>
+    <Name>TestCrawler</Name>
+    <RootNamespace>TestCrawler</RootNamespace>
     <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <SuppressConfigureTestFrameworkPrompt>true</SuppressConfigureTestFrameworkPrompt>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,7 +23,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="TestScrapper.py" />
+    <None Include="TestCrawler.py" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env\">
@@ -35,9 +35,6 @@
       <PathEnvironmentVariable>PYTHONPATH</PathEnvironmentVariable>
       <Architecture>X64</Architecture>
     </Interpreter>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include=".gitignore" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
