@@ -124,6 +124,8 @@ namespace BebodhCrawler
                 config.UseSqlServerStorage(builder.Configuration.GetSection("SqlServer")["ConnectionURI"]);
             });
 
+            builder.Services.AddHangfireServer();
+
             var app = builder.Build();
 
             if (app.Environment.IsDevelopment())
