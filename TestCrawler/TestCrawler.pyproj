@@ -36,6 +36,24 @@
       <Architecture>X64</Architecture>
     </Interpreter>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="departments_and_their_categories.json" />
+    <Content Include="requirements.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PythonLibs\PythonLibs.pyproj">
+      <Name>PythonLibs</Name>
+      <Project>{8baa653f-9b4e-4ae4-9c3b-a4239d48a104}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="exports\" />
+    <Folder Include="src\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\utility.py" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
        Visual Studio and specify your pre- and post-build commands in

@@ -19,6 +19,8 @@ Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "TestCrawler", "TestCrawler\
 EndProject
 Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "TestScrapper", "TestScrapper\TestScrapper.pyproj", "{1FF78656-FB20-4230-8F2D-963833EA4F62}"
 EndProject
+Project("{888888A0-9F3D-457C-B088-3A5042F75D52}") = "PythonLibs", "PythonLibs\PythonLibs.pyproj", "{8BAA653F-9B4E-4AE4-9C3B-A4239D48A104}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,8 @@ Global
 		{14122DB5-5A55-4AEB-946D-53855D2CE99C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FF78656-FB20-4230-8F2D-963833EA4F62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1FF78656-FB20-4230-8F2D-963833EA4F62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BAA653F-9B4E-4AE4-9C3B-A4239D48A104}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BAA653F-9B4E-4AE4-9C3B-A4239D48A104}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
