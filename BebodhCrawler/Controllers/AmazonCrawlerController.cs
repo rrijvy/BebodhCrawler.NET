@@ -94,9 +94,9 @@ namespace BebodhCrawler.Controllers
             {
                 //string currentDir = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
 
-                string pythonPath = @"F:\Codes\.net\BebodhCrawler\TestCrawler\env\Scripts\\python.exe";
+                string pythonPath = @"C:\Users\tarek\source\repos\BebodhCrawler.NET\TestCrawler\env\Scripts\python.exe";
 
-                string scriptPath = @"F:\\Codes\\.net\\BebodhCrawler\\TestCrawler\\TestCrawler.py";
+                string scriptPath = @"C:\Users\tarek\source\repos\BebodhCrawler.NET\TestCrawler\TestCrawler.py 54564654654";
 
                 ProcessStartInfo startInfo = new ProcessStartInfo
                 {
@@ -114,22 +114,22 @@ namespace BebodhCrawler.Controllers
                 };
 
                 process.Start();
-                //process.WaitForExit();
+                process.WaitForExit();
 
-                //string output = process.StandardOutput.ReadToEnd();
-                //string error = process.StandardError.ReadToEnd();
+                string output = process.StandardOutput.ReadToEnd();
+                string error = process.StandardError.ReadToEnd();
 
-                //if (!string.IsNullOrEmpty(output))
-                //{
-                //    Console.WriteLine("Output from Python script:");
-                //    Console.WriteLine(output);
-                //}
+                if (!string.IsNullOrEmpty(output))
+                {
+                    Console.WriteLine("Output from Python script:");
+                    Console.WriteLine(output);
+                }
 
-                //if (!string.IsNullOrEmpty(error))
-                //{
-                //    Console.WriteLine("Error from Python script:");
-                //    Console.WriteLine(error);
-                //}
+                if (!string.IsNullOrEmpty(error))
+                {
+                    Console.WriteLine("Error from Python script:");
+                    Console.WriteLine(error);
+                }
 
                 return Ok("Python script executed.");
             }

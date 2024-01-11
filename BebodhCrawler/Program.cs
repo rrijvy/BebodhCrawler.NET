@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Net.Security;
 using System.Text;
 
 namespace BebodhCrawler
@@ -51,6 +52,37 @@ namespace BebodhCrawler
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("JWTCred")["SecretKey"]))
                 };
             });
+
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                    policy =>
+                    {
+                        policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
+                    });
+            });
+
+            builder.Services.AddHttpClient("SelfSignedClient")
+                .ConfigurePrimaryHttpMessageHandler(() =>
+                {
+                    return new HttpClientHandler
+                    {
+                        ServerCertificateCustomValidationCallback = (sender, certificate, chain, sslPolicyErrors) =>
+                        {
+                            // If the certificate is self-signed, accept it
+                            if (sslPolicyErrors == SslPolicyErrors.None)
+                            {
+                                return true;
+                            }
+
+                            // Otherwise, reject the certificate
+                            return false;
+                        }
+                    };
+                });
+
 
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
@@ -99,6 +131,8 @@ namespace BebodhCrawler
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseHttpsRedirection();
 

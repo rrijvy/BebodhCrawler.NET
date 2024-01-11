@@ -1,0 +1,1657 @@
+[
+  {
+    "department_name": "Electronics",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "Camera & Photo",
+        "category_url": "https://www.amazon.com/s?bbn=16225009011&rh=i%3Aspecialty-aps%2Cn%3A%2116225009011%2Cn%3A502394",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Car & Vehicle Electronics",
+        "category_url": "https://www.amazon.com/s?bbn=16225009011&rh=i%3Aspecialty-aps%2Cn%3A%2116225009011%2Cn%3A3248684011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Cell Phones & Accessories",
+        "category_url": "https://www.amazon.com/s?bbn=16225009011&rh=i%3Aspecialty-aps%2Cn%3A%2116225009011%2Cn%3A2811119011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Computers & Accessories",
+        "category_url": "https://www.amazon.com/s?bbn=16225009011&rh=i%3Aspecialty-aps%2Cn%3A%2116225009011%2Cn%3A541966",
+        "sub_categories": []
+      },
+      {
+        "category_name": "GPS & Navigation",
+        "category_url": "https://www.amazon.com/s?bbn=16225009011&rh=i%3Aspecialty-aps%2Cn%3A%2116225009011%2Cn%3A172526",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Headphones",
+        "category_url": "https://www.amazon.com/s?bbn=16225009011&rh=i%3Aspecialty-aps%2Cn%3A%2116225009011%2Cn%3A172541",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Home Audio",
+        "category_url": "https://www.amazon.com/s?bbn=16225009011&rh=i%3Aspecialty-aps%2Cn%3A%2116225009011%2Cn%3A667846011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Office Electronics",
+        "category_url": "https://www.amazon.com/s?bbn=16225009011&rh=i%3Aspecialty-aps%2Cn%3A%2116225009011%2Cn%3A172574",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Portable Audio & Video",
+        "category_url": "https://www.amazon.com/s?bbn=16225009011&rh=i%3Aspecialty-aps%2Cn%3A%2116225009011%2Cn%3A172623",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Security & Surveillance",
+        "category_url": "https://www.amazon.com/s?bbn=16225009011&rh=i%3Aspecialty-aps%2Cn%3A%2116225009011%2Cn%3A524136",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Service Plans",
+        "category_url": "https://www.amazon.com/s?bbn=16225009011&rh=i%3Aspecialty-aps%2Cn%3A%2116225009011%2Cn%3A16285901",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Television & Video",
+        "category_url": "https://www.amazon.com/s?bbn=16225009011&rh=i%3Aspecialty-aps%2Cn%3A%2116225009011%2Cn%3A1266092011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Video Game Consoles & Accessories",
+        "category_url": "https://www.amazon.com/s?bbn=16225009011&rh=i%3Aspecialty-aps%2Cn%3A%2116225009011%2Cn%3A7926841011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Video Projectors",
+        "category_url": "https://www.amazon.com/s?bbn=16225009011&rh=i%3Aspecialty-aps%2Cn%3A%2116225009011%2Cn%3A300334",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Wearable Technology",
+        "category_url": "https://www.amazon.com/s?bbn=16225009011&rh=i%3Aspecialty-aps%2Cn%3A%2116225009011%2Cn%3A10048700011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "eBook Readers & Accessories",
+        "category_url": "https://www.amazon.com/s?bbn=16225009011&rh=i%3Aspecialty-aps%2Cn%3A%2116225009011%2Cn%3A2642125011",
+        "sub_categories": []
+      }
+    ]
+  },
+  {
+    "department_name": "Computers",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "Computer Accessories & Peripherals",
+        "category_url": "https://www.amazon.com/s?bbn=16225007011&rh=i%3Aspecialty-aps%2Cn%3A16225007011%2Cn%3A172456",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Computer Components",
+        "category_url": "https://www.amazon.com/s?bbn=16225007011&rh=i%3Aspecialty-aps%2Cn%3A16225007011%2Cn%3A193870011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Computers & Tablets",
+        "category_url": "https://www.amazon.com/s?bbn=16225007011&rh=i%3Aspecialty-aps%2Cn%3A16225007011%2Cn%3A13896617011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Data Storage",
+        "category_url": "https://www.amazon.com/s?bbn=16225007011&rh=i%3Aspecialty-aps%2Cn%3A16225007011%2Cn%3A1292110011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "External Components",
+        "category_url": "https://www.amazon.com/s?bbn=16225007011&rh=i%3Aspecialty-aps%2Cn%3A16225007011%2Cn%3A3012292011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Laptop Accessories",
+        "category_url": "https://www.amazon.com/s?bbn=16225007011&rh=i%3Aspecialty-aps%2Cn%3A16225007011%2Cn%3A3011391011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Monitors",
+        "category_url": "https://www.amazon.com/s?bbn=16225007011&rh=i%3Aspecialty-aps%2Cn%3A16225007011%2Cn%3A1292115011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Networking Products",
+        "category_url": "https://www.amazon.com/s?bbn=16225007011&rh=i%3Aspecialty-aps%2Cn%3A16225007011%2Cn%3A172504",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Power Strips & Surge Protectors",
+        "category_url": "https://www.amazon.com/s?bbn=16225007011&rh=i%3Aspecialty-aps%2Cn%3A16225007011%2Cn%3A17854127011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Printers",
+        "category_url": "https://www.amazon.com/s?bbn=16225007011&rh=i%3Aspecialty-aps%2Cn%3A16225007011%2Cn%3A172635",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Scanners",
+        "category_url": "https://www.amazon.com/s?bbn=16225007011&rh=i%3Aspecialty-aps%2Cn%3A16225007011%2Cn%3A172584",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Servers",
+        "category_url": "https://www.amazon.com/s?bbn=16225007011&rh=i%3Aspecialty-aps%2Cn%3A16225007011%2Cn%3A11036071",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Tablet Accessories",
+        "category_url": "https://www.amazon.com/s?bbn=16225007011&rh=i%3Aspecialty-aps%2Cn%3A16225007011%2Cn%3A2348628011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Tablet Replacement Parts",
+        "category_url": "https://www.amazon.com/s?bbn=16225007011&rh=i%3Aspecialty-aps%2Cn%3A16225007011%2Cn%3A15524379011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Warranties & Services",
+        "category_url": "https://www.amazon.com/s?bbn=16225007011&rh=i%3Aspecialty-aps%2Cn%3A16225007011%2Cn%3A16285851",
+        "sub_categories": []
+      }
+    ]
+  },
+  {
+    "department_name": "Smart Home",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "Amazon Smart Home",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=6563140011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Smart Home Lighting",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=21217035011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Smart Locks and Entry",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=21216824011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Security Cameras and Systems",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=21217033011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Plugs and Outlets",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=21217037011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "New Smart Devices",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=19185106011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Heating and Cooling",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=21217041011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Detectors and Sensors",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=21217048011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Home Entertainment",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=21216826011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Pet",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=21221447011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Voice Assistants and Hubs",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=21216812011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Kitchen",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=21217039011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Vacuums and Mops",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=21217038011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Lawn and Garden",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=21217056011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "WIFI and Networking",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=21217028011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Other Solutions",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=21217060011",
+        "sub_categories": []
+      }
+    ]
+  },
+  {
+    "department_name": "Arts & Crafts",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "Painting, Drawing & Art Supplies",
+        "category_url": "https://www.amazon.com/s?bbn=4954955011&rh=i%3Aspecialty-aps%2Cn%3A4954955011%2Cn%3A%212617942011%2Cn%3A2747968011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Beading & Jewelry Making",
+        "category_url": "https://www.amazon.com/s?bbn=4954955011&rh=i%3Aspecialty-aps%2Cn%3A4954955011%2Cn%3A%212617942011%2Cn%3A12896081",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Crafting",
+        "category_url": "https://www.amazon.com/s?bbn=4954955011&rh=i%3Aspecialty-aps%2Cn%3A4954955011%2Cn%3A%212617942011%2Cn%3A378733011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Fabric",
+        "category_url": "https://www.amazon.com/s?bbn=4954955011&rh=i%3Aspecialty-aps%2Cn%3A4954955011%2Cn%3A%212617942011%2Cn%3A12899121",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Fabric Decorating",
+        "category_url": "https://www.amazon.com/s?bbn=4954955011&rh=i%3Aspecialty-aps%2Cn%3A4954955011%2Cn%3A%212617942011%2Cn%3A12896841",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Knitting & Crochet",
+        "category_url": "https://www.amazon.com/s?bbn=4954955011&rh=i%3Aspecialty-aps%2Cn%3A4954955011%2Cn%3A%212617942011%2Cn%3A12897221",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Needlework",
+        "category_url": "https://www.amazon.com/s?bbn=4954955011&rh=i%3Aspecialty-aps%2Cn%3A4954955011%2Cn%3A%212617942011%2Cn%3A2237329011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Organization, Storage & Transport",
+        "category_url": "https://www.amazon.com/s?bbn=4954955011&rh=i%3Aspecialty-aps%2Cn%3A4954955011%2Cn%3A%212617942011%2Cn%3A2237594011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Printmaking",
+        "category_url": "https://www.amazon.com/s?bbn=4954955011&rh=i%3Aspecialty-aps%2Cn%3A4954955011%2Cn%3A%212617942011%2Cn%3A12898451",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Scrapbooking & Stamping",
+        "category_url": "https://www.amazon.com/s?bbn=4954955011&rh=i%3Aspecialty-aps%2Cn%3A4954955011%2Cn%3A%212617942011%2Cn%3A12898821",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Sewing",
+        "category_url": "https://www.amazon.com/s?bbn=4954955011&rh=i%3Aspecialty-aps%2Cn%3A4954955011%2Cn%3A%212617942011%2Cn%3A12899091",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Party Decorations & Supplies",
+        "category_url": "https://www.amazon.com/s?bbn=4954955011&rh=i%3Aspecialty-aps%2Cn%3A4954955011%2Cn%3A%212617942011%2Cn%3A723469011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Gift Wrapping Supplies",
+        "category_url": "https://www.amazon.com/s?bbn=4954955011&rh=i%3Aspecialty-aps%2Cn%3A4954955011%2Cn%3A%212617942011%2Cn%3A723452011",
+        "sub_categories": []
+      }
+    ]
+  },
+  {
+    "department_name": "Automotive",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "Car Care",
+        "category_url": "https://www.amazon.com/s?bbn=2562090011&rh=i%3Aspecialty-aps%2Cn%3A2562090011%2Cn%3A%2115690151%2Cn%3A15718271",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Car Electronics & Accessories",
+        "category_url": "https://www.amazon.com/s?bbn=2562090011&rh=i%3Aspecialty-aps%2Cn%3A2562090011%2Cn%3A%2115690151%2Cn%3A2230642011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Exterior Accessories",
+        "category_url": "https://www.amazon.com/s?bbn=2562090011&rh=i%3Aspecialty-aps%2Cn%3A2562090011%2Cn%3A%2115690151%2Cn%3A15857511",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Interior Accessories",
+        "category_url": "https://www.amazon.com/s?bbn=2562090011&rh=i%3Aspecialty-aps%2Cn%3A2562090011%2Cn%3A%2115690151%2Cn%3A15857501",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Lights & Lighting Accessories",
+        "category_url": "https://www.amazon.com/s?bbn=2562090011&rh=i%3Aspecialty-aps%2Cn%3A2562090011%2Cn%3A%2115690151%2Cn%3A15736321",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Motorcycle & Powersports",
+        "category_url": "https://www.amazon.com/s?bbn=2562090011&rh=i%3Aspecialty-aps%2Cn%3A2562090011%2Cn%3A%2115690151%2Cn%3A346333011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Oils & Fluids",
+        "category_url": "https://www.amazon.com/s?bbn=2562090011&rh=i%3Aspecialty-aps%2Cn%3A2562090011%2Cn%3A%2115690151%2Cn%3A15718791",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Paint & Paint Supplies",
+        "category_url": "https://www.amazon.com/s?bbn=2562090011&rh=i%3Aspecialty-aps%2Cn%3A2562090011%2Cn%3A%2115690151%2Cn%3A13591416011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Performance Parts & Accessories",
+        "category_url": "https://www.amazon.com/s?bbn=2562090011&rh=i%3Aspecialty-aps%2Cn%3A2562090011%2Cn%3A%2115690151%2Cn%3A15710351",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Replacement Parts",
+        "category_url": "https://www.amazon.com/s?bbn=2562090011&rh=i%3Aspecialty-aps%2Cn%3A2562090011%2Cn%3A%2115690151%2Cn%3A15719731",
+        "sub_categories": []
+      },
+      {
+        "category_name": "RV Parts & Accessories",
+        "category_url": "https://www.amazon.com/s?bbn=2562090011&rh=i%3Aspecialty-aps%2Cn%3A2562090011%2Cn%3A%2115690151%2Cn%3A2258019011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Tires & Wheels",
+        "category_url": "https://www.amazon.com/s?bbn=2562090011&rh=i%3Aspecialty-aps%2Cn%3A2562090011%2Cn%3A%2115690151%2Cn%3A15706571",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Tools & Equipment",
+        "category_url": "https://www.amazon.com/s?bbn=2562090011&rh=i%3Aspecialty-aps%2Cn%3A2562090011%2Cn%3A%2115690151%2Cn%3A15706941",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Automotive Enthusiast Merchandise",
+        "category_url": "https://www.amazon.com/s?bbn=2562090011&rh=i%3Aspecialty-aps%2Cn%3A2562090011%2Cn%3A%2115690151%2Cn%3A2204830011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Heavy Duty & Commercial Vehicle Equipment",
+        "category_url": "https://www.amazon.com/s?bbn=2562090011&rh=i%3Aspecialty-aps%2Cn%3A2562090011%2Cn%3A%2115690151%2Cn%3A15682003011",
+        "sub_categories": []
+      }
+    ]
+  },
+  {
+    "department_name": "Baby",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "Activity & Entertainment",
+        "category_url": "https://www.amazon.com/s?bbn=16225005011&rh=i%3Aspecialty-aps%2Cn%3A%2116225005011%2Cn%3A239225011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Apparel & Accessories",
+        "category_url": "https://www.amazon.com/s?bbn=16225005011&rh=i%3Aspecialty-aps%2Cn%3A%2116225005011%2Cn%3A7147444011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Baby & Toddler Toys",
+        "category_url": "https://www.amazon.com/s?bbn=16225005011&rh=i%3Aspecialty-aps%2Cn%3A%2116225005011%2Cn%3A196601011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Baby Care",
+        "category_url": "https://www.amazon.com/s?bbn=16225005011&rh=i%3Aspecialty-aps%2Cn%3A%2116225005011%2Cn%3A17720255011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Baby Stationery",
+        "category_url": "https://www.amazon.com/s?bbn=16225005011&rh=i%3Aspecialty-aps%2Cn%3A%2116225005011%2Cn%3A405369011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Car Seats & Accessories",
+        "category_url": "https://www.amazon.com/s?bbn=16225005011&rh=i%3Aspecialty-aps%2Cn%3A%2116225005011%2Cn%3A166835011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Diapering",
+        "category_url": "https://www.amazon.com/s?bbn=16225005011&rh=i%3Aspecialty-aps%2Cn%3A%2116225005011%2Cn%3A166764011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Feeding",
+        "category_url": "https://www.amazon.com/s?bbn=16225005011&rh=i%3Aspecialty-aps%2Cn%3A%2116225005011%2Cn%3A166777011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Gifts",
+        "category_url": "https://www.amazon.com/s?bbn=16225005011&rh=i%3Aspecialty-aps%2Cn%3A%2116225005011%2Cn%3A239226011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Nursery",
+        "category_url": "https://www.amazon.com/s?bbn=16225005011&rh=i%3Aspecialty-aps%2Cn%3A%2116225005011%2Cn%3A695338011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Potty Training",
+        "category_url": "https://www.amazon.com/s?bbn=16225005011&rh=i%3Aspecialty-aps%2Cn%3A%2116225005011%2Cn%3A166887011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Pregnancy & Maternity",
+        "category_url": "https://www.amazon.com/s?bbn=16225005011&rh=i%3Aspecialty-aps%2Cn%3A%2116225005011%2Cn%3A166804011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Safety",
+        "category_url": "https://www.amazon.com/s?bbn=16225005011&rh=i%3Aspecialty-aps%2Cn%3A%2116225005011%2Cn%3A166863011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Strollers & Accessories",
+        "category_url": "https://www.amazon.com/s?bbn=16225005011&rh=i%3Aspecialty-aps%2Cn%3A%2116225005011%2Cn%3A8446318011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Travel Gear",
+        "category_url": "https://www.amazon.com/s?bbn=16225005011&rh=i%3Aspecialty-aps%2Cn%3A%2116225005011%2Cn%3A17726796011",
+        "sub_categories": []
+      }
+    ]
+  },
+  {
+    "department_name": "Beauty and personal care",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "Makeup",
+        "category_url": "https://www.amazon.com/s?bbn=16225006011&rh=i%3Aspecialty-aps%2Cn%3A%2116225006011%2Cn%3A11058281",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Skin Care",
+        "category_url": "https://www.amazon.com/s?bbn=16225006011&rh=i%3Aspecialty-aps%2Cn%3A%2116225006011%2Cn%3A11060451",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Hair Care",
+        "category_url": "https://www.amazon.com/s?bbn=16225006011&rh=i%3Aspecialty-aps%2Cn%3A%2116225006011%2Cn%3A11057241",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Fragrance",
+        "category_url": "https://www.amazon.com/s?bbn=16225006011&rh=i%3Aspecialty-aps%2Cn%3A%2116225006011%2Cn%3A11056591",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Foot, Hand & Nail Care",
+        "category_url": "https://www.amazon.com/s?bbn=16225006011&rh=i%3Aspecialty-aps%2Cn%3A%2116225006011%2Cn%3A17242866011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Tools & Accessories",
+        "category_url": "https://www.amazon.com/s?bbn=16225006011&rh=i%3Aspecialty-aps%2Cn%3A%2116225006011%2Cn%3A11062741",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Shave & Hair Removal",
+        "category_url": "https://www.amazon.com/s?bbn=16225006011&rh=i%3Aspecialty-aps%2Cn%3A%2116225006011%2Cn%3A3778591",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Personal Care",
+        "category_url": "https://www.amazon.com/s?bbn=16225006011&rh=i%3Aspecialty-aps%2Cn%3A%2116225006011%2Cn%3A3777891",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Oral Care",
+        "category_url": "https://www.amazon.com/s?bbn=16225006011&rh=i%3Aspecialty-aps%2Cn%3A%2116225006011%2Cn%3A10079992011",
+        "sub_categories": []
+      }
+    ]
+  },
+  {
+    "department_name": "Women's Fashion",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "Clothing",
+        "category_url": "https://www.amazon.com/s?bbn=16225018011&rh=i%3Aspecialty-aps%2Cn%3A7141123011%2Cn%3A16225018011%2Cn%3A1040660",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Shoes",
+        "category_url": "https://www.amazon.com/s?bbn=16225018011&rh=i%3Aspecialty-aps%2Cn%3A7141123011%2Cn%3A16225018011%2Cn%3A679337011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Jewelry",
+        "category_url": "https://www.amazon.com/s?bbn=16225018011&rh=i%3Aspecialty-aps%2Cn%3A7141123011%2Cn%3A16225018011%2Cn%3A7192394011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Watches",
+        "category_url": "https://www.amazon.com/s?bbn=16225018011&rh=i%3Aspecialty-aps%2Cn%3A7141123011%2Cn%3A16225018011%2Cn%3A6358543011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Handbags",
+        "category_url": "https://www.amazon.com/s?bbn=16225018011&rh=i%3Aspecialty-aps%2Cn%3A7141123011%2Cn%3A16225018011%2Cn%3A15743631",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Accessories",
+        "category_url": "https://www.amazon.com/s?bbn=16225018011&rh=i%3Aspecialty-aps%2Cn%3A7141123011%2Cn%3A16225018011%2Cn%3A2474936011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Men's Fashion",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=16225019011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Girls' Fashion",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=16225020011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Boys' Fashion",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=16225019011",
+        "sub_categories": []
+      }
+    ]
+  },
+  {
+    "department_name": "Men's Fashion",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "Clothing",
+        "category_url": "https://www.amazon.com/s?bbn=16225019011&rh=i%3Aspecialty-aps%2Cn%3A7141123011%2Cn%3A16225019011%2Cn%3A1040658",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Shoes",
+        "category_url": "https://www.amazon.com/s?bbn=16225019011&rh=i%3Aspecialty-aps%2Cn%3A7141123011%2Cn%3A16225019011%2Cn%3A679255011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Watches",
+        "category_url": "https://www.amazon.com/s?bbn=16225019011&rh=i%3Aspecialty-aps%2Cn%3A7141123011%2Cn%3A16225019011%2Cn%3A6358539011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Accessories",
+        "category_url": "https://www.amazon.com/s?bbn=16225019011&rh=i%3Aspecialty-aps%2Cn%3A7141123011%2Cn%3A16225019011%2Cn%3A2474937011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Women's Fashion",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=16225018011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Girls' Fashion",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=16225020011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Boys' Fashion",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=16225021011",
+        "sub_categories": []
+      }
+    ]
+  },
+  {
+    "department_name": "Girls' Fashion",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "Clothing",
+        "category_url": "https://www.amazon.com/s?bbn=16225020011&rh=i%3Aspecialty-aps%2Cn%3A7141123011%2Cn%3A16225020011%2Cn%3A1040664",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Shoes",
+        "category_url": "https://www.amazon.com/s?bbn=16225020011&rh=i%3Aspecialty-aps%2Cn%3A7141123011%2Cn%3A16225020011%2Cn%3A679217011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Jewelry",
+        "category_url": "https://www.amazon.com/s?bbn=16225020011&rh=i%3Aspecialty-aps%2Cn%3A7141123011%2Cn%3A16225020011%2Cn%3A3880961",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Watches",
+        "category_url": "https://www.amazon.com/s?bbn=16225020011&rh=i%3Aspecialty-aps%2Cn%3A7141123011%2Cn%3A16225020011%2Cn%3A6358547011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Accessories",
+        "category_url": "https://www.amazon.com/s?bbn=16225020011&rh=i%3Aspecialty-aps%2Cn%3A7141123011%2Cn%3A16225020011%2Cn%3A2474938011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "School Uniforms",
+        "category_url": "https://www.amazon.com/s?bbn=16225020011&rh=i%3Aspecialty-aps%2Cn%3A7141123011%2Cn%3A7147442011%2Cn%3A7581687011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Women's Fashion",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=16225018011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Men's Fashion",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=16225019011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Boys' Fashion",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=16225021011",
+        "sub_categories": []
+      }
+    ]
+  },
+  {
+    "department_name": "Boys' Fashion",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "Clothing",
+        "category_url": "https://www.amazon.com/s?bbn=16225021011&rh=i%3Aspecialty-aps%2Cn%3A7141123011%2Cn%3A16225021011%2Cn%3A1040666",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Shoes",
+        "category_url": "https://www.amazon.com/s?bbn=16225021011&rh=i%3Aspecialty-aps%2Cn%3A7141123011%2Cn%3A16225021011%2Cn%3A679182011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Jewelry",
+        "category_url": "https://www.amazon.com/s?bbn=16225021011&rh=i%3Aspecialty-aps%2Cn%3A7141123011%2Cn%3A16225021011%2Cn%3A3880611",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Watches",
+        "category_url": "https://www.amazon.com/s?bbn=16225021011&rh=i%3Aspecialty-aps%2Cn%3A7141123011%2Cn%3A16225021011%2Cn%3A6358551011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Accessories",
+        "category_url": "https://www.amazon.com/s?bbn=16225021011&rh=i%3Aspecialty-aps%2Cn%3A7141123011%2Cn%3A16225021011%2Cn%3A2474939011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "School Uniforms",
+        "category_url": "https://www.amazon.com/s?bbn=7581691011&rh=i%3Aspecialty-aps%2Cn%3A7141123011%2Cn%3A7147443011%2Cn%3A7581691011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Women's Fashion",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=16225018011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Men's Fashion",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=16225019011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Girls' Fashion",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=16225020011",
+        "sub_categories": []
+      }
+    ]
+  },
+  {
+    "department_name": "Health and Household",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "Baby & Child Care",
+        "category_url": "https://www.amazon.com/s?bbn=16225010011&rh=i%3Aspecialty-aps%2Cn%3A%2116225010011%2Cn%3A10787321",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Health Care",
+        "category_url": "https://www.amazon.com/s?bbn=16225010011&rh=i%3Aspecialty-aps%2Cn%3A%2116225010011%2Cn%3A3760941",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Household Supplies",
+        "category_url": "https://www.amazon.com/s?bbn=16225010011&rh=i%3Aspecialty-aps%2Cn%3A%2116225010011%2Cn%3A15342811",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Medical Supplies & Equipment",
+        "category_url": "https://www.amazon.com/s?bbn=16225010011&rh=i%3Aspecialty-aps%2Cn%3A%2116225010011%2Cn%3A3775161",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Oral Care",
+        "category_url": "https://www.amazon.com/s?bbn=16225010011&rh=i%3Aspecialty-aps%2Cn%3A%2116225010011%2Cn%3A10079992011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Personal Care",
+        "category_url": "https://www.amazon.com/s?bbn=16225010011&rh=i%3Aspecialty-aps%2Cn%3A%2116225010011%2Cn%3A3777891",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Sexual Wellness",
+        "category_url": "https://www.amazon.com/s?bbn=16225010011&rh=i%3Aspecialty-aps%2Cn%3A%2116225010011%2Cn%3A3777371",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Sports Nutrition",
+        "category_url": "https://www.amazon.com/s?bbn=16225010011&rh=i%3Aspecialty-aps%2Cn%3A%2116225010011%2Cn%3A6973663011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Stationery & Gift Wrapping Supplies",
+        "category_url": "https://www.amazon.com/s?bbn=16225010011&rh=i%3Aspecialty-aps%2Cn%3A%2116225010011%2Cn%3A723418011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Vision Care",
+        "category_url": "https://www.amazon.com/s?bbn=16225010011&rh=i%3Aspecialty-aps%2Cn%3A%2116225010011%2Cn%3A10079994011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Vitamins & Dietary Supplements",
+        "category_url": "https://www.amazon.com/s?bbn=16225010011&rh=i%3Aspecialty-aps%2Cn%3A%2116225010011%2Cn%3A3764441",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Wellness & Relaxation",
+        "category_url": "https://www.amazon.com/s?bbn=16225010011&rh=i%3Aspecialty-aps%2Cn%3A%2116225010011%2Cn%3A10079996011",
+        "sub_categories": []
+      }
+    ]
+  },
+  {
+    "department_name": "Home and Kitchen",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "Kids' Home Store",
+        "category_url": "https://www.amazon.com/s?bbn=16225011011&rh=i%3Aspecialty-aps%2Cn%3A%2116225011011%2Cn%3A3206325011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Kitchen & Dining",
+        "category_url": "https://www.amazon.com/s?bbn=16225011011&rh=i%3Aspecialty-aps%2Cn%3A%2116225011011%2Cn%3A284507",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Bedding",
+        "category_url": "https://www.amazon.com/s?bbn=16225011011&rh=i%3Aspecialty-aps%2Cn%3A%2116225011011%2Cn%3A1063252",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Bath",
+        "category_url": "https://www.amazon.com/s?bbn=16225011011&rh=i%3Aspecialty-aps%2Cn%3A%2116225011011%2Cn%3A1063236",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Furniture",
+        "category_url": "https://www.amazon.com/s?bbn=16225011011&rh=i%3Aspecialty-aps%2Cn%3A%2116225011011%2Cn%3A1063306",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Home D\u00e9cor",
+        "category_url": "https://www.amazon.com/s?bbn=16225011011&rh=i%3Aspecialty-aps%2Cn%3A%2116225011011%2Cn%3A1063278",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Wall Art",
+        "category_url": "https://www.amazon.com/s?bbn=16225011011&rh=i%3Aspecialty-aps%2Cn%3A%2116225011011%2Cn%3A3736081",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Lighting & Ceiling Fans",
+        "category_url": "https://www.amazon.com/s?bbn=16225011011&rh=i%3Aspecialty-aps%2Cn%3A%2116225011011%2Cn%3A16510975011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Seasonal D\u00e9cor",
+        "category_url": "https://www.amazon.com/s?bbn=16225011011&rh=i%3Aspecialty-aps%2Cn%3A%2116225011011%2Cn%3A13679381",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Event & Party Supplies",
+        "category_url": "https://www.amazon.com/s?bbn=16225011011&rh=i%3Aspecialty-aps%2Cn%3A%2116225011011%2Cn%3A901590",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Heating, Cooling & Air Quality",
+        "category_url": "https://www.amazon.com/s?bbn=16225011011&rh=i%3Aspecialty-aps%2Cn%3A%2116225011011%2Cn%3A3206324011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Irons & Steamers",
+        "category_url": "https://www.amazon.com/s?bbn=16225011011&rh=i%3Aspecialty-aps%2Cn%3A%2116225011011%2Cn%3A510240",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Vacuums & Floor Care",
+        "category_url": "https://www.amazon.com/s?bbn=16225011011&rh=i%3Aspecialty-aps%2Cn%3A%2116225011011%2Cn%3A510106",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Storage & Organization",
+        "category_url": "https://www.amazon.com/s?bbn=16225011011&rh=i%3Aspecialty-aps%2Cn%3A%2116225011011%2Cn%3A3610841",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Cleaning Supplies",
+        "category_url": "https://www.amazon.com/s?bbn=16225011011&rh=i%3Aspecialty-aps%2Cn%3A%2116225011011%2Cn%3A10802561",
+        "sub_categories": []
+      }
+    ]
+  },
+  {
+    "department_name": "Industrial and Scientific",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "Abrasive & Finishing Products",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A256167011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Additive Manufacturing Products",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A6066126011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Commercial Door Products",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A10773802011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Cutting Tools",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A383598011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Fasteners",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A383599011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Filtration",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A3061625011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Food Service Equipment & Supplies",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A6054382011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Hydraulics, Pneumatics & Plumbing",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A3021479011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Industrial Electrical",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A306506011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Industrial Hardware",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A16412251",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Industrial Power & Hand Tools",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A3021459011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Janitorial & Sanitation Supplies",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A317971011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Lab & Scientific Products",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A317970011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Material Handling Products",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A256346011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Occupational Health & Safety Products",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A318135011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Packaging & Shipping Supplies",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A8553197011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Power Transmission Products",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A16310181",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Professional Dental Supplies",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A8297371011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Professional Medical Supplies",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A8297370011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Raw Materials",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A16310191",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Retail Store Fixtures & Equipment",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A8615538011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Robotics",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A8498884011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Science Education",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A393459011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Tapes, Adhesives & Sealants",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A256225011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Test, Measure & Inspect",
+        "category_url": "https://www.amazon.com/s?bbn=16225012011&rh=i%3Aspecialty-aps%2Cn%3A%2116225012011%2Cn%3A256409011",
+        "sub_categories": []
+      }
+    ]
+  },
+  {
+    "department_name": "Luggage",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "Carry-ons",
+        "category_url": "https://www.amazon.com/s?bbn=16225017011&rh=i%3Afashion-luggage%2Cn%3A7141123011%2Cn%3A16225017011%2Cn%3A15743251%2Cn%3A15743261",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Backpacks",
+        "category_url": "https://www.amazon.com/s?bbn=16225017011&rh=i%3Afashion-luggage%2Cn%3A7141123011%2Cn%3A16225017011%2Cn%3A360832011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Garment bags",
+        "category_url": "https://www.amazon.com/s?bbn=16225017011&rh=i%3Afashion-luggage%2Cn%3A7141123011%2Cn%3A16225017011%2Cn%3A15743251%2Cn%3A15743271",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Travel Totes",
+        "category_url": "https://www.amazon.com/s?bbn=16225017011&rh=i%3Afashion-luggage%2Cn%3A7141123011%2Cn%3A16225017011%2Cn%3A15743241",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Luggage Sets",
+        "category_url": "https://www.amazon.com/s?bbn=16225017011&rh=i%3Afashion-luggage%2Cn%3A7141123011%2Cn%3A16225017011%2Cn%3A15743251%2Cn%3A15743291",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Laptop Bags",
+        "category_url": "https://www.amazon.com/s?bbn=16225017011&rh=i%3Afashion-luggage%2Cn%3A7141123011%2Cn%3A16225017011%2Cn%3A9971584011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Suitcases",
+        "category_url": "https://www.amazon.com/s?bbn=16225017011&rh=i%3Afashion-luggage%2Cn%3A7141123011%2Cn%3A16225017011%2Cn%3A15743251%2Cn%3A2477388011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Kids Luggage",
+        "category_url": "https://www.amazon.com/s?bbn=16225017011&rh=i%3Afashion-luggage%2Cn%3A7141123011%2Cn%3A16225017011%2Cn%3A15743251%2Cn%3A2477386011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Messenger Bags",
+        "category_url": "https://www.amazon.com/s?bbn=16225017011&rh=i%3Afashion-luggage%2Cn%3A7141123011%2Cn%3A16225017011%2Cn%3A15743231",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Umbrellas",
+        "category_url": "https://www.amazon.com/s?bbn=16225017011&rh=i%3Afashion-luggage%2Cn%3A7141123011%2Cn%3A16225017011%2Cn%3A15744111",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Duffles",
+        "category_url": "https://www.amazon.com/s?bbn=16225017011&rh=i%3Afashion-luggage%2Cn%3A7141123011%2Cn%3A16225017011%2Cn%3A15743211",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Travel Accessories",
+        "category_url": "https://www.amazon.com/s?bbn=16225017011&rh=i%3Afashion-luggage%2Cn%3A7141123011%2Cn%3A16225017011%2Cn%3A15743971",
+        "sub_categories": []
+      }
+    ]
+  },
+  {
+    "department_name": "Movies & Television",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "Movies",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=2649512011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "TV Shows",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=2649513011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Blu-ray",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=2901953011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "4K Ultra HD",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=11598814011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Today's Deals",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=2921749011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "New Releases",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=2921748011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Pre-orders",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=7353051011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Kids & Family",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=2650365011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Prime Video",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=2858778011",
+        "sub_categories": []
+      }
+    ]
+  },
+  {
+    "department_name": "Pet supplies",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "Dogs",
+        "category_url": "https://www.amazon.com/s?bbn=16225013011&rh=i%3Aspecialty-aps%2Cn%3A%2116225013011%2Cn%3A2975312011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Cats",
+        "category_url": "https://www.amazon.com/s?bbn=16225013011&rh=i%3Aspecialty-aps%2Cn%3A%2116225013011%2Cn%3A2975241011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Fish & Aquatic Pets",
+        "category_url": "https://www.amazon.com/s?bbn=16225013011&rh=i%3Aspecialty-aps%2Cn%3A%2116225013011%2Cn%3A2975446011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Birds",
+        "category_url": "https://www.amazon.com/s?bbn=16225013011&rh=i%3Aspecialty-aps%2Cn%3A%2116225013011%2Cn%3A2975221011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Horses",
+        "category_url": "https://www.amazon.com/s?bbn=16225013011&rh=i%3Aspecialty-aps%2Cn%3A%2116225013011%2Cn%3A2975481011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Reptiles & Amphibians",
+        "category_url": "https://www.amazon.com/s?bbn=16225013011&rh=i%3Aspecialty-aps%2Cn%3A%2116225013011%2Cn%3A2975504011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Small Animals",
+        "category_url": "https://www.amazon.com/s?bbn=16225013011&rh=i%3Aspecialty-aps%2Cn%3A%2116225013011%2Cn%3A2975520011",
+        "sub_categories": []
+      }
+    ]
+  },
+  {
+    "department_name": "Software",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "Accounting & Finance",
+        "category_url": "https://www.amazon.com/s?bbn=16225008011&rh=i%3Aspecialty-aps%2Cn%3A%2116225008011%2Cn%3A5223260011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Antivirus & Security",
+        "category_url": "https://www.amazon.com/s?bbn=16225008011&rh=i%3Aspecialty-aps%2Cn%3A%2116225008011%2Cn%3A229677",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Business & Office",
+        "category_url": "https://www.amazon.com/s?bbn=16225008011&rh=i%3Aspecialty-aps%2Cn%3A%2116225008011%2Cn%3A229535",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Children's",
+        "category_url": "https://www.amazon.com/s?bbn=16225008011&rh=i%3Aspecialty-aps%2Cn%3A%2116225008011%2Cn%3A229548",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Design & Illustration",
+        "category_url": "https://www.amazon.com/s?bbn=16225008011&rh=i%3Aspecialty-aps%2Cn%3A%2116225008011%2Cn%3A229614",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Digital Software",
+        "category_url": "https://www.amazon.com/s?bbn=16225008011&rh=i%3Aspecialty-aps%2Cn%3A%2116225008011%2Cn%3A1233514011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Education & Reference",
+        "category_url": "https://www.amazon.com/s?bbn=16225008011&rh=i%3Aspecialty-aps%2Cn%3A%2116225008011%2Cn%3A229563",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Games",
+        "category_url": "https://www.amazon.com/s?bbn=16225008011&rh=i%3Aspecialty-aps%2Cn%3A%2116225008011%2Cn%3A1294826011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Lifestyle & Hobbies",
+        "category_url": "https://www.amazon.com/s?bbn=16225008011&rh=i%3Aspecialty-aps%2Cn%3A%2116225008011%2Cn%3A229624",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Music",
+        "category_url": "https://www.amazon.com/s?bbn=16225008011&rh=i%3Aspecialty-aps%2Cn%3A%2116225008011%2Cn%3A497022",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Networking & Servers",
+        "category_url": "https://www.amazon.com/s?bbn=16225008011&rh=i%3Aspecialty-aps%2Cn%3A%2116225008011%2Cn%3A229637",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Operating Systems",
+        "category_url": "https://www.amazon.com/s?bbn=16225008011&rh=i%3Aspecialty-aps%2Cn%3A%2116225008011%2Cn%3A229653",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Photography",
+        "category_url": "https://www.amazon.com/s?bbn=16225008011&rh=i%3Aspecialty-aps%2Cn%3A%2116225008011%2Cn%3A229621",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Programming & Web Development",
+        "category_url": "https://www.amazon.com/s?bbn=16225008011&rh=i%3Aspecialty-aps%2Cn%3A%2116225008011%2Cn%3A5223262011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Tax Preparation",
+        "category_url": "https://www.amazon.com/s?bbn=16225008011&rh=i%3Aspecialty-aps%2Cn%3A%2116225008011%2Cn%3A229545",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Utilities",
+        "category_url": "https://www.amazon.com/s?bbn=16225008011&rh=i%3Aspecialty-aps%2Cn%3A%2116225008011%2Cn%3A229672",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Video",
+        "category_url": "https://www.amazon.com/s?bbn=16225008011&rh=i%3Aspecialty-aps%2Cn%3A%2116225008011%2Cn%3A290542",
+        "sub_categories": []
+      }
+    ]
+  },
+  {
+    "department_name": "Sports and Outdoors",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "Sports and Outdoors",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=16225014011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Outdoor Recreation",
+        "category_url": "https://www.amazon.com/s?bbn=16225014011&rh=i%3Aspecialty-aps%2Cn%3A%2116225014011%2Cn%3A706814011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Sports & Fitness",
+        "category_url": "https://www.amazon.com/s?bbn=16225014011&rh=i%3Aspecialty-aps%2Cn%3A%2116225014011%2Cn%3A10971181011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Fan Shop",
+        "category_url": "https://www.amazon.com/s?bbn=16225014011&rh=i%3Aspecialty-aps%2Cn%3A%2116225014011%2Cn%3A3386071",
+        "sub_categories": []
+      }
+    ]
+  },
+  {
+    "department_name": "Tools & Home Improvement",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "Tools & Home Improvement",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=256643011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Appliances",
+        "category_url": "https://www.amazon.com/s?bbn=256643011&rh=i%3Aspecialty-aps%2Cn%3A256643011%2Cn%3A%21468240%2Cn%3A13397451",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Building Supplies",
+        "category_url": "https://www.amazon.com/s?bbn=256643011&rh=i%3Aspecialty-aps%2Cn%3A256643011%2Cn%3A%21468240%2Cn%3A551240",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Electrical",
+        "category_url": "https://www.amazon.com/s?bbn=256643011&rh=i%3Aspecialty-aps%2Cn%3A256643011%2Cn%3A%21468240%2Cn%3A495266",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Hardware",
+        "category_url": "https://www.amazon.com/s?bbn=256643011&rh=i%3Aspecialty-aps%2Cn%3A256643011%2Cn%3A%21468240%2Cn%3A511228",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Kitchen & Bath Fixtures",
+        "category_url": "https://www.amazon.com/s?bbn=256643011&rh=i%3Aspecialty-aps%2Cn%3A256643011%2Cn%3A%21468240%2Cn%3A3754161",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Light Bulbs",
+        "category_url": "https://www.amazon.com/s?bbn=256643011&rh=i%3Aspecialty-aps%2Cn%3A256643011%2Cn%3A%21468240%2Cn%3A322525011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Lighting & Ceiling Fans",
+        "category_url": "https://www.amazon.com/s?bbn=256643011&rh=i%3Aspecialty-aps%2Cn%3A256643011%2Cn%3A%21468240%2Cn%3A495224",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Measuring & Layout Tools",
+        "category_url": "https://www.amazon.com/s?bbn=256643011&rh=i%3Aspecialty-aps%2Cn%3A256643011%2Cn%3A%21468240%2Cn%3A553244",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Painting Supplies & Wall Treatments",
+        "category_url": "https://www.amazon.com/s?bbn=256643011&rh=i%3Aspecialty-aps%2Cn%3A256643011%2Cn%3A%21468240%2Cn%3A228899",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Power & Hand Tools",
+        "category_url": "https://www.amazon.com/s?bbn=256643011&rh=i%3Aspecialty-aps%2Cn%3A256643011%2Cn%3A%21468240%2Cn%3A328182011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Rough Plumbing",
+        "category_url": "https://www.amazon.com/s?bbn=256643011&rh=i%3Aspecialty-aps%2Cn%3A256643011%2Cn%3A%21468240%2Cn%3A13749581",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Safety & Security",
+        "category_url": "https://www.amazon.com/s?bbn=256643011&rh=i%3Aspecialty-aps%2Cn%3A256643011%2Cn%3A%21468240%2Cn%3A3180231",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Storage & Home Organization",
+        "category_url": "https://www.amazon.com/s?bbn=256643011&rh=i%3Aspecialty-aps%2Cn%3A256643011%2Cn%3A%21468240%2Cn%3A13400631",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Welding & Soldering",
+        "category_url": "https://www.amazon.com/s?bbn=256643011&rh=i%3Aspecialty-aps%2Cn%3A256643011%2Cn%3A%21468240%2Cn%3A8106310011",
+        "sub_categories": []
+      }
+    ]
+  },
+  {
+    "department_name": "Toys and Games",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "Action Figures & Statues",
+        "category_url": "https://www.amazon.com/s?bbn=16225015011&rh=i%3Aspecialty-aps%2Cn%3A%2116225015011%2Cn%3A165993011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Arts & Crafts",
+        "category_url": "https://www.amazon.com/s?bbn=16225015011&rh=i%3Aspecialty-aps%2Cn%3A%2116225015011%2Cn%3A166057011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Baby & Toddler Toys",
+        "category_url": "https://www.amazon.com/s?bbn=16225015011&rh=i%3Aspecialty-aps%2Cn%3A%2116225015011%2Cn%3A196601011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Building Toys",
+        "category_url": "https://www.amazon.com/s?bbn=16225015011&rh=i%3Aspecialty-aps%2Cn%3A%2116225015011%2Cn%3A166092011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Dolls & Accessories",
+        "category_url": "https://www.amazon.com/s?bbn=16225015011&rh=i%3Aspecialty-aps%2Cn%3A%2116225015011%2Cn%3A166118011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Dress Up & Pretend Play",
+        "category_url": "https://www.amazon.com/s?bbn=16225015011&rh=i%3Aspecialty-aps%2Cn%3A%2116225015011%2Cn%3A166316011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Kids' Electronics",
+        "category_url": "https://www.amazon.com/s?bbn=16225015011&rh=i%3Aspecialty-aps%2Cn%3A%2116225015011%2Cn%3A166164011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Games",
+        "category_url": "https://www.amazon.com/s?bbn=16225015011&rh=i%3Aspecialty-aps%2Cn%3A%2116225015011%2Cn%3A166220011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Grown-Up Toys",
+        "category_url": "https://www.amazon.com/s?bbn=16225015011&rh=i%3Aspecialty-aps%2Cn%3A%2116225015011%2Cn%3A3226142011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Hobbies",
+        "category_url": "https://www.amazon.com/s?bbn=16225015011&rh=i%3Aspecialty-aps%2Cn%3A%2116225015011%2Cn%3A276729011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Kids' Furniture, D\u00e9cor & Storage",
+        "category_url": "https://www.amazon.com/s?bbn=16225015011&rh=i%3Aspecialty-aps%2Cn%3A%2116225015011%2Cn%3A166210011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Learning & Education",
+        "category_url": "https://www.amazon.com/s?bbn=16225015011&rh=i%3Aspecialty-aps%2Cn%3A%2116225015011%2Cn%3A166269011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Novelty & Gag Toys",
+        "category_url": "https://www.amazon.com/s?bbn=16225015011&rh=i%3Aspecialty-aps%2Cn%3A%2116225015011%2Cn%3A166027011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Party Supplies",
+        "category_url": "https://www.amazon.com/s?bbn=16225015011&rh=i%3Aspecialty-aps%2Cn%3A%2116225015011%2Cn%3A1266203011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Puppets",
+        "category_url": "https://www.amazon.com/s?bbn=16225015011&rh=i%3Aspecialty-aps%2Cn%3A%2116225015011%2Cn%3A166333011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Puzzles",
+        "category_url": "https://www.amazon.com/s?bbn=16225015011&rh=i%3Aspecialty-aps%2Cn%3A%2116225015011%2Cn%3A166359011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Sports & Outdoor Play",
+        "category_url": "https://www.amazon.com/s?bbn=16225015011&rh=i%3Aspecialty-aps%2Cn%3A%2116225015011%2Cn%3A166420011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Stuffed Animals & Plush Toys",
+        "category_url": "https://www.amazon.com/s?bbn=16225015011&rh=i%3Aspecialty-aps%2Cn%3A%2116225015011%2Cn%3A166461011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Toy Remote Control & Play Vehicles",
+        "category_url": "https://www.amazon.com/s?bbn=16225015011&rh=i%3Aspecialty-aps%2Cn%3A%2116225015011%2Cn%3A166508011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Tricycles, Scooters & Wagons",
+        "category_url": "https://www.amazon.com/s?bbn=16225015011&rh=i%3Aspecialty-aps%2Cn%3A%2116225015011%2Cn%3A256994011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Video Games",
+        "category_url": "https://www.amazon.com/s?bbn=16225015011&rh=i%3Aspecialty-aps%2Cn%3A%2116225015011%2Cn%3A8794716011",
+        "sub_categories": []
+      }
+    ]
+  },
+  {
+    "department_name": "Video Games",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "Video Games",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=16225016011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "PlayStation 4",
+        "category_url": "https://www.amazon.com/s?bbn=16225016011&rh=i%3Aspecialty-aps%2Cn%3A%2116225016011%2Cn%3A6427814011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "PlayStation 3",
+        "category_url": "https://www.amazon.com/s?bbn=16225016011&rh=i%3Aspecialty-aps%2Cn%3A%2116225016011%2Cn%3A14210751",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Xbox One",
+        "category_url": "https://www.amazon.com/s?bbn=16225016011&rh=i%3Aspecialty-aps%2Cn%3A%2116225016011%2Cn%3A6469269011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Xbox 360",
+        "category_url": "https://www.amazon.com/s?bbn=16225016011&rh=i%3Aspecialty-aps%2Cn%3A%2116225016011%2Cn%3A14220161",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Nintendo Switch",
+        "category_url": "https://www.amazon.com/s?bbn=16225016011&rh=i%3Aspecialty-aps%2Cn%3A%2116225016011%2Cn%3A16227128011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Wii U",
+        "category_url": "https://www.amazon.com/s?bbn=16225016011&rh=i%3Aspecialty-aps%2Cn%3A%2116225016011%2Cn%3A3075112011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Wii",
+        "category_url": "https://www.amazon.com/s?bbn=16225016011&rh=i%3Aspecialty-aps%2Cn%3A%2116225016011%2Cn%3A14218901",
+        "sub_categories": []
+      },
+      {
+        "category_name": "PC",
+        "category_url": "https://www.amazon.com/s?bbn=16225016011&rh=i%3Aspecialty-aps%2Cn%3A%2116225016011%2Cn%3A229575",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Mac",
+        "category_url": "https://www.amazon.com/s?bbn=16225016011&rh=i%3Aspecialty-aps%2Cn%3A%2116225016011%2Cn%3A229647",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Nintendo 3DS & 2DS",
+        "category_url": "https://www.amazon.com/s?bbn=16225016011&rh=i%3Aspecialty-aps%2Cn%3A%2116225016011%2Cn%3A2622269011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Nintendo DS",
+        "category_url": "https://www.amazon.com/s?bbn=16225016011&rh=i%3Aspecialty-aps%2Cn%3A%2116225016011%2Cn%3A11075831",
+        "sub_categories": []
+      },
+      {
+        "category_name": "PlayStation Vita",
+        "category_url": "https://www.amazon.com/s?bbn=16225016011&rh=i%3Aspecialty-aps%2Cn%3A%2116225016011%2Cn%3A3010556011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Sony PSP",
+        "category_url": "https://www.amazon.com/s?bbn=16225016011&rh=i%3Aspecialty-aps%2Cn%3A%2116225016011%2Cn%3A11075221",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Retro Gaming & Microconsoles",
+        "category_url": "https://www.amazon.com/s?bbn=16225016011&rh=i%3Aspecialty-aps%2Cn%3A%2116225016011%2Cn%3A294940",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Accessories",
+        "category_url": "https://www.amazon.com/s?bbn=16225016011&rh=i%3Aspecialty-aps%2Cn%3A%2116225016011%2Cn%3A471304",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Digital Games",
+        "category_url": "https://www.amazon.com/s?bbn=16225016011&rh=i%3Aspecialty-aps%2Cn%3A%2116225016011%2Cn%3A979455011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Kids & Family",
+        "category_url": "https://www.amazon.com/s?bbn=16225016011&rh=i%3Aspecialty-aps%2Cn%3A%2116225016011%2Cn%3A8400376011",
+        "sub_categories": []
+      }
+    ]
+  },
+  {
+    "department_name": "Gift Cards",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "All gift cards",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=2238192011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "eGift cards",
+        "category_url": "https://www.amazon.com/s?bbn=2238192011&page=1&rh=n%3A2238192011%2Cp_n_format_browse-bin%3A2740964011%2Cp_89%3AAmazon",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Gift cards by mail",
+        "category_url": "https://www.amazon.com/s?bbn=2238192011&page=1&rh=n%3A2238192011%2Cp_89%3AAmazon%2Cp_n_format_browse-bin%3A2740967011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Specialty gift cards",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=2864196011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Amazon Cash",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=14583169011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "For Businesses",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=15243182011",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Redeem a gift card",
+        "category_url": "https://www.amazon.com/gc/redeem?ref_=nav_em_hmc_gc_redeem_0_2_27_9",
+        "sub_categories": []
+      },
+      {
+        "category_name": "View Your Balance",
+        "category_url": "https://www.amazon.com/gp/css/gc/balance?ref_=nav_em_hmc_gc_viewbalance_0_2_27_10",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Reload Your Balance",
+        "category_url": "https://www.amazon.com/asv/reload/order?ref_=nav_em_hmc_gc_asv_0_2_27_11",
+        "sub_categories": []
+      }
+    ]
+  },
+  {
+    "department_name": "Amazon Live",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "Live",
+        "category_url": "https://www.amazon.com/live?ref_=nav_em_sd_al_dest_0_2_28_2",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Recently Live",
+        "category_url": "https://www.amazon.com/live?ref_=nav_em_sd_al_dest#recently_0_2_28_3",
+        "sub_categories": []
+      }
+    ]
+  },
+  {
+    "department_name": "International Shopping",
+    "department_id": "",
+    "categories": [
+      {
+        "category_name": "Where we ship",
+        "category_url": "https://www.amazon.com/gp/help/customer/display.html?nodeId=201910800",
+        "sub_categories": []
+      },
+      {
+        "category_name": "Visit Amazon Global",
+        "category_url": "https://www.amazon.com/gp/browse.html?node=17416544011",
+        "sub_categories": []
+      }
+    ]
+  }
+]

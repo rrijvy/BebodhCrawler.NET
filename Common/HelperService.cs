@@ -1,4 +1,5 @@
-﻿using Core.IRepositories;
+﻿using Core.Entities;
+using Core.IRepositories;
 using Core.IServices;
 using Core.Models;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,6 +17,8 @@ namespace Common
             serviceCollection.AddScoped<IProxyService, ProxyService>();
             serviceCollection.AddScoped<IAmazonCrawlerService, AmazonCrawlerService>();
             serviceCollection.AddScoped<IAuthService, AuthService>();
+            serviceCollection.AddScoped<ICrawlRepository, CrawlRepository>();
+
         }
     }
 }
