@@ -2,17 +2,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>14122db5-5a55-4aeb-946d-53855d2ce99c</ProjectGuid>
+    <ProjectGuid>1ff78656-fb20-4230-8f2d-963833ea4f62</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>TestCrawler.py</StartupFile>
+    <StartupFile>TestScrapper.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
-    <Name>TestCrawler</Name>
-    <RootNamespace>TestCrawler</RootNamespace>
-    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <Name>TestScrapper</Name>
+    <RootNamespace>TestScrapper</RootNamespace>
     <SuppressConfigureTestFrameworkPrompt>true</SuppressConfigureTestFrameworkPrompt>
+    <InterpreterId>MSBuild|env|$(MSBuildProjectFullPath)</InterpreterId>
+    <PublishUrl>F:\Codes\.net\BebodhCrawler\TestScrapper\publish</PublishUrl>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,7 +24,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="TestCrawler.py" />
+    <Compile Include="TestScrapper.py" />
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env\">
