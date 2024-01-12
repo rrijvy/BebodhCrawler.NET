@@ -140,17 +140,14 @@ namespace Services
             var filterDefination = Builders<HttpProxy>.Filter.Eq(x => x.IsProxyRunning, false);
             var sortDefinition = Builders<HttpProxy>.Sort.Ascending(x => x.UpdatedAt);
 
-            //var proxies = _proxyRepository.AsQueryable()
-            //    .Where(x => !x.IsProxyRunning && !x.BlockedBy.Contains(CrawlerType.AMAZON))
-            //    .OrderBy(x => x.UpdatedAt).ToList();
-
             var proxies = await _proxyRepository.FindAllAsync(filterDefination, sortDefinition);
-
-
 
             var proxy = proxies.FirstOrDefault(x =>
             {
-                if (string.IsNullOrEmpty(x.UpdatedAt)) return true;
+                if (x.UpdatedAt <= Utility.GetMinimumUnixTime())
+                {
+                    return true;
+                }
 
                 var elapsedTime = Utility.GetElapsedTimeInSecond(x.UpdatedAt);
 

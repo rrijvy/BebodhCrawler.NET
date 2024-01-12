@@ -24,6 +24,14 @@ namespace Core.Helpers
             var timeStamp = new DateTimeOffset(DateTime.Now).ToUnixTimeSeconds();
             return timeStamp;
         }
+
+        public static long GetMinimumUnixTime()
+        {
+            var timeStamp = new DateTimeOffset(DateTime.MinValue).ToUnixTimeSeconds();
+            return timeStamp;
+        }
+
+
         public static double GetElapsedTimeInSecond(string lastUsedTimeStamp)
         {
             if (string.IsNullOrEmpty(lastUsedTimeStamp)) return 0;
@@ -33,11 +41,20 @@ namespace Core.Helpers
             return diff.TotalSeconds;
         }
 
+        public static double GetElapsedTimeInSecond(long lastUsedTimeStamp)
+        {
+            if (lastUsedTimeStamp <= GetMinimumUnixTime()) return 0;
+            DateTimeOffset currentOffset = DateTimeOffset.FromUnixTimeSeconds(Utility.GetCurrentUnixTime());
+            DateTimeOffset lastUsedOffset = DateTimeOffset.FromUnixTimeSeconds(lastUsedTimeStamp);
+            var diff = currentOffset - lastUsedOffset;
+            return diff.TotalSeconds;
+        }
+
         public static HttpProxy GetProxy(string proxyAddress)
         {
             return new HttpProxy
             {
-                AddedOn = GetCurrentUnixTimeAsString(),
+                AddedOn = GetCurrentUnixTime(),
                 IpAddress = proxyAddress,
                 IsActive = false,
                 IsProxyRunning = false,

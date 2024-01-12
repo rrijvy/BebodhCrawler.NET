@@ -36,7 +36,7 @@ namespace BebodhCrawler.Controllers
                 CrawlerName = value.CrawlerName,
                 OutputPath = value.OutputPath,
                 Progress = value.Progress,
-                AddedOn = Utility.GetCurrentUnixTimeAsString(),
+                AddedOn = Utility.GetCurrentUnixTime(),
             });
 
             return Ok();
