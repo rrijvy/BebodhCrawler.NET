@@ -18,13 +18,19 @@ namespace BebodhCrawler
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            var mongoDbSettings = builder.Configuration.GetSection("MongoDB").Get<MongoDBSettings>();
+            var sqlServerSettings = builder.Configuration.GetSection("CrawlerSqlServer").Get<SqlServerSettings>();
+            var crawlerDbSettings = builder.Configuration.GetSection("SqlServer").Get<SqlServerSettings>();
+            var jwtSettings = builder.Configuration.GetSection("JWTCred").Get<JwtSettings>();
+
+
             builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDB"));
             builder.Services.Configure<SqlServerSettings>(builder.Configuration.GetSection("SqlServer"));
             builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JWTCred"));
 
             builder.Services.AddDbContext<CrawlerDbContext>(options =>
             {
-                options.UseSqlServer(builder.Configuration.GetSection("CrawlerSqlServer")["ConnectionURI"]);
+                options.UseSqlServer(crawlerDbSettings.ConnectionURI);
             });
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
@@ -49,7 +55,7 @@ namespace BebodhCrawler
                     ValidateAudience = false,
                     RequireExpirationTime = true,
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetSection("JWTCred")["SecretKey"]))
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey))
                 };
             });
 
@@ -121,7 +127,7 @@ namespace BebodhCrawler
             {
                 config.UseSimpleAssemblyNameTypeSerializer();
                 config.UseRecommendedSerializerSettings();
-                config.UseSqlServerStorage(builder.Configuration.GetSection("SqlServer")["ConnectionURI"]);
+                config.UseSqlServerStorage(sqlServerSettings.ConnectionURI);
             });
 
             builder.Services.AddHangfireServer();

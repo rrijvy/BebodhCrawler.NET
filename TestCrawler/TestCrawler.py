@@ -5,6 +5,9 @@ from selenium import webdriver
 import time
 import os
 import requests
+from PythonLibs import CustomRequest
+from BrowserUserAgent import BrowserUserAgent
+
 
 arguments = sys.argv[1:]
 
@@ -13,7 +16,6 @@ filename = f"{int(time.time())}.csv"
 export_file = os.path.join(
     os.path.dirname(os.path.realpath(__file__)), "exports", filename
 )
-
 
 
 # url = "http://localhost:28851/api/Crawls/UpdateCrawls"
@@ -33,14 +35,17 @@ export_file = os.path.join(
 # print(response.text)
 
 
-
 parsed_argument = {
     "category_name": "Camera & Photo",
-    "category_url": "https://www.amazon.com/s?bbn=16225009011&rh=i%3Aspecialty-aps%2Cn%3A%2116225009011%2Cn%3A502394",
-    "sub_categories": []
+    "category_url": "https://www.amazon.com/s?bbn=16225009011&rh=i%3Aspecialty-aps%2Cn%3A%2116225009011%2C",
+    "sub_categories": [],
 }
 
-from PythonLibs import CustomRequest
+
+response = CustomRequest.make_get_request(
+    parsed_argument["category_url"],
+    headers={"User-Agent": BrowserUserAgent.GetRandom()},
+)
 
 response = CustomRequest.make_get_request(parsed_argument['category_url'])
 print(response)

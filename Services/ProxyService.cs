@@ -68,6 +68,15 @@ namespace Services
                 }
             }
 
+            var batchSize = 500;
+
+            //for (int i = 0; i < proxies.Count; i += batchSize)
+            //{
+            //    List<string> currentBatch = proxies.GetRange(i, Math.Min(batchSize, proxies.Count - i));
+
+            //    tasks.AddRange(CheckProxiesConcurrently(currentBatch));
+            //}
+
             foreach (var proxyAddress in proxies)
             {
                 tasks.Add(CheckProxyIsAlive(proxyAddress));
@@ -79,12 +88,25 @@ namespace Services
 
             var httpProxies = activeProxies.Select(x => Utility.GetProxy(x)).ToList();
 
-            await _proxyRepository.InsertManyAsync(httpProxies);
+            //await _proxyRepository.InsertManyAsync(httpProxies);
 
             proxyBackgroundTaskHistory.EndedAt = Utility.GetCurrentUnixTime();
+
             await _proxyBackgroundTaskRepository.ReplaceOneAsync(proxyBackgroundTaskHistory.Id, proxyBackgroundTaskHistory);
 
             return httpProxies;
+        }
+
+        private List<Task<string>> CheckProxiesConcurrently(List<string> proxies)
+        {
+            var tasks = new List<Task<string>>();
+
+            foreach (var proxy in proxies)
+            {
+                tasks.Add(CheckProxyIsAlive(proxy));
+            }
+
+            return tasks;
         }
 
         private async Task<string> CheckProxyIsAlive(string proxyAddress)
@@ -101,6 +123,7 @@ namespace Services
                 if (response.IsSuccessStatusCode)
                 {
                     Console.WriteLine($"Success - {proxyAddress}");
+                    await _proxyRepository.InsertOneAsync(Utility.GetProxy(proxyAddress));
                     return proxyAddress;
                 }
                 return string.Empty;
@@ -112,14 +135,18 @@ namespace Services
             }
         }
 
-        public HttpProxy GetUnusedActiveProxy()
+        public async Task<HttpProxy> GetUnusedActiveProxy()
         {
             var filterDefination = Builders<HttpProxy>.Filter.Eq(x => x.IsProxyRunning, false);
             var sortDefinition = Builders<HttpProxy>.Sort.Ascending(x => x.UpdatedAt);
 
-            var proxies = _proxyRepository.AsQueryable()
-                .Where(x => !x.IsProxyRunning && !x.BlockedBy.Contains(CrawlerType.AMAZON))
-                .OrderBy(x => x.UpdatedAt).ToList();
+            //var proxies = _proxyRepository.AsQueryable()
+            //    .Where(x => !x.IsProxyRunning && !x.BlockedBy.Contains(CrawlerType.AMAZON))
+            //    .OrderBy(x => x.UpdatedAt).ToList();
+
+            var proxies = await _proxyRepository.FindAllAsync(filterDefination, sortDefinition);
+
+
 
             var proxy = proxies.FirstOrDefault(x =>
             {

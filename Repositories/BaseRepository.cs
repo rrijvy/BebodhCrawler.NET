@@ -31,6 +31,11 @@ namespace Repositories
                 : Database.GetCollection<T>(mongoDBSettings.Value.CollectionName);
         }
 
+        public IMongoCollection<T> GetQueryContext()
+        {
+            return DbSet;
+        }
+
         public IQueryable<T> AsQueryable()
         {
             return DbSet.AsQueryable();

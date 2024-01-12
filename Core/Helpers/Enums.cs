@@ -1,6 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using MongoDB.Bson.Serialization.Attributes;
+using MongoDB.Bson;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System;
 
 namespace Core.Helpers
 {
@@ -8,7 +9,9 @@ namespace Core.Helpers
     [JsonConverter(typeof(StringEnumConverter))]
     public enum CrawlerType
     {
+        [BsonRepresentation(BsonType.String)]
         AMAZON,
+        [BsonRepresentation(BsonType.String)]
         LINKEDIN
     }
 }

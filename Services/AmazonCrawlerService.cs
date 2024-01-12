@@ -48,7 +48,7 @@ namespace Services
 
                 var searchUrl = GenerateAmazonSearchUrlByCategory(category);
 
-                proxy = _proxyService.GetUnusedActiveProxy();
+                proxy = await _proxyService.GetUnusedActiveProxy();
 
                 if (proxy == null) return null;
 
