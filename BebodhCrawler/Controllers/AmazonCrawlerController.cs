@@ -1,6 +1,7 @@
 ﻿using Core.Helpers;
 using Core.IRepositories;
 using Core.IServices;
+using Hangfire;
 using HtmlAgilityPack;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -88,7 +89,7 @@ namespace BebodhCrawler.Controllers
         }
 
         [HttpGet("RunScript")]
-        public async Task<ActionResult> RunScript()
+        public ActionResult RunScript()
         {
             try
             {
@@ -98,7 +99,7 @@ namespace BebodhCrawler.Controllers
 
                 string scriptPath = @"C:\Users\tarek\source\repos\BebodhCrawler.NET\TestCrawler\TestCrawler.py 54564654654";
 
-                ProcessStartInfo startInfo = new ProcessStartInfo
+                var startInfo = new ProcessStartInfo
                 {
                     FileName = pythonPath,
                     Arguments = scriptPath,
@@ -108,7 +109,7 @@ namespace BebodhCrawler.Controllers
                     CreateNoWindow = true
                 };
 
-                using Process process = new Process
+                using var process = new Process
                 {
                     StartInfo = startInfo
                 };
@@ -139,5 +140,24 @@ namespace BebodhCrawler.Controllers
             }
 
         }
+
+        [HttpGet("RunBackgroundTask")]
+        public ActionResult RunBackgroundTask()
+        {
+            try
+            {
+                var jobId = BackgroundJob.Enqueue(() => _amazonCrawlerService.GetAmazonProductsByCategory("monitor"));
+
+                return Ok("Python script executed.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+
+
     }
 }
