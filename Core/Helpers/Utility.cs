@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml;
 using HtmlAgilityPack;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace Core.Helpers
 {
@@ -116,5 +118,25 @@ namespace Core.Helpers
             }
         }
 
+        public static string GetPropertyName<T>(Expression<Func<T, string>> expression)
+        {
+            if (expression.Body is not MemberExpression memberExpression)
+            {
+                UnaryExpression unaryExpression = (UnaryExpression)expression.Body;
+                memberExpression = (MemberExpression)unaryExpression.Operand;
+            }
+
+            if (memberExpression != null)
+            {
+                PropertyInfo propertyInfo = (PropertyInfo)memberExpression.Member;
+
+                if (propertyInfo != null)
+                {
+                    return propertyInfo.Name;
+                }
+            }
+
+            throw new ArgumentException("Expression is not a valid property expression");
+        }
     }
 }

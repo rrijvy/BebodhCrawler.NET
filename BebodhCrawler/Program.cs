@@ -7,8 +7,13 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using MongoDB.Bson.Serialization.Serializers;
+using MongoDB.Bson.Serialization;
+using MongoDB.Bson;
 using System.Net.Security;
 using System.Text;
+using Core.Helpers;
+using Core.Entities;
 
 namespace BebodhCrawler
 {
@@ -23,6 +28,7 @@ namespace BebodhCrawler
             var crawlerDbSettings = builder.Configuration.GetSection("SqlServer").Get<SqlServerSettings>();
             var jwtSettings = builder.Configuration.GetSection("JWTCred").Get<JwtSettings>();
 
+            BsonSerializer.RegisterSerializer(new DateTimeSerializer(DateTimeKind.Local, BsonType.String));
 
             builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDB"));
             builder.Services.Configure<SqlServerSettings>(builder.Configuration.GetSection("SqlServer"));
