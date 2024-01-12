@@ -70,17 +70,17 @@ namespace Services
 
             var batchSize = 500;
 
-            for (int i = 0; i < proxies.Count; i += batchSize)
-            {
-                List<string> currentBatch = proxies.GetRange(i, Math.Min(batchSize, proxies.Count - i));
-
-                tasks.AddRange(CheckProxiesConcurrently(currentBatch));
-            }
-
-            //foreach (var proxyAddress in proxies)
+            //for (int i = 0; i < proxies.Count; i += batchSize)
             //{
-            //    tasks.Add(CheckProxyIsAlive(proxyAddress));
+            //    List<string> currentBatch = proxies.GetRange(i, Math.Min(batchSize, proxies.Count - i));
+
+            //    tasks.AddRange(CheckProxiesConcurrently(currentBatch));
             //}
+
+            foreach (var proxyAddress in proxies)
+            {
+                tasks.Add(CheckProxyIsAlive(proxyAddress));
+            }
 
             var taskResults = await Task.WhenAll(tasks);
 
@@ -88,7 +88,7 @@ namespace Services
 
             var httpProxies = activeProxies.Select(x => Utility.GetProxy(x)).ToList();
 
-            await _proxyRepository.InsertManyAsync(httpProxies);
+            //await _proxyRepository.InsertManyAsync(httpProxies);
 
             proxyBackgroundTaskHistory.EndedAt = Utility.GetCurrentUnixTime();
 
@@ -122,6 +122,7 @@ namespace Services
                 HttpResponseMessage response = await client.GetAsync("https://httpbin.org/ip");
                 if (response.IsSuccessStatusCode)
                 {
+                    await _proxyRepository.InsertOneAsync(Utility.GetProxy(proxyAddress));
                     return proxyAddress;
                 }
                 return string.Empty;

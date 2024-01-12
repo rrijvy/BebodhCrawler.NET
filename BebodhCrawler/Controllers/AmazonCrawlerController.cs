@@ -33,7 +33,7 @@ namespace BebodhCrawler.Controllers
             {
                 string htmlAsString = string.Empty;
 
-                var proxy = _proxyService.GetUnusedActiveProxy();
+                var proxy = await _proxyService.GetUnusedActiveProxy();
 
                 var productUrl = @"https://www.amazon.com/SAMSUNG-Computer-DisplayPort-Adjustable-LF24T454FQNXGO/dp/B08WGLL83S";
 
