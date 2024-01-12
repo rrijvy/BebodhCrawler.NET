@@ -3,6 +3,7 @@ using Core.IRepositories;
 using Core.IServices;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
+using Repositories;
 
 namespace BebodhCrawler.Controllers
 {
@@ -22,7 +23,7 @@ namespace BebodhCrawler.Controllers
         [HttpGet]
         public async Task<IEnumerable<HttpProxy>> Get()
         {
-            var proxies = await _proxyService.RetrieveProxies();
+            var proxies = await _proxyRepository.GetAll();
             return proxies;
         }
 

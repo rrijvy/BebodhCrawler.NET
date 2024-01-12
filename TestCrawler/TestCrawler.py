@@ -42,5 +42,5 @@ parsed_argument = {
 
 from PythonLibs import CustomRequest
 
-response = CustomRequest.make_get_request(parsed_argument['category_url'], headers = {'User-Agent':})
+response = CustomRequest.make_get_request(parsed_argument['category_url'])
 print(response)

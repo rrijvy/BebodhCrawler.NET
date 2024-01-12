@@ -40,9 +40,9 @@ namespace Services
             var sourceUrls = new List<string>()
             {
                 "https://raw.githubusercontent.com/prxchk/proxy-list/main/http.txt",
-                //"https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/http.txt",
-                //"https://raw.githubusercontent.com/saisuiu/Lionkings-Http-Proxys-Proxies/main/free.txt",
-                //"https://raw.githubusercontent.com/MuRongPIG/Proxy-Master/main/http.txt",
+                "https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/http.txt",
+                "https://raw.githubusercontent.com/saisuiu/Lionkings-Http-Proxys-Proxies/main/free.txt",
+                "https://raw.githubusercontent.com/MuRongPIG/Proxy-Master/main/http.txt",
 
                 //"https://raw.githubusercontent.com/caliphdev/Proxy-List/master/http.txt",
                 //"https://raw.githubusercontent.com/Zaeem20/FREE_PROXIES_LIST/master/http.txt",
@@ -100,6 +100,7 @@ namespace Services
                 HttpResponseMessage response = await client.GetAsync("https://httpbin.org/ip");
                 if (response.IsSuccessStatusCode)
                 {
+                    Console.WriteLine($"Success - {proxyAddress}");
                     return proxyAddress;
                 }
                 return string.Empty;
