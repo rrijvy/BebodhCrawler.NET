@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 using MongoDB.Bson;
+using MongoDB.Driver;
 
 namespace Core.IRepositories
 {
@@ -16,6 +13,7 @@ namespace Core.IRepositories
         Task<T> FindOneAsync(Expression<Func<T, bool>> filterExpression);
         Task<T> FindByIdAsync(ObjectId id);
         Task<IEnumerable<T>> FindAllAsync(Expression<Func<T, bool>> filterExpression);
+        Task<IEnumerable<T>> FindAllAsync(FilterDefinition<T> filterDefinition = null, SortDefinition<T> sortDefinition = null);
         Task InsertOneAsync(T document);
         Task InsertManyAsync(ICollection<T> documents);
         Task ReplaceOneAsync(ObjectId id, T document);

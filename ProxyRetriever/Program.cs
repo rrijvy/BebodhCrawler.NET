@@ -2,7 +2,6 @@
 using Core.IServices;
 using Core.Models;
 using Hangfire;
-using Hangfire.Storage.SQLite;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ProxyRetriever
@@ -12,21 +11,23 @@ namespace ProxyRetriever
 
         static void Main(string[] args)
         {
-            //var sqlServerConnectionString = @"Data Source=DESKTOP-MSFMN85\SQLEXPRESS;Initial Catalog=ProxyRetrieverDB;Integrated Security=True";
-            //GlobalConfiguration.Configuration
-            //    .UseSimpleAssemblyNameTypeSerializer()
-            //    .UseRecommendedSerializerSettings()
-            //    .UseSqlServerStorage(sqlServerConnectionString);
-
-            var sqliteConnectionString = @"Data Source=scheduler.db";
+            var sqlServerConnectionString = @"Data Source=DESKTOP-MSFMN85\SQLEXPRESS;Initial Catalog=ProxyRetrieverDB;Integrated Security=True";
             GlobalConfiguration.Configuration
                 .UseSimpleAssemblyNameTypeSerializer()
                 .UseRecommendedSerializerSettings()
-                .UseSQLiteStorage(sqliteConnectionString);
+                .UseSqlServerStorage(sqlServerConnectionString);
+
+            //var sqliteConnectionString = @"Data Source=scheduler.db";
+            //GlobalConfiguration.Configuration
+            //    .UseSimpleAssemblyNameTypeSerializer()
+            //    .UseRecommendedSerializerSettings()
+            //    .UseSQLiteStorage(sqliteConnectionString);
 
             using (var server = new BackgroundJobServer())
             {
-                RecurringJob.AddOrUpdate("___main___", () => RetrieveProxies(), "*/1 * * * *");
+                //RecurringJob.AddOrUpdate("___main___", () => RetrieveProxies(), "*/1 * * * *");
+
+                BackgroundJob.Enqueue(() => RetrieveProxies());
 
                 Console.WriteLine("Hangfire Server started. Press any key to exit...");
 

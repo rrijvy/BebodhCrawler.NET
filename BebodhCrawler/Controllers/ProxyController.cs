@@ -20,9 +20,9 @@ namespace BebodhCrawler.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<HttpProxy>> Get()
+        public async Task<HttpProxy> Get()
         {
-            var proxies = await _proxyService.RetrieveProxies();
+            var proxies = await _proxyService.GetUnusedActiveProxy();
             return proxies;
         }
 

@@ -40,9 +40,9 @@ namespace Services
             var sourceUrls = new List<string>()
             {
                 "https://raw.githubusercontent.com/prxchk/proxy-list/main/http.txt",
-                //"https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/http.txt",
-                //"https://raw.githubusercontent.com/saisuiu/Lionkings-Http-Proxys-Proxies/main/free.txt",
-                //"https://raw.githubusercontent.com/MuRongPIG/Proxy-Master/main/http.txt",
+                "https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/http.txt",
+                "https://raw.githubusercontent.com/saisuiu/Lionkings-Http-Proxys-Proxies/main/free.txt",
+                "https://raw.githubusercontent.com/MuRongPIG/Proxy-Master/main/http.txt",
 
                 //"https://raw.githubusercontent.com/caliphdev/Proxy-List/master/http.txt",
                 //"https://raw.githubusercontent.com/Zaeem20/FREE_PROXIES_LIST/master/http.txt",
@@ -68,10 +68,19 @@ namespace Services
                 }
             }
 
-            foreach (var proxyAddress in proxies)
+            var batchSize = 500;
+
+            for (int i = 0; i < proxies.Count; i += batchSize)
             {
-                tasks.Add(CheckProxyIsAlive(proxyAddress));
+                List<string> currentBatch = proxies.GetRange(i, Math.Min(batchSize, proxies.Count - i));
+
+                tasks.AddRange(CheckProxiesConcurrently(currentBatch));
             }
+
+            //foreach (var proxyAddress in proxies)
+            //{
+            //    tasks.Add(CheckProxyIsAlive(proxyAddress));
+            //}
 
             var taskResults = await Task.WhenAll(tasks);
 
@@ -82,9 +91,22 @@ namespace Services
             await _proxyRepository.InsertManyAsync(httpProxies);
 
             proxyBackgroundTaskHistory.EndedAt = Utility.GetCurrentUnixTime();
+
             await _proxyBackgroundTaskRepository.ReplaceOneAsync(proxyBackgroundTaskHistory.Id, proxyBackgroundTaskHistory);
 
             return httpProxies;
+        }
+
+        private List<Task<string>> CheckProxiesConcurrently(List<string> proxies)
+        {
+            var tasks = new List<Task<string>>();
+
+            foreach (var proxy in proxies)
+            {
+                tasks.Add(CheckProxyIsAlive(proxy));
+            }
+
+            return tasks;
         }
 
         private async Task<string> CheckProxyIsAlive(string proxyAddress)
@@ -111,14 +133,18 @@ namespace Services
             }
         }
 
-        public HttpProxy GetUnusedActiveProxy()
+        public async Task<HttpProxy> GetUnusedActiveProxy()
         {
             var filterDefination = Builders<HttpProxy>.Filter.Eq(x => x.IsProxyRunning, false);
             var sortDefinition = Builders<HttpProxy>.Sort.Ascending(x => x.UpdatedAt);
 
-            var proxies = _proxyRepository.AsQueryable()
-                .Where(x => !x.IsProxyRunning && !x.BlockedBy.Contains(CrawlerType.AMAZON))
-                .OrderBy(x => x.UpdatedAt).ToList();
+            //var proxies = _proxyRepository.AsQueryable()
+            //    .Where(x => !x.IsProxyRunning && !x.BlockedBy.Contains(CrawlerType.AMAZON))
+            //    .OrderBy(x => x.UpdatedAt).ToList();
+
+            var proxies = await _proxyRepository.FindAllAsync(filterDefination, sortDefinition);
+
+
 
             var proxy = proxies.FirstOrDefault(x =>
             {
