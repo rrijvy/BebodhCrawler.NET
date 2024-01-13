@@ -138,18 +138,18 @@ namespace Services
         public async Task<HttpProxy> GetUnusedActiveProxy()
         {
             var filterDefination = Builders<HttpProxy>.Filter.Eq(x => x.IsProxyRunning, false);
-            var sortDefinition = Builders<HttpProxy>.Sort.Ascending(x => x.UpdatedAt);
+            var sortDefinition = Builders<HttpProxy>.Sort.Ascending(x => x.UpdatedOn);
 
             var proxies = await _proxyRepository.FindAllAsync(filterDefination, sortDefinition);
 
             var proxy = proxies.FirstOrDefault(x =>
             {
-                if (x.UpdatedAt <= Utility.GetMinimumUnixTime())
+                if (x.UpdatedOn <= Utility.GetMinimumUnixTime())
                 {
                     return true;
                 }
 
-                var elapsedTime = Utility.GetElapsedTimeInSecond(x.UpdatedAt);
+                var elapsedTime = Utility.GetElapsedTimeInSecond(x.UpdatedOn);
 
                 return elapsedTime > 300000 ? true : false;
             });

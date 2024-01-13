@@ -9,9 +9,7 @@ namespace Core.Helpers
     [JsonConverter(typeof(StringEnumConverter))]
     public enum CrawlerType
     {
-        [BsonRepresentation(BsonType.String)]
         AMAZON,
-        [BsonRepresentation(BsonType.String)]
         LINKEDIN
     }
 }

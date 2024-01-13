@@ -8,6 +8,6 @@ namespace Core.Entities
     {
         public ObjectId Id { get; set; }
         public long AddedOn { get; set; }
-        public long UpdatedAt { get; set; }
+        public long UpdatedOn { get; set; }
     }
 }

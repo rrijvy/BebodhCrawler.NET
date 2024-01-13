@@ -72,8 +72,9 @@ namespace Services
                     }
 
                     proxy.IsProxyRunning = false;
-                    proxy.UpdatedAt = Utility.GetCurrentUnixTime();
-                    await _proxyRepository.ReplaceOneAsync(proxy.Id, proxy);
+                    proxy.UpdatedOn = Utility.GetCurrentUnixTime();
+
+                    //await _proxyRepository.ReplaceOneAsync(proxy.Id, proxy);
                 }
                 else
                 {
@@ -81,8 +82,9 @@ namespace Services
                     else proxy.BlockedBy.Add(CrawlerType.AMAZON);
 
                     proxy.IsProxyRunning = false;
-                    proxy.UpdatedAt = Utility.GetCurrentUnixTime();
-                    await _proxyRepository.ReplaceOneAsync(proxy.Id, proxy);
+                    proxy.UpdatedOn = Utility.GetCurrentUnixTime();
+
+                    //await _proxyRepository.ReplaceOneAsync(proxy.Id, proxy);
 
                     return await GetAmazonProductsByCategory(category);
                 }
@@ -96,15 +98,15 @@ namespace Services
                     if (proxy.BlockedBy == null) proxy.BlockedBy = new List<CrawlerType> { CrawlerType.AMAZON };
                     else proxy.BlockedBy.Add(CrawlerType.AMAZON);
                     proxy.IsProxyRunning = false;
-                    proxy.UpdatedAt = Utility.GetCurrentUnixTime();
-                    await _proxyRepository.ReplaceOneAsync(proxy.Id, proxy);
+                    proxy.UpdatedOn = Utility.GetCurrentUnixTime();
+
+                    //await _proxyRepository.ReplaceOneAsync(proxy.Id, proxy);
 
                     return await GetAmazonProductsByCategory(category);
                 }
 
                 return null;
             }
-
         }
 
         private static AmazonProduct AmazonProductInfoParser(HtmlNode productNode)

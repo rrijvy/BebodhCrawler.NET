@@ -28,13 +28,6 @@ namespace BebodhCrawler.Controllers
             _proxyQuery = new MongoQuery<HttpProxy>(_options).GetQueryContext();
         }
 
-        [HttpGet]
-        public async Task<HttpProxy> GetAsync()
-        {
-            var proxies = await _proxyService.GetUnusedActiveProxy();
-            return proxies;
-        }
-
         [HttpGet("GetActiveProxies")]
         public async Task<List<string>> GetActiveProxies()
         {
@@ -49,34 +42,33 @@ namespace BebodhCrawler.Controllers
             }
         }
 
-        [HttpGet("{id}")]
-        public async Task<HttpProxy> Get(ObjectId id)
+        [HttpGet("GetBlockedProxies")]
+        public async Task<List<string>> GetBlockedProxies()
         {
-            var proxy = await _proxyRepository.FindByIdAsync(id);
-            return proxy;
+            try
+            {
+                var proxies = await _proxyRepository.GetBlockedProxies();
+                return proxies;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         [HttpPost]
         public async Task<ActionResult> Post([FromBody] HttpProxy httpProxy)
         {
-            await _proxyRepository.InsertOneAsync(httpProxy);
-            return Ok();
+            try
+            {
+                await _proxyRepository.InsertOneAsync(httpProxy);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+
+            }
         }
-
-        //[HttpPut("{id}")]
-        //public async Task<ActionResult> Put(ObjectId id, [FromBody] HttpProxy httpProxy)
-        //{
-        //    await _proxyRepository.ReplaceOneAsync(id, httpProxy);
-        //    return Ok();
-        //}
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> Delete(ObjectId id)
-        {
-            await _proxyRepository.DeleteByIdAsync(id);
-            return Ok();
-        }
-
-
     }
 }

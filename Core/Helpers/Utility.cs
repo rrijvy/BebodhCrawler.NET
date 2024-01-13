@@ -54,6 +54,7 @@ namespace Core.Helpers
         {
             return new HttpProxy
             {
+                Id = proxyAddress,
                 AddedOn = GetCurrentUnixTime(),
                 IpAddress = proxyAddress,
                 IsActive = false,
