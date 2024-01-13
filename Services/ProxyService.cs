@@ -116,22 +116,25 @@ namespace Services
                 Proxy = new WebProxy($"http://{proxyAddress}"),
                 UseProxy = true
             };
-            var client = new HttpClient(handler);
-            try
+
+            using (var client = new HttpClient(handler))
             {
-                HttpResponseMessage response = await client.GetAsync("https://httpbin.org/ip");
-                if (response.IsSuccessStatusCode)
+                try
                 {
-                    Console.WriteLine($"Success - {proxyAddress}");
-                    await _proxyRepository.InsertOneAsync(Utility.GetProxy(proxyAddress));
-                    return proxyAddress;
+                    HttpResponseMessage response = await client.GetAsync("https://httpbin.org/ip");
+                    if (response.IsSuccessStatusCode)
+                    {
+                        Console.WriteLine($"Success - {proxyAddress}");
+                        await _proxyRepository.InsertOneAsync(Utility.GetProxy(proxyAddress));
+                        return proxyAddress;
+                    }
+                    return string.Empty;
                 }
-                return string.Empty;
-            }
-            catch (Exception)
-            {
-                Console.WriteLine($"Failed - {proxyAddress}");
-                return string.Empty;
+                catch (Exception)
+                {
+                    Console.WriteLine($"Failed - {proxyAddress}");
+                    return string.Empty;
+                }
             }
         }
 

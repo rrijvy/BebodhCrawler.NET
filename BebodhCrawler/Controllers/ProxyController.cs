@@ -8,6 +8,7 @@ using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using Repositories;
 using MongoDB.Driver;
+using Core.Helpers;
 
 namespace BebodhCrawler.Controllers
 {
@@ -28,12 +29,12 @@ namespace BebodhCrawler.Controllers
             _proxyQuery = new MongoQuery<HttpProxy>(_options).GetQueryContext();
         }
 
-        [HttpGet("GetActiveProxies")]
-        public async Task<List<string>> GetActiveProxies()
+        [HttpPost("GetActiveProxies")]
+        public async Task<List<HttpProxy>> GetActiveProxies([FromBody] ProxyRequestModel proxyRequest)
         {
             try
             {
-                var proxies = await _proxyRepository.GetActiveProxiesAsync();
+                var proxies = await _proxyRepository.GetActiveProxiesAsync(proxyRequest.Count, proxyRequest.CrawlerTypes);
                 return proxies;
             }
             catch (Exception ex)
@@ -43,11 +44,25 @@ namespace BebodhCrawler.Controllers
         }
 
         [HttpGet("GetBlockedProxies")]
-        public async Task<List<string>> GetBlockedProxies()
+        public async Task<List<HttpProxy>> GetBlockedProxies()
         {
             try
             {
-                var proxies = await _proxyRepository.GetBlockedProxies();
+                var proxies = await _proxyRepository.GetBlockedProxies(new List<CrawlerType> { CrawlerType.AMAZON });
+                return proxies;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpGet("UpdateProxyStatus")]
+        public async Task<List<HttpProxy>> UpdateProxyStatus()
+        {
+            try
+            {
+                var proxies = await _proxyRepository.GetBlockedProxies(new List<CrawlerType> { CrawlerType.AMAZON });
                 return proxies;
             }
             catch (Exception ex)

@@ -20,6 +20,7 @@ namespace Core.Entities
         public string IpAddress { get; set; }
         public bool IsActive { get; set; }
         public bool IsProxyRunning { get; set; }
+        public bool IsFreezed { get; set; }
 
         [JsonConverter(typeof(StringEnumConverter))]
         [BsonRepresentation(BsonType.String)]
