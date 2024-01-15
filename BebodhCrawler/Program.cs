@@ -76,26 +76,6 @@ namespace BebodhCrawler
                     });
             });
 
-            builder.Services.AddHttpClient("SelfSignedClient")
-                .ConfigurePrimaryHttpMessageHandler(() =>
-                {
-                    return new HttpClientHandler
-                    {
-                        ServerCertificateCustomValidationCallback = (sender, certificate, chain, sslPolicyErrors) =>
-                        {
-                            // If the certificate is self-signed, accept it
-                            if (sslPolicyErrors == SslPolicyErrors.None)
-                            {
-                                return true;
-                            }
-
-                            // Otherwise, reject the certificate
-                            return false;
-                        }
-                    };
-                });
-
-
             builder.Services.AddControllers();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(options =>

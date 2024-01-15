@@ -26,6 +26,8 @@ namespace ProxyRetriever
 
             await RetrieveProxies();
 
+            Console.ReadKey();
+
             //using (var server = new BackgroundJobServer())
             //{
             //    //RecurringJob.AddOrUpdate("___main___", () => RetrieveProxies(), "*/1 * * * *");

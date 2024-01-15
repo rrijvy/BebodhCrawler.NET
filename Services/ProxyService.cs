@@ -68,27 +68,27 @@ namespace Services
                 }
             }
 
-            var batchSize = 500;
+            Console.WriteLine($"Total ${proxies.Count} proxy found.");
 
-            //for (int i = 0; i < proxies.Count; i += batchSize)
-            //{
-            //    List<string> currentBatch = proxies.GetRange(i, Math.Min(batchSize, proxies.Count - i));
+            Console.WriteLine("Start checking...");
 
-            //    tasks.AddRange(CheckProxiesConcurrently(currentBatch));
-            //}
+            var client = new HttpClient();
+
+            var index = 0;
 
             foreach (var proxyAddress in proxies)
             {
-                tasks.Add(CheckProxyIsAlive(proxyAddress));
+                index = index + 1;
+                tasks.Add(CheckProxyIsAlive(proxyAddress, client, index));
             }
+
+            client.Dispose();
 
             var taskResults = await Task.WhenAll(tasks);
 
             activeProxies = taskResults.Where(x => !string.IsNullOrEmpty(x)).ToList();
 
             var httpProxies = activeProxies.Select(x => Utility.GetProxy(x)).ToList();
-
-            //await _proxyRepository.InsertManyAsync(httpProxies);
 
             proxyBackgroundTaskHistory.EndedAt = Utility.GetCurrentUnixTime();
 
@@ -97,19 +97,7 @@ namespace Services
             return httpProxies;
         }
 
-        private List<Task<string>> CheckProxiesConcurrently(List<string> proxies)
-        {
-            var tasks = new List<Task<string>>();
-
-            foreach (var proxy in proxies)
-            {
-                tasks.Add(CheckProxyIsAlive(proxy));
-            }
-
-            return tasks;
-        }
-
-        private async Task<string> CheckProxyIsAlive(string proxyAddress)
+        private async Task<string> CheckProxyIsAlive(string proxyAddress, HttpClient client, int index)
         {
             var handler = new HttpClientHandler
             {
@@ -117,14 +105,14 @@ namespace Services
                 UseProxy = true
             };
 
-            using (var client = new HttpClient(handler))
+            using (client = new HttpClient(handler))
             {
                 try
                 {
                     HttpResponseMessage response = await client.GetAsync("https://httpbin.org/ip");
                     if (response.IsSuccessStatusCode)
                     {
-                        Console.WriteLine($"Success - {proxyAddress}");
+                        Console.WriteLine($"{index}. Success - {proxyAddress}");
                         await _proxyRepository.InsertOneAsync(Utility.GetProxy(proxyAddress));
                         return proxyAddress;
                     }
@@ -132,7 +120,7 @@ namespace Services
                 }
                 catch (Exception)
                 {
-                    Console.WriteLine($"Failed - {proxyAddress}");
+                    Console.WriteLine($"{index}. Failed - {proxyAddress}");
                     return string.Empty;
                 }
             }
