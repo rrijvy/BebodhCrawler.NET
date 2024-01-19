@@ -5,6 +5,7 @@ using Core.Models;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Linq.Expressions;
 
 namespace Repositories
 {
@@ -20,17 +21,29 @@ namespace Repositories
         public async Task<List<HttpProxy>> GetActiveProxiesAsync(int count, List<CrawlerType>? crawlerTypes)
         {
             BsonDocument bsonFilter;
+            FilterDefinition<HttpProxy> filter;
+            var builder = Builders<HttpProxy>.Filter;
 
             if (crawlerTypes == null)
             {
                 bsonFilter = new BsonDocument();
+                filter = builder.Empty;
             }
             else
             {
-                bsonFilter = new BsonDocument
+                var filters = new List<FilterDefinition<HttpProxy>>()
                 {
-                    { "BlockedBy", new BsonDocument ("$not", new BsonDocument("$elemMatch", new BsonDocument ("$eq", "AMAZON"))) }
+                    builder.Eq(x => x.IsActive, true),
+                    builder.ElemMatch(x => x.BlockedBy, y => y == CrawlerType.AMAZON)
                 };
+
+                filter = builder.And(filters);
+
+                bsonFilter = new BsonDocument("$and", new BsonArray
+                {
+                    new BsonDocument("IsActive", new BsonDocument("$eq", true)),
+                    new BsonDocument("BlockedBy", new BsonDocument ("$not", new BsonDocument("$elemMatch", new BsonDocument ("$in", new BsonArray(crawlerTypes.Select(x=>x.ToString()))))))
+                });
             }
 
             var bsonSort = new BsonDocument("UpdatedOn", 1);
@@ -38,8 +51,6 @@ namespace Repositories
             var proxies = await queryContext.Find(bsonFilter).Sort(bsonSort).Limit(count).ToCursorAsync();
 
             var result = await proxies.ToListAsync();
-
-            //var propertyName = Utility.GetPropertyName<HttpProxy>(x => x.IpAddress);
 
             return result;
         }
@@ -54,7 +65,6 @@ namespace Repositories
                 var result = await proxies.ToListAsync();
                 return result;
             }
-
             else
             {
                 var filter = new BsonDocument("BlockedBy", new BsonDocument("$elemMatch", new BsonDocument("$in", new BsonArray(crawlerTypes))));
@@ -62,6 +72,30 @@ namespace Repositories
                 var proxies = await queryContext.Find(filter).Sort(sort).ToCursorAsync();
                 var result = await proxies.ToListAsync();
                 return result;
+            }
+        }
+
+        public async Task<HttpProxy> UpdateProxy(HttpProxy proxy)
+        {
+            try
+            {
+                var singleProxyFilter = new BsonDocument("_id", new BsonDocument("$eq", proxy.Id));
+                var proxyRecord = await queryContext.Find(singleProxyFilter).FirstOrDefaultAsync();
+                if (proxyRecord == null)
+                {
+                    await this.InsertOneAsync(proxy);
+                }
+                else
+                {
+                    await queryContext.ReplaceOneAsync(singleProxyFilter, proxy);
+                }
+
+                return proxy;
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
             }
         }
 

@@ -5,6 +5,11 @@ using Microsoft.Extensions.Options;
 using System.Linq.Expressions;
 using MongoDB.Bson;
 using Core.Entities;
+using MongoDB.Driver.Core.Configuration;
+using MongoDB.Driver.Linq;
+using Core.Helpers;
+using MongoDB.Bson.Serialization.Serializers;
+using MongoDB.Bson.Serialization;
 
 namespace Repositories
 {
@@ -12,23 +17,27 @@ namespace Repositories
     {
         private MongoClient MongoClient { get; set; }
         private IMongoDatabase Database { get; set; }
-
-
         private IClientSessionHandle Session { get; set; }
 
         private readonly List<Func<Task>> _commands;
         private readonly IOptions<MongoDBSettings> _mongoDBSettings;
-        protected IMongoCollection<T> DbSet;
+        private readonly IMongoCollection<T> DbSet;
 
         public BaseRepository(IOptions<MongoDBSettings> mongoDBSettings)
         {
             _mongoDBSettings = mongoDBSettings;
             _commands = new List<Func<Task>>();
-            MongoClient = new MongoClient(mongoDBSettings.Value.ConnectionURI);
+
+            var clientSettings = MongoClientSettings.FromConnectionString(mongoDBSettings.Value.ConnectionURI);
+            clientSettings.LinqProvider = LinqProvider.V3;
+
+            MongoClient = new MongoClient(clientSettings);
             Database = MongoClient.GetDatabase(mongoDBSettings.Value.DatabaseName);
             DbSet = string.IsNullOrEmpty(mongoDBSettings.Value.CollectionName)
                 ? Database.GetCollection<T>(typeof(T).Name)
                 : Database.GetCollection<T>(mongoDBSettings.Value.CollectionName);
+
+
         }
 
         public IMongoCollection<T> GetQueryContext()
@@ -83,11 +92,9 @@ namespace Repositories
             }
 
             return Enumerable.Empty<T>();
-
-
         }
 
-        public virtual async Task<T> FindByIdAsync(ObjectId id)
+        public virtual async Task<T> FindByIdAsync(dynamic id)
         {
             var result = await DbSet.FindAsync(Builders<T>.Filter.Eq("_id", id));
             return result.FirstOrDefault();
@@ -103,12 +110,12 @@ namespace Repositories
             await DbSet.InsertManyAsync(documents);
         }
 
-        public virtual async Task ReplaceOneAsync(ObjectId id, T document)
+        public virtual async Task ReplaceOneAsync(dynamic id, T document)
         {
             await DbSet.FindOneAndReplaceAsync(Builders<T>.Filter.Eq("_id", id), document);
         }
 
-        public virtual async Task DeleteByIdAsync(ObjectId id)
+        public virtual async Task DeleteByIdAsync(dynamic id)
         {
             await DbSet.FindOneAndDeleteAsync(Builders<T>.Filter.Eq("_id", id));
         }

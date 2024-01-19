@@ -1,15 +1,22 @@
 ﻿using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System.Text.Json.Serialization;
+using System.Runtime.Serialization;
 
 namespace Core.Helpers
 {
     [Serializable]
-    [JsonConverter(typeof(StringEnumConverter))]
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public enum CrawlerType
     {
+        [BsonIgnoreIfDefault]
+        [EnumMember(Value = "None")]
+        None,
+        [BsonRepresentation(BsonType.String)]
+        [EnumMember(Value = "AMAZON")]
         AMAZON,
+        [BsonRepresentation(BsonType.String)]
+        [EnumMember(Value = "LINKEDIN")]
         LINKEDIN
     }
 }

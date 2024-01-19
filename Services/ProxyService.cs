@@ -5,6 +5,9 @@ using Core.IServices;
 using MongoDB.Driver;
 using Repositories;
 using System.Net;
+using System.Net.Http;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Services
 {
@@ -12,11 +15,13 @@ namespace Services
     {
         private readonly IProxyRepository _proxyRepository;
         private readonly IProxyBackgroundTaskRepository _proxyBackgroundTaskRepository;
+        private readonly IHttpClientFactory _clientFactory;
 
-        public ProxyService(IProxyRepository proxyRepository, IProxyBackgroundTaskRepository proxyBackgroundTaskRepository)
+        public ProxyService(IProxyRepository proxyRepository, IProxyBackgroundTaskRepository proxyBackgroundTaskRepository, IHttpClientFactory clientFactory)
         {
             _proxyRepository = proxyRepository;
             _proxyBackgroundTaskRepository = proxyBackgroundTaskRepository;
+            _clientFactory = clientFactory;
         }
 
         public async Task<List<HttpProxy>> GetProxies()
@@ -34,6 +39,7 @@ namespace Services
             };
             await _proxyBackgroundTaskRepository.InsertOneAsync(proxyBackgroundTaskHistory);
             proxyBackgroundTaskHistory = _proxyBackgroundTaskRepository.AsQueryable().OrderByDescending(x => x.StartedAt).ToList().FirstOrDefault();
+            var semaphore = new SemaphoreSlim(500);
             var proxies = new List<string>();
             var activeProxies = new List<string>();
             var tasks = new List<Task<string>>();
@@ -72,17 +78,13 @@ namespace Services
 
             Console.WriteLine("Start checking...");
 
-            var client = new HttpClient();
-
             var index = 0;
 
             foreach (var proxyAddress in proxies)
             {
-                index = index + 1;
-                tasks.Add(CheckProxyIsAlive(proxyAddress, client, index));
+                index++;
+                tasks.Add(CheckProxyIsAlive(proxyAddress, index, semaphore));
             }
-
-            client.Dispose();
 
             var taskResults = await Task.WhenAll(tasks);
 
@@ -97,15 +99,42 @@ namespace Services
             return httpProxies;
         }
 
-        private async Task<string> CheckProxyIsAlive(string proxyAddress, HttpClient client, int index)
+        public async Task<List<HttpProxy>> RecheckActiveProxies()
         {
+            var proxyRecords = await _proxyRepository.GetAll();
+
+            var semaphore = new SemaphoreSlim(500);
+
+            var proxyTasks = new List<Task<string>>();
+
+            int index = 0;
+
+            foreach (var proxy in proxyRecords)
+            {
+                index++;
+                proxyTasks.Add(CheckProxyIsAlive(proxy.IpAddress, index, semaphore, proxy));
+            }
+
+            var taskResults = await Task.WhenAll(proxyTasks);
+
+            var activeProxies = taskResults.Where(x => !string.IsNullOrEmpty(x)).ToList();
+
+            var httpProxies = activeProxies.Select(x => Utility.GetProxy(x)).ToList();
+
+            return httpProxies;
+        }
+
+        private async Task<string> CheckProxyIsAlive(string proxyAddress, int index, SemaphoreSlim semaphoreSlim, HttpProxy? httpProxy = null)
+        {
+            await semaphoreSlim.WaitAsync();
+
             var handler = new HttpClientHandler
             {
                 Proxy = new WebProxy($"http://{proxyAddress}"),
                 UseProxy = true
             };
 
-            using (client = new HttpClient(handler))
+            using (var client = new HttpClient(handler))
             {
                 try
                 {
@@ -113,17 +142,44 @@ namespace Services
                     if (response.IsSuccessStatusCode)
                     {
                         Console.WriteLine($"{index}. Success - {proxyAddress}");
-                        await _proxyRepository.InsertOneAsync(Utility.GetProxy(proxyAddress));
+                        if (httpProxy == null)
+                        {
+                            await _proxyRepository.InsertOneAsync(Utility.GetProxy(proxyAddress));
+                        }
+                        else
+                        {
+                            httpProxy.IsActive = true;
+                            httpProxy.UpdatedOn = Utility.GetCurrentUnixTime();
+                            await _proxyRepository.UpdateProxy(httpProxy);
+                        }
+                        semaphoreSlim.Release();
                         return proxyAddress;
                     }
+
+                    if (httpProxy != null)
+                    {
+                        httpProxy.IsActive = false;
+                        httpProxy.UpdatedOn = Utility.GetCurrentUnixTime();
+                        await _proxyRepository.UpdateProxy(httpProxy);
+                    }
+                    semaphoreSlim.Release();
                     return string.Empty;
                 }
                 catch (Exception)
                 {
                     Console.WriteLine($"{index}. Failed - {proxyAddress}");
+                    if (httpProxy != null)
+                    {
+                        httpProxy.IsActive = false;
+                        httpProxy.UpdatedOn = Utility.GetCurrentUnixTime();
+                        await _proxyRepository.UpdateProxy(httpProxy);
+                    }
+                    semaphoreSlim.Release();
                     return string.Empty;
                 }
             }
+
+
         }
 
         public async Task<HttpProxy> GetUnusedActiveProxy()

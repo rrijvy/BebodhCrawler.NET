@@ -7,5 +7,6 @@ namespace Core.IRepositories
     {
         Task<List<HttpProxy>> GetActiveProxiesAsync(int count, List<CrawlerType>? crawlerTypes);
         Task<List<HttpProxy>> GetBlockedProxies(List<CrawlerType> crawlerTypes);
+        Task<HttpProxy> UpdateProxy(HttpProxy proxy);
     }
 }

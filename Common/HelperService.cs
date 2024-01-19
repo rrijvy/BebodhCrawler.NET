@@ -1,7 +1,5 @@
-﻿using Core.Entities;
-using Core.IRepositories;
+﻿using Core.IRepositories;
 using Core.IServices;
-using Core.Models;
 using Microsoft.Extensions.DependencyInjection;
 using Repositories;
 using Services;
@@ -12,6 +10,8 @@ namespace Common
     {
         public static void RegisterDependencies(IServiceCollection serviceCollection)
         {
+            serviceCollection.AddHttpClient();
+
             serviceCollection.AddScoped<IProxyRepository, ProxyRepository>();
             serviceCollection.AddScoped<IProxyBackgroundTaskRepository, ProxyBackgroundTaskRepository>();
             serviceCollection.AddScoped<IProxyService, ProxyService>();

@@ -14,6 +14,7 @@ using System.Net.Security;
 using System.Text;
 using Core.Helpers;
 using Core.Entities;
+using System.Text.Json.Serialization;
 
 namespace BebodhCrawler
 {
@@ -76,7 +77,10 @@ namespace BebodhCrawler
                     });
             });
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen(options =>
             {

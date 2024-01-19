@@ -30,7 +30,7 @@ namespace BebodhCrawler.Controllers
         }
 
         [HttpPost("GetActiveProxies")]
-        public async Task<List<HttpProxy>> GetActiveProxies([FromBody] ProxyRequestModel proxyRequest)
+        public async Task<List<HttpProxy>> GetActiveProxies(ProxyRequestModel proxyRequest)
         {
             try
             {

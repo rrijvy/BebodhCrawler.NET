@@ -57,7 +57,7 @@ namespace Core.Helpers
                 Id = proxyAddress,
                 AddedOn = GetCurrentUnixTime(),
                 IpAddress = proxyAddress,
-                IsActive = false,
+                IsActive = true,
                 IsProxyRunning = false,
             };
         }

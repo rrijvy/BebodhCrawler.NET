@@ -3,6 +3,7 @@ using Core.IServices;
 using Core.Models;
 using Hangfire;
 using Microsoft.Extensions.DependencyInjection;
+using MongoDB.Bson;
 
 namespace ProxyRetriever
 {
@@ -24,7 +25,10 @@ namespace ProxyRetriever
             //    .UseRecommendedSerializerSettings()
             //    .UseSQLiteStorage(sqliteConnectionString);
 
-            await RetrieveProxies();
+            //await RetrieveProxies();
+
+
+            await RecheckActiveProxies();
 
             Console.ReadKey();
 
@@ -52,6 +56,15 @@ namespace ProxyRetriever
             var proxyService = serviceProvider.GetService<IProxyService>();
             if (proxyService == null) return;
             await proxyService.RetrieveProxies();
+            Console.WriteLine("Completed!");
+        }
+
+        public static async Task RecheckActiveProxies()
+        {
+            var serviceProvider = RegisterDependencies();
+            var proxyService = serviceProvider.GetService<IProxyService>();
+            if (proxyService == null) return;
+            await proxyService.RecheckActiveProxies();
             Console.WriteLine("Completed!");
         }
 

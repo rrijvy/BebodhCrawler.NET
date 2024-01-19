@@ -1,8 +1,6 @@
 ﻿using Core.Helpers;
 using MongoDB.Bson.Serialization.Attributes;
 using MongoDB.Bson;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace Core.Entities
 {
@@ -22,7 +20,6 @@ namespace Core.Entities
         public bool IsProxyRunning { get; set; }
         public bool IsFreezed { get; set; }
 
-        [JsonConverter(typeof(StringEnumConverter))]
         [BsonRepresentation(BsonType.String)]
         public List<CrawlerType> BlockedBy { get; set; }
         public long AddedOn { get; set; }
