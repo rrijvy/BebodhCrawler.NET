@@ -57,19 +57,19 @@ namespace BebodhCrawler.Controllers
             }
         }
 
-        [HttpPost("UpdateProxy")]
-        public async Task<bool> UpdateProxy(HttpProxy proxy)
-        {
-            try
-            {
-                var result = await _proxyRepository.UpdateProxy(proxy);
-                return result;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
-        }
+        //[HttpPost("UpdateProxy")]
+        //public async Task<bool> UpdateProxy(HttpProxy proxy)
+        //{
+        //    try
+        //    {
+        //        var result = await _proxyRepository.UpdateProxy(proxy);
+        //        return result;
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw new Exception(ex.Message);
+        //    }
+        //}
 
         [HttpPost("UpdateProxy")]
         public async Task<bool> UpdateProxy(ProxyUpdateRequestModel requestModel)
