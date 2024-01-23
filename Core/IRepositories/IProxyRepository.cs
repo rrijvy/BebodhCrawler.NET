@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Core.Helpers;
+using Core.Models;
 
 namespace Core.IRepositories
 {
@@ -7,6 +8,7 @@ namespace Core.IRepositories
     {
         Task<List<HttpProxy>> GetActiveProxiesAsync(int count, List<CrawlerType>? crawlerTypes);
         Task<List<HttpProxy>> GetBlockedProxies(List<CrawlerType> crawlerTypes);
-        Task<HttpProxy> UpdateProxy(HttpProxy proxy);
+        Task<bool> UpdateProxy(HttpProxy proxy);
+        Task<bool> UpdateProxy(ProxyUpdateRequestModel requestModel);
     }
 }

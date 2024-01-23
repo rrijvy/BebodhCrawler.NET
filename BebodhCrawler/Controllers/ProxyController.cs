@@ -57,13 +57,27 @@ namespace BebodhCrawler.Controllers
             }
         }
 
-        [HttpGet("UpdateProxyStatus")]
-        public async Task<List<HttpProxy>> UpdateProxyStatus()
+        [HttpPost("UpdateProxy")]
+        public async Task<bool> UpdateProxy(HttpProxy proxy)
         {
             try
             {
-                var proxies = await _proxyRepository.GetBlockedProxies(new List<CrawlerType> { CrawlerType.AMAZON });
-                return proxies;
+                var result = await _proxyRepository.UpdateProxy(proxy);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        [HttpPost("UpdateProxy")]
+        public async Task<bool> UpdateProxy(ProxyUpdateRequestModel requestModel)
+        {
+            try
+            {
+                var result = await _proxyRepository.UpdateProxy(requestModel);
+                return result;
             }
             catch (Exception ex)
             {

@@ -75,22 +75,15 @@ namespace Repositories
             }
         }
 
-        public async Task<HttpProxy> UpdateProxy(HttpProxy proxy)
+        public async Task<bool> UpdateProxy(HttpProxy proxy)
         {
             try
             {
-                var singleProxyFilter = new BsonDocument("_id", new BsonDocument("$eq", proxy.Id));
-                var proxyRecord = await queryContext.Find(singleProxyFilter).FirstOrDefaultAsync();
-                if (proxyRecord == null)
-                {
-                    await this.InsertOneAsync(proxy);
-                }
-                else
-                {
-                    await queryContext.ReplaceOneAsync(singleProxyFilter, proxy);
-                }
+                var singleProxyFilter = Builders<HttpProxy>.Filter.Eq(x => x.Id, proxy.Id);
 
-                return proxy;
+                var result = await queryContext.ReplaceOneAsync(singleProxyFilter, proxy, new ReplaceOptions { IsUpsert = true });
+
+                return true;
             }
             catch (Exception ex)
             {
@@ -99,5 +92,36 @@ namespace Repositories
             }
         }
 
+        public async Task<bool> UpdateProxy(ProxyUpdateRequestModel requestModel)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(requestModel.Id)) throw new Exception("Id required.");
+
+                var singleProxyFilter = Builders<HttpProxy>.Filter.Eq(x => x.Id, requestModel.Id);
+
+                var proxyRecord = await (await queryContext.FindAsync(singleProxyFilter)).FirstOrDefaultAsync();
+
+                if (proxyRecord == null) throw new Exception("Porxy not found!");
+
+                proxyRecord.UpdatedOn = Utility.GetCurrentUnixTime();
+
+                if (requestModel.IsRunning != null) proxyRecord.IsProxyRunning = (bool)requestModel.IsRunning;
+                if (requestModel.IsActive != null) proxyRecord.IsActive = (bool)requestModel.IsActive;
+                if (requestModel.BlockedBy != null) proxyRecord.BlockedBy.Add((CrawlerType)requestModel.BlockedBy);
+
+                var updateDefination = Builders<HttpProxy>.Update.Set(x => x.BlockedBy, proxyRecord.BlockedBy)
+                    .Set(x => x.IsActive, proxyRecord.IsActive)
+                    .Set(x => x.IsProxyRunning, proxyRecord.IsProxyRunning);
+
+                await queryContext.UpdateOneAsync(singleProxyFilter, updateDefination);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
