@@ -25,8 +25,8 @@ namespace BebodhCrawler
             var builder = WebApplication.CreateBuilder(args);
 
             var mongoDbSettings = builder.Configuration.GetSection("MongoDB").Get<MongoDBSettings>();
-            var sqlServerSettings = builder.Configuration.GetSection("CrawlerSqlServerTarek").Get<SqlServerSettings>();
-            var crawlerDbSettings = builder.Configuration.GetSection("SqlServerTarek").Get<SqlServerSettings>();
+            var sqlServerSettings = builder.Configuration.GetSection("SqlServer").Get<SqlServerSettings>();
+            var crawlerDbSettings = builder.Configuration.GetSection("CrawlerSqlServer").Get<SqlServerSettings>();
             var jwtSettings = builder.Configuration.GetSection("JWTCred").Get<JwtSettings>();
 
             BsonSerializer.RegisterSerializer(new DateTimeSerializer(DateTimeKind.Local, BsonType.String));
@@ -113,14 +113,14 @@ namespace BebodhCrawler
 
             HelperService.RegisterDependencies(builder.Services);
 
-            //builder.Services.AddHangfire(config =>
-            //{
-            //    config.UseSimpleAssemblyNameTypeSerializer();
-            //    config.UseRecommendedSerializerSettings();
-            //    config.UseSqlServerStorage(sqlServerSettings.ConnectionURI);
-            //});
+            builder.Services.AddHangfire(config =>
+            {
+                config.UseSimpleAssemblyNameTypeSerializer();
+                config.UseRecommendedSerializerSettings();
+                config.UseSqlServerStorage(sqlServerSettings.ConnectionURI);
+            });
 
-            //builder.Services.AddHangfireServer();
+            builder.Services.AddHangfireServer();
 
             var app = builder.Build();
 
@@ -140,9 +140,9 @@ namespace BebodhCrawler
 
             app.MapControllers();
 
-            //app.UseHangfireDashboard();
+            app.UseHangfireDashboard();
 
-            //app.MapHangfireDashboard();
+            app.MapHangfireDashboard();
 
             app.Run();
         }

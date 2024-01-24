@@ -150,6 +150,7 @@ namespace Services
                         {
                             httpProxy.IsActive = true;
                             httpProxy.UpdatedOn = Utility.GetCurrentUnixTime();
+                            httpProxy.BlockedBy = new List<CrawlerType>();
                             await _proxyRepository.UpdateProxy(httpProxy);
                         }
                         semaphoreSlim.Release();
@@ -160,6 +161,7 @@ namespace Services
                     {
                         httpProxy.IsActive = false;
                         httpProxy.UpdatedOn = Utility.GetCurrentUnixTime();
+                        httpProxy.BlockedBy = new List<CrawlerType>();
                         await _proxyRepository.UpdateProxy(httpProxy);
                     }
                     semaphoreSlim.Release();
@@ -172,6 +174,7 @@ namespace Services
                     {
                         httpProxy.IsActive = false;
                         httpProxy.UpdatedOn = Utility.GetCurrentUnixTime();
+                        httpProxy.BlockedBy = new List<CrawlerType>();
                         await _proxyRepository.UpdateProxy(httpProxy);
                     }
                     semaphoreSlim.Release();

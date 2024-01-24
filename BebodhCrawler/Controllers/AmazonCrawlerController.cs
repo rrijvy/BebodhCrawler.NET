@@ -1,10 +1,13 @@
 ﻿using Core.Helpers;
 using Core.IRepositories;
 using Core.IServices;
+using Core.Models;
 using Hangfire;
 using HtmlAgilityPack;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Services;
 using System.Diagnostics;
 using System.IO.Compression;
 using System.Reflection;
@@ -18,12 +21,15 @@ namespace BebodhCrawler.Controllers
         private readonly IProxyService _proxyService;
         private readonly IAmazonCrawlerService _amazonCrawlerService;
         private readonly IProxyRepository _proxyRepository;
+        private readonly PythonScriptService _scriptService;
 
-        public AmazonCrawlerController(IProxyService proxyService, IAmazonCrawlerService amazonCrawlerService, IProxyRepository proxyRepository)
+        public AmazonCrawlerController(IProxyService proxyService, IAmazonCrawlerService amazonCrawlerService, IProxyRepository proxyRepository,
+            PythonScriptService scriptService)
         {
             _proxyService = proxyService;
             _amazonCrawlerService = amazonCrawlerService;
             _proxyRepository = proxyRepository;
+            _scriptService = scriptService;
         }
 
         [HttpGet("AmazonProducts")]
@@ -157,7 +163,13 @@ namespace BebodhCrawler.Controllers
 
         }
 
+        [HttpPost("RunAmazonCategoryScrapper")]
+        public ActionResult<string> RunAmazonCategoryScrapper(AmazonCategoryScrapperRequestModel requestModel)
+        {
+            string jobId = BackgroundJob.Enqueue(() => _scriptService.RunAmazonCategoryScrapper(requestModel));
 
+            return Ok(jobId);
+        }
 
     }
 }

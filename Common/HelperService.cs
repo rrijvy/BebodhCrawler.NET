@@ -18,6 +18,7 @@ namespace Common
             serviceCollection.AddScoped<IAmazonCrawlerService, AmazonCrawlerService>();
             serviceCollection.AddScoped<IAuthService, AuthService>();
             serviceCollection.AddScoped<ICrawlRepository, CrawlRepository>();
+            serviceCollection.AddScoped<PythonScriptService>();
 
         }
     }
