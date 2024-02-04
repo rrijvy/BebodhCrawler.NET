@@ -11,13 +11,17 @@ namespace Services
             {
                 using (Process process = new Process())
                 {
-                    process.StartInfo.FileName = "python";
-                    process.StartInfo.Arguments = $"E:\\Codebase\\BebodhCrawler\\BebodhCrawler.Py\\main.py ${requestModel.Url}";
+                    process.StartInfo.FileName = $"E:\\Codebase\\BebodhCrawler\\BebodhCrawler.Py\\env\\Scripts\\python.exe";
+                    process.StartInfo.Arguments = $"E:\\Codebase\\BebodhCrawler\\BebodhCrawler.Py\\main.py {requestModel.Url}";
                     process.StartInfo.RedirectStandardOutput = true;
                     process.StartInfo.UseShellExecute = false;
                     process.StartInfo.CreateNoWindow = true;
 
                     process.Start();
+
+                    string output = process.StandardOutput.ReadToEnd();
+
+                    process.WaitForExit();
 
                     return "Started.";
                 }
