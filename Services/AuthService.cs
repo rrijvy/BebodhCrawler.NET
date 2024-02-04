@@ -68,6 +68,7 @@ namespace Services
 
                 return new SignInResponseModel
                 {
+                    User = user,
                     Message = tokenAsString,
                     ExpiresAt = token.ValidTo,
                     IsSuccess = true

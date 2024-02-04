@@ -11,8 +11,8 @@ namespace Services
             {
                 using (Process process = new Process())
                 {
-                    process.StartInfo.FileName = $"E:\\Codebase\\BebodhCrawler\\BebodhCrawler.Py\\env\\Scripts\\python.exe";
-                    process.StartInfo.Arguments = $"E:\\Codebase\\BebodhCrawler\\BebodhCrawler.Py\\main.py {requestModel.Url}";
+                    process.StartInfo.FileName = requestModel.PythonExecutablePath;
+                    process.StartInfo.Arguments = $"{requestModel.ScrapperFilePath} {requestModel.Url}";
                     process.StartInfo.RedirectStandardOutput = true;
                     process.StartInfo.UseShellExecute = false;
                     process.StartInfo.CreateNoWindow = true;

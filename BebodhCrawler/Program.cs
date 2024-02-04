@@ -28,12 +28,14 @@ namespace BebodhCrawler
             var sqlServerSettings = builder.Configuration.GetSection("SqlServer").Get<SqlServerSettings>();
             var crawlerDbSettings = builder.Configuration.GetSection("CrawlerSqlServer").Get<SqlServerSettings>();
             var jwtSettings = builder.Configuration.GetSection("JWTCred").Get<JwtSettings>();
+            var crawlerConfig = builder.Configuration.GetSection("CrawlerConfig").Get<CrawlerConfig>();
 
             BsonSerializer.RegisterSerializer(new DateTimeSerializer(DateTimeKind.Local, BsonType.String));
 
             builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDB"));
             builder.Services.Configure<SqlServerSettings>(builder.Configuration.GetSection("SqlServer"));
             builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JWTCred"));
+            builder.Services.Configure<CrawlerConfig>(builder.Configuration.GetSection("CrawlerConfig"));
 
             builder.Services.AddDbContext<CrawlerDbContext>(options =>
             {
