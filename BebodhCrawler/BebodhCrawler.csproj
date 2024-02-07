@@ -9,6 +9,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="AutoMapper" Version="13.0.0" />
 		<PackageReference Include="Hangfire" Version="1.8.7" />
 		<PackageReference Include="Hangfire.Core" Version="1.8.7" />
 		<PackageReference Include="Hangfire.SqlServer" Version="1.8.7" />

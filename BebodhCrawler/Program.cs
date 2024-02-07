@@ -15,6 +15,7 @@ using System.Text;
 using Core.Helpers;
 using Core.Entities;
 using System.Text.Json.Serialization;
+using AutoMapper;
 
 namespace BebodhCrawler
 {
@@ -78,6 +79,13 @@ namespace BebodhCrawler
                         policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod();
                     });
             });
+
+            var mapperConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+            IMapper mapper = mapperConfig.CreateMapper();
+            builder.Services.AddSingleton(mapper);
 
             builder.Services.AddControllers().AddJsonOptions(options =>
             {

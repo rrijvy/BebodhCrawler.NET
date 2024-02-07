@@ -1,5 +1,6 @@
 ﻿using Core.Entities;
 using Core.Models;
+using System.Linq;
 
 namespace Core.Helpers
 {
@@ -25,9 +26,7 @@ namespace Core.Helpers
         {
             if (schedule != null)
             {
-                var now = DateTime.UtcNow;
-                var afterRepeatDays = now.AddDays(schedule.RepeatEvery);
-                return $"{schedule.Minute} {schedule.Hour} {afterRepeatDays.Day} {afterRepeatDays.Month} ? {afterRepeatDays.Year}";
+                return $"{schedule.Minute ?? 0} {schedule.Hour ?? 12} */{schedule.RepeatEvery} * *";
             }
 
             return string.Empty;
@@ -35,13 +34,11 @@ namespace Core.Helpers
 
         private static string GenerateWeeklyExpression(ProxySchedule schedule)
         {
-            if (schedule != null)
+            if (schedule != null && schedule.WeekSpecificDays.Any())
             {
-                string dayOfMonth = "?", month = "*", daysOfWeek = string.Empty, year = "*";
-                if (!schedule.WeekSpecificDays.Any()) schedule.WeekSpecificDays.Add(WeekDay.Friday);
-                daysOfWeek = string.Join(",", schedule.WeekSpecificDays.Select(x => $"{(int)x}").ToList());
-                return $"{schedule.Minute} {schedule.Hour} {dayOfMonth} {month} {daysOfWeek} {year}";
+                return $"{schedule.Minute ?? 0} {schedule.Hour ?? 12} '*' '*' {string.Join(",", schedule.WeekSpecificDays)}";
             }
+
             return string.Empty;
         }
 
