@@ -36,7 +36,8 @@ namespace Core.Helpers
         {
             if (schedule != null && schedule.WeekSpecificDays.Any())
             {
-                return $"{schedule.Minute ?? 0} {schedule.Hour ?? 12} '*' '*' {string.Join(",", schedule.WeekSpecificDays)}";
+                var weekDays = schedule.WeekSpecificDays.Select(x => x.ToString().Substring(0, 3));
+                return $"{schedule.Minute ?? 0} {schedule.Hour ?? 12} * * {string.Join(",", weekDays)}";
             }
 
             return string.Empty;

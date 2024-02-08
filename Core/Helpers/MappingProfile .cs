@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Core.Entities;
 using Core.Models;
+using Hangfire.Storage;
 
 namespace Core.Helpers
 {
@@ -9,6 +10,7 @@ namespace Core.Helpers
         public MappingProfile()
         {
             CreateMap<ProxySchedule, ProxyScheduleRequestModel>().ReverseMap();
+            CreateMap<HangfireJob, RecurringJobDto>().ReverseMap();
         }
     }
 }
