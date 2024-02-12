@@ -16,11 +16,13 @@ namespace BebodhCrawler.Controllers
     public class ProxySchedulerController : ControllerBase
     {
         private readonly IProxyScheduleRepository _proxyScheduleRepository;
+        private readonly IProxyScheduleService _proxyScheduleService;
         private readonly IMapper _mapper;
 
-        public ProxySchedulerController(IProxyScheduleRepository proxyScheduleRepository, IMapper mapper)
+        public ProxySchedulerController(IProxyScheduleRepository proxyScheduleRepository, IProxyScheduleService proxyScheduleService, IMapper mapper)
         {
             _proxyScheduleRepository = proxyScheduleRepository;
+            _proxyScheduleService = proxyScheduleService;
             _mapper = mapper;
         }
 
@@ -37,7 +39,7 @@ namespace BebodhCrawler.Controllers
 
                 var existingProxySchedules = await _proxyScheduleRepository.GetAll();
 
-                if (MatchWithExistingSchedule(existingProxySchedules, requestModel))
+                if (_proxyScheduleService.MatchWithExistingSchedule(existingProxySchedules, requestModel))
                 {
                     return BadRequest("Schedule already exist.");
                 }
@@ -68,54 +70,6 @@ namespace BebodhCrawler.Controllers
             {
                 return BadRequest(ex.Message);
             }
-        }
-
-        private bool MatchWithExistingSchedule(List<ProxySchedule> existingProxySchedules, ProxySchedule requestModel)
-        {
-            bool isUpdate = !requestModel.Id.Equals(ObjectId.Empty);
-
-            if (requestModel.RecurrenceType.Equals(RecurrenceType.Weekly))
-            {
-                var similarSchedule = existingProxySchedules.FirstOrDefault(
-                    t => (!isUpdate || !t.Id.ToString().Equals(requestModel.Id.ToString()))
-                         && (t.RecurrenceType.Equals(requestModel.RecurrenceType) &&
-                             t.WeekSpecificDays.All(requestModel.WeekSpecificDays.Contains) &&
-                             t.WeekSpecificDays.Count == requestModel.WeekSpecificDays.Count &&
-                             t.RepeatEvery.Equals(requestModel.RepeatEvery) && t.Hour.Equals(requestModel.Hour) &&
-                             t.Minute.Equals(requestModel.Minute))
-                );
-                if (similarSchedule != null)
-                    return true;
-            }
-            if (requestModel.RecurrenceType.Equals(RecurrenceType.Daily))
-            {
-                var similarSchedule = existingProxySchedules.FirstOrDefault(
-                    t => (!isUpdate || !t.Id.ToString().Equals(requestModel.Id.ToString()))
-                         && (t.RecurrenceType.Equals(requestModel.RecurrenceType) &&
-                             t.RepeatEvery.Equals(requestModel.RepeatEvery) && t.Hour.Equals(requestModel.Hour) &&
-                             t.Minute.Equals(requestModel.Minute))
-                );
-                if (similarSchedule != null)
-                    return true;
-            }
-
-            //if (requestModel.RecurrenceType.Equals(RecurrenceType.Monthly))
-            //{
-            //    var similarSchedule = existingProxySchedules.FirstOrDefault(
-            //        t => (!isUpdate || !t.P1stonType.Equals(requestModel.P1stonType))
-            //             && (t.RecurrenceType.Equals(requestModel.RecurrenceType) &&
-            //                 t.MonthlySelectionType.Equals(requestModel.MonthlySelectionType) &&
-            //                 t.WeeklySpecificDay.Equals(requestModel.WeeklySpecificDay) &&
-            //                 t.MonthlyRecurrenceWeek.Equals(requestModel.MonthlyRecurrenceWeek) &&
-            //                 t.MonthlySpecificDay.Equals(requestModel.MonthlySpecificDay) &&
-            //                 t.RepeatEvery.Equals(requestModel.RepeatEvery) && t.Hour.Equals(requestModel.Hour) &&
-            //                 t.Minute.Equals(requestModel.Minute) && t.TimeZone.Equals(requestModel.TimeZone))
-            //    );
-            //    if (similarSchedule != null)
-            //        return true;
-            //}
-
-            return false;
         }
 
         [HttpGet("GetAllRecurringSchedules")]
@@ -158,12 +112,27 @@ namespace BebodhCrawler.Controllers
             return Ok();
         }
 
-        [HttpPost("DeleteProxySchedule")]
-        public async Task<IActionResult> DeleteProxySchedule(ObjectId jobId)
+        [HttpGet("RunActiveProxyChecker")]
+        public IActionResult RunActiveProxyChecker()
         {
-            await _proxyScheduleRepository.DeleteByIdAsync(jobId);
-            RecurringJob.RemoveIfExists(jobId.ToString());
+            BackgroundJob.Enqueue<IProxyService>(x => x.RecheckActiveProxies());
+
             return Ok();
+        }
+
+        [HttpPost("DeleteProxySchedule")]
+        public async Task<IActionResult> DeleteProxySchedule(string jobId)
+        {
+            var canParse = ObjectId.TryParse(jobId, out ObjectId id);
+
+            if (canParse)
+            {
+                await _proxyScheduleRepository.DeleteByIdAsync(id);
+                RecurringJob.RemoveIfExists(id.ToString());
+                return Ok();
+            }
+
+            return BadRequest();
         }
     }
 }

@@ -2,6 +2,7 @@
 using Core.Helpers;
 using Core.IRepositories;
 using Core.IServices;
+using MongoDB.Bson;
 using MongoDB.Driver;
 using Repositories;
 using System.Net;
@@ -33,12 +34,6 @@ namespace Services
         public async Task<List<HttpProxy>> RetrieveProxies()
         {
             Console.WriteLine("Initiate Retrival.");
-            var proxyBackgroundTaskHistory = new ProxyBackgroundTaskHistory
-            {
-                StartedAt = Utility.GetCurrentUnixTime(),
-            };
-            await _proxyBackgroundTaskRepository.InsertOneAsync(proxyBackgroundTaskHistory);
-            proxyBackgroundTaskHistory = _proxyBackgroundTaskRepository.AsQueryable().OrderByDescending(x => x.StartedAt).ToList().FirstOrDefault();
             var semaphore = new SemaphoreSlim(500);
             var proxies = new List<string>();
             var activeProxies = new List<string>();
@@ -50,14 +45,14 @@ namespace Services
                 "https://raw.githubusercontent.com/saisuiu/Lionkings-Http-Proxys-Proxies/main/free.txt",
                 "https://raw.githubusercontent.com/MuRongPIG/Proxy-Master/main/http.txt",
 
-                //"https://raw.githubusercontent.com/caliphdev/Proxy-List/master/http.txt",
-                //"https://raw.githubusercontent.com/Zaeem20/FREE_PROXIES_LIST/master/http.txt",
-                //"https://raw.githubusercontent.com/proxy4parsing/proxy-list/main/http.txt",
+                "https://raw.githubusercontent.com/caliphdev/Proxy-List/master/http.txt",
+                "https://raw.githubusercontent.com/Zaeem20/FREE_PROXIES_LIST/master/http.txt",
+                "https://raw.githubusercontent.com/proxy4parsing/proxy-list/main/http.txt",
 
-                //"https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/https.txt",
-                //"https://raw.githubusercontent.com/zloi-user/hideip.me/main/https.txt",
+                "https://raw.githubusercontent.com/ErcinDedeoglu/proxies/main/proxies/https.txt",
+                "https://raw.githubusercontent.com/zloi-user/hideip.me/main/https.txt",
 
-                //"https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/http.txt",
+                "https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/http.txt",
             };
 
             using (var httpClient = new HttpClient())
@@ -92,10 +87,6 @@ namespace Services
 
             var httpProxies = activeProxies.Select(x => Utility.GetProxy(x)).ToList();
 
-            proxyBackgroundTaskHistory.EndedAt = Utility.GetCurrentUnixTime();
-
-            await _proxyBackgroundTaskRepository.ReplaceOneAsync(proxyBackgroundTaskHistory.Id, proxyBackgroundTaskHistory);
-
             return httpProxies;
         }
 
@@ -128,61 +119,66 @@ namespace Services
         {
             await semaphoreSlim.WaitAsync();
 
-            var handler = new HttpClientHandler
+            using (CancellationTokenSource cts = new CancellationTokenSource())
             {
-                Proxy = new WebProxy($"http://{proxyAddress}"),
-                UseProxy = true
-            };
+                cts.CancelAfter(TimeSpan.FromSeconds(20));
 
-            using (var client = new HttpClient(handler))
-            {
-                try
+                var handler = new HttpClientHandler
                 {
-                    HttpResponseMessage response = await client.GetAsync("https://httpbin.org/ip");
-                    if (response.IsSuccessStatusCode)
+                    Proxy = new WebProxy($"http://{proxyAddress}"),
+                    UseProxy = true
+                };
+
+                using (var client = new HttpClient(handler))
+                {
+                    client.Timeout = TimeSpan.FromSeconds(30);
+
+                    try
                     {
-                        Console.WriteLine($"{index}. Success - {proxyAddress}");
-                        if (httpProxy == null)
+                        HttpResponseMessage response = await client.GetAsync("https://httpbin.org/ip");
+
+                        if (response.IsSuccessStatusCode)
                         {
-                            await _proxyRepository.InsertOneAsync(Utility.GetProxy(proxyAddress));
+                            if (httpProxy == null)
+                            {
+                                await _proxyRepository.InsertOneAsync(Utility.GetProxy(proxyAddress));
+                            }
+                            else
+                            {
+                                httpProxy.IsActive = true;
+                                httpProxy.UpdatedOn = Utility.GetCurrentUnixTime();
+                                httpProxy.BlockedBy = new List<CrawlerType>();
+                                await _proxyRepository.UpdateProxy(httpProxy);
+                            }
+                            semaphoreSlim.Release();
+                            return proxyAddress;
                         }
-                        else
+
+                        if (httpProxy != null)
                         {
-                            httpProxy.IsActive = true;
+                            httpProxy.IsActive = false;
+                            httpProxy.UpdatedOn = Utility.GetCurrentUnixTime();
+                            httpProxy.BlockedBy = new List<CrawlerType>();
+                            await _proxyRepository.UpdateProxy(httpProxy);
+                        }
+
+                        semaphoreSlim.Release();
+                        return string.Empty;
+                    }
+                    catch (Exception)
+                    {
+                        if (httpProxy != null)
+                        {
+                            httpProxy.IsActive = false;
                             httpProxy.UpdatedOn = Utility.GetCurrentUnixTime();
                             httpProxy.BlockedBy = new List<CrawlerType>();
                             await _proxyRepository.UpdateProxy(httpProxy);
                         }
                         semaphoreSlim.Release();
-                        return proxyAddress;
+                        return string.Empty;
                     }
-
-                    if (httpProxy != null)
-                    {
-                        httpProxy.IsActive = false;
-                        httpProxy.UpdatedOn = Utility.GetCurrentUnixTime();
-                        httpProxy.BlockedBy = new List<CrawlerType>();
-                        await _proxyRepository.UpdateProxy(httpProxy);
-                    }
-                    semaphoreSlim.Release();
-                    return string.Empty;
-                }
-                catch (Exception)
-                {
-                    Console.WriteLine($"{index}. Failed - {proxyAddress}");
-                    if (httpProxy != null)
-                    {
-                        httpProxy.IsActive = false;
-                        httpProxy.UpdatedOn = Utility.GetCurrentUnixTime();
-                        httpProxy.BlockedBy = new List<CrawlerType>();
-                        await _proxyRepository.UpdateProxy(httpProxy);
-                    }
-                    semaphoreSlim.Release();
-                    return string.Empty;
                 }
             }
-
-
         }
 
         public async Task<HttpProxy> GetUnusedActiveProxy()

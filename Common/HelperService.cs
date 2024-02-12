@@ -19,6 +19,7 @@ namespace Common
             serviceCollection.AddScoped<IAuthService, AuthService>();
             serviceCollection.AddScoped<ICrawlRepository, CrawlRepository>();
             serviceCollection.AddScoped<IProxyScheduleRepository, ProxyScheduleRepository>();
+            serviceCollection.AddScoped<IProxyScheduleService, ProxyScheduleService>();
             serviceCollection.AddScoped<PythonScriptService>();
 
         }

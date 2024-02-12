@@ -5,8 +5,6 @@ using Core.IServices;
 using Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using MongoDB.Bson;
-using Repositories;
 using MongoDB.Driver;
 using Core.Helpers;
 
@@ -57,20 +55,6 @@ namespace BebodhCrawler.Controllers
             }
         }
 
-        //[HttpPost("UpdateProxy")]
-        //public async Task<bool> UpdateProxy(HttpProxy proxy)
-        //{
-        //    try
-        //    {
-        //        var result = await _proxyRepository.UpdateProxy(proxy);
-        //        return result;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new Exception(ex.Message);
-        //    }
-        //}
-
         [HttpPost("UpdateProxy")]
         public async Task<bool> UpdateProxy(ProxyUpdateRequestModel requestModel)
         {
@@ -85,19 +69,6 @@ namespace BebodhCrawler.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Post([FromBody] HttpProxy httpProxy)
-        {
-            try
-            {
-                await _proxyRepository.InsertOneAsync(httpProxy);
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
 
-            }
-        }
     }
 }

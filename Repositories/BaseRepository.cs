@@ -94,7 +94,7 @@ namespace Repositories
             return Enumerable.Empty<T>();
         }
 
-        public virtual async Task<T> FindByIdAsync(dynamic id)
+        public virtual async Task<T> FindByIdAsync(ObjectId id)
         {
             var result = await DbSet.FindAsync(Builders<T>.Filter.Eq("_id", id));
             return result.FirstOrDefault();
@@ -110,14 +110,20 @@ namespace Repositories
             await DbSet.InsertManyAsync(documents);
         }
 
-        public virtual async Task ReplaceOneAsync(dynamic id, T document)
+        public virtual async Task ReplaceOneAsync(ObjectId id, T document)
         {
             await DbSet.FindOneAndReplaceAsync(Builders<T>.Filter.Eq("_id", id), document);
         }
 
-        public virtual async Task DeleteByIdAsync(dynamic id)
+        public virtual async Task DeleteByIdAsync(ObjectId id)
         {
-            await DbSet.FindOneAndDeleteAsync(Builders<T>.Filter.Eq("_id", id));
+            try
+            {
+                await DbSet.FindOneAndDeleteAsync(Builders<T>.Filter.Eq("_id", id));
+            }
+            catch (Exception ex)
+            {
+            }
         }
 
         public virtual async Task DeleteOneAsync(Expression<Func<T, bool>> filterExpression)
