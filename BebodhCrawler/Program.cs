@@ -10,12 +10,12 @@ using Microsoft.OpenApi.Models;
 using MongoDB.Bson.Serialization.Serializers;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson;
-using System.Net.Security;
 using System.Text;
 using Core.Helpers;
-using Core.Entities;
 using System.Text.Json.Serialization;
 using AutoMapper;
+using Hangfire.PostgreSql;
+using Npgsql;
 
 namespace BebodhCrawler
 {
@@ -26,21 +26,22 @@ namespace BebodhCrawler
             var builder = WebApplication.CreateBuilder(args);
 
             var mongoDbSettings = builder.Configuration.GetSection("MongoDB").Get<MongoDBSettings>();
-            var sqlServerSettings = builder.Configuration.GetSection("SqlServer").Get<SqlServerSettings>();
-            var crawlerDbSettings = builder.Configuration.GetSection("CrawlerSqlServer").Get<SqlServerSettings>();
+            var pgHangfireConfig = builder.Configuration.GetSection("PgHangfireServer").Get<DbServerSettings>();
+            var crawlerDbSettings = builder.Configuration.GetSection("PgServer").Get<DbServerSettings>();
             var jwtSettings = builder.Configuration.GetSection("JWTCred").Get<JwtSettings>();
             var crawlerConfig = builder.Configuration.GetSection("CrawlerConfig").Get<CrawlerConfig>();
 
             BsonSerializer.RegisterSerializer(new DateTimeSerializer(DateTimeKind.Local, BsonType.String));
 
             builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDB"));
-            builder.Services.Configure<SqlServerSettings>(builder.Configuration.GetSection("SqlServer"));
+            builder.Services.Configure<DbServerSettings>(builder.Configuration.GetSection("PgHangfireServer"));
+            builder.Services.Configure<DbServerSettings>(builder.Configuration.GetSection("PgServer"));
             builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JWTCred"));
             builder.Services.Configure<CrawlerConfig>(builder.Configuration.GetSection("CrawlerConfig"));
 
             builder.Services.AddDbContext<CrawlerDbContext>(options =>
             {
-                options.UseSqlServer(crawlerDbSettings.ConnectionURI);
+                options.UseNpgsql(crawlerDbSettings.ConnectionURI);
             });
 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options =>
@@ -123,11 +124,13 @@ namespace BebodhCrawler
 
             HelperService.RegisterDependencies(builder.Services);
 
+            //EnsureHangfireDatabaseExists(pgHangfireConfig.ConnectionURI);
+
             builder.Services.AddHangfire(config =>
             {
                 config.UseSimpleAssemblyNameTypeSerializer();
                 config.UseRecommendedSerializerSettings();
-                config.UseSqlServerStorage(sqlServerSettings.ConnectionURI);
+                config.UsePostgreSqlStorage(c => c.UseNpgsqlConnection(pgHangfireConfig.ConnectionURI));
             });
 
             builder.Services.AddHangfireServer();
@@ -155,6 +158,29 @@ namespace BebodhCrawler
             app.MapHangfireDashboard();
 
             app.Run();
+        }
+
+        public static void EnsureHangfireDatabaseExists(string connectionString)
+        {
+            var builder = new NpgsqlConnectionStringBuilder(connectionString);
+            var databaseName = builder.Database;
+            builder.Database = "";
+
+            var connectionStr = $"Server={builder.Host};Database=;User Id={builder.Username};Password={builder.Password}";
+
+            using (var connection = new NpgsqlConnection(connectionStr))
+            {
+                connection.Open();
+
+                var databaseExists = new NpgsqlCommand($"SELECT COUNT(*) FROM pg_database WHERE datname = '{databaseName}'", connection)
+                    .ExecuteScalar() is int count && count > 0;
+
+                if (!databaseExists)
+                {
+                    // Create the Hangfire database
+                    new NpgsqlCommand($"CREATE DATABASE {databaseName}", connection).ExecuteNonQuery();
+                }
+            }
         }
     }
 }

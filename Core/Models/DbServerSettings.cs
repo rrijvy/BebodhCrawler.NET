@@ -1,6 +1,6 @@
 ﻿namespace Core.Models
 {
-    public class SqlServerSettings
+    public class DbServerSettings
     {
         public string ConnectionURI { get; set; }
 
