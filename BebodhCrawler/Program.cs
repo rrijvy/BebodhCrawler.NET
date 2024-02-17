@@ -25,17 +25,27 @@ namespace BebodhCrawler
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            var mongoDbSettings = builder.Configuration.GetSection("MongoDB").Get<MongoDBSettings>();
-            var pgHangfireConfig = builder.Configuration.GetSection("PgHangfireServer").Get<DbServerSettings>();
-            var crawlerDbSettings = builder.Configuration.GetSection("PgServer").Get<DbServerSettings>();
+            //var mongoDbSettings = builder.Configuration.GetSection("MongoDB").Get<MongoDBSettings>();
+            //var pgHangfireConfig = builder.Configuration.GetSection("PgHangfireServer").Get<HangfireDbServerSettings>();
+            //var crawlerDbSettings = builder.Configuration.GetSection("PgServer").Get<DbServerSettings>();
+
+            var mongoDbSettings = builder.Configuration.GetSection("MongoDB_Dev").Get<MongoDBSettings>();
+            var pgHangfireConfig = builder.Configuration.GetSection("PgHangfireServer_Dev").Get<HangfireDbServerSettings>();
+            var crawlerDbSettings = builder.Configuration.GetSection("PgServer_Dev").Get<DbServerSettings>();
+
             var jwtSettings = builder.Configuration.GetSection("JWTCred").Get<JwtSettings>();
             var crawlerConfig = builder.Configuration.GetSection("CrawlerConfig").Get<CrawlerConfig>();
 
             BsonSerializer.RegisterSerializer(new DateTimeSerializer(DateTimeKind.Local, BsonType.String));
 
-            builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDB"));
-            builder.Services.Configure<DbServerSettings>(builder.Configuration.GetSection("PgHangfireServer"));
-            builder.Services.Configure<DbServerSettings>(builder.Configuration.GetSection("PgServer"));
+            //builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDB"));
+            //builder.Services.Configure<HangfireDbServerSettings>(builder.Configuration.GetSection("PgHangfireServer"));
+            //builder.Services.Configure<DbServerSettings>(builder.Configuration.GetSection("PgServer"));
+
+            builder.Services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDB_Dev"));
+            builder.Services.Configure<HangfireDbServerSettings>(builder.Configuration.GetSection("PgHangfireServer_Dev"));
+            builder.Services.Configure<DbServerSettings>(builder.Configuration.GetSection("PgServer_Dev"));
+
             builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JWTCred"));
             builder.Services.Configure<CrawlerConfig>(builder.Configuration.GetSection("CrawlerConfig"));
 
@@ -124,7 +134,7 @@ namespace BebodhCrawler
 
             HelperService.RegisterDependencies(builder.Services);
 
-            //EnsureHangfireDatabaseExists(pgHangfireConfig.ConnectionURI);
+            EnsureHangfireDatabaseExists(pgHangfireConfig.ConnectionURI);
 
             builder.Services.AddHangfire(config =>
             {
@@ -136,6 +146,8 @@ namespace BebodhCrawler
             builder.Services.AddHangfireServer();
 
             var app = builder.Build();
+
+            EnsureCrawlerMasterDatabaseExists(app);
 
             if (app.Environment.IsDevelopment() || app.Environment.IsProduction() || app.Environment.IsStaging())
             {
@@ -162,23 +174,56 @@ namespace BebodhCrawler
 
         public static void EnsureHangfireDatabaseExists(string connectionString)
         {
-            var builder = new NpgsqlConnectionStringBuilder(connectionString);
-            var databaseName = builder.Database;
-            builder.Database = "";
-
-            var connectionStr = $"Server={builder.Host};Database=;User Id={builder.Username};Password={builder.Password}";
-
-            using (var connection = new NpgsqlConnection(connectionStr))
+            try
             {
-                connection.Open();
+                var builder = new NpgsqlConnectionStringBuilder(connectionString);
+                var databaseName = builder.Database;
+                builder.Database = "";
 
-                var databaseExists = new NpgsqlCommand($"SELECT COUNT(*) FROM pg_database WHERE datname = '{databaseName}'", connection)
-                    .ExecuteScalar() is int count && count > 0;
+                var connectionStr = $"Server={builder.Host};Database=postgres;User Id={builder.Username};Password={builder.Password}";
 
-                if (!databaseExists)
+                using (var connection = new NpgsqlConnection(connectionStr))
                 {
-                    // Create the Hangfire database
-                    new NpgsqlCommand($"CREATE DATABASE {databaseName}", connection).ExecuteNonQuery();
+                    connection.Open();
+
+                    var result = new NpgsqlCommand($"SELECT COUNT(*) FROM pg_database WHERE datname = '{databaseName}'", connection)
+                        .ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        int.TryParse(result.ToString(), out var db_count);
+
+                        var databaseExists = db_count > 0;
+
+                        if (!databaseExists)
+                        {
+                            new NpgsqlCommand($"CREATE DATABASE {databaseName}", connection).ExecuteNonQuery();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        public static void EnsureCrawlerMasterDatabaseExists(WebApplication app)
+        {
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                try
+                {
+                    var context = services.GetRequiredService<CrawlerDbContext>();
+                    if (!context.Database.EnsureCreated())
+                    {
+                        context.Database.Migrate();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error applying database migrations: {ex.Message}");
                 }
             }
         }

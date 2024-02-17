@@ -1,23 +1,17 @@
 ﻿using Core.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 
 namespace Core.Data
 {
     public class CrawlerDbContext : IdentityDbContext<ApplicationUser>
     {
-        public CrawlerDbContext(DbContextOptions<CrawlerDbContext> options) : base(options)
-        {
-        }
+        private readonly IOptions<DbServerSettings> _dbConfig;
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public CrawlerDbContext(DbContextOptions<CrawlerDbContext> options, IOptions<DbServerSettings> dbConfig) : base(options)
         {
-            //if (!optionsBuilder.IsConfigured)
-            //{
-            //    optionsBuilder.UseNpgsql(_dbConfig.ConnectionURI);
-
-            //    this.Database.Migrate();
-            //}
+            _dbConfig = dbConfig;
         }
     }
 }
