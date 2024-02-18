@@ -60,7 +60,7 @@ namespace Services
                     issuer: _jwtSettings.Value.Issuer,
                     audience: _jwtSettings.Value.Issuer,
                     claims: claims,
-                    expires: DateTime.Now.AddDays(1), 
+                    expires: DateTime.Now.AddMinutes(5), 
                     signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
                 );
 

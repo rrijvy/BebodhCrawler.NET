@@ -21,9 +21,15 @@ namespace BebodhCrawler
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Host.ConfigureLogging((context, logging) =>
+            {
+                logging.ClearProviders();
+                logging.AddConsole();
+            });
 
             //var mongoDbSettings = builder.Configuration.GetSection("MongoDB").Get<MongoDBSettings>();
             //var pgHangfireConfig = builder.Configuration.GetSection("PgHangfireServer").Get<HangfireDbServerSettings>();
@@ -147,7 +153,7 @@ namespace BebodhCrawler
 
             var app = builder.Build();
 
-            EnsureCrawlerMasterDatabaseExists(app);
+            await EnsureCrawlerMasterDatabaseExists(app);
 
             if (app.Environment.IsDevelopment() || app.Environment.IsProduction() || app.Environment.IsStaging())
             {
@@ -204,27 +210,29 @@ namespace BebodhCrawler
             }
             catch (Exception ex)
             {
-
+                Console.WriteLine($"Error applying database migrations: {ex.Message}");
             }
         }
 
-        public static void EnsureCrawlerMasterDatabaseExists(WebApplication app)
+        public static async Task EnsureCrawlerMasterDatabaseExists(WebApplication app)
         {
-            using (var scope = app.Services.CreateScope())
+
+            try
             {
-                var services = scope.ServiceProvider;
-                try
+                using (var scope = app.Services.CreateScope())
                 {
+                    var services = scope.ServiceProvider;
                     var context = services.GetRequiredService<CrawlerDbContext>();
-                    if (!context.Database.EnsureCreated())
+                    var pendingMigrations = await context.Database.GetPendingMigrationsAsync();
+                    if (pendingMigrations != null && pendingMigrations.Count() > 0)
                     {
                         context.Database.Migrate();
                     }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Error applying database migrations: {ex.Message}");
-                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error applying database migrations: {ex.Message}");
             }
         }
     }

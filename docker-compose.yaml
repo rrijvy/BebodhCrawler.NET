@@ -1,57 +1,59 @@
 version: "3.8"
 
 networks:
-  bebodh_crawler_network:
+    bebodh_crawler_network:
 
 services:
-  bebodh_crawler_api_net:
-    container_name: bebodh_crawler_api_net
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - 1996:80
-    network_mode: bebodh_crawler_network
-    depends_on:
-      - bebodh_crawler_db_postgres
-      - bebodh_crawler_db_mongo
+   bebodh_crawler_db_postgres:
+       image: postgres
+       container_name: bebodh_crawler_db_postgres
+       ports:
+            - 1997:5432
+       environment:
+            POSTGRES_USER: rrijvy
+            POSTGRES_PASSWORD: password
+       network_mode: bebodh_crawler_network
+       volumes:
+            - postgresql_data:/var/lib/postgresql/data
   
-  bebodh_crawler_db_postgres:
-    image: postgres
-    container_name: bebodh_crawler_db_postgres
-    ports:
-      - 1997:5432
-    environment:
-      POSTGRES_USER: rrijvy
-      POSTGRES_PASSWORD: password
-    network_mode: bebodh_crawler_network
-    volumes:
-      - postgresql_data:/var/lib/postgresql/data
-  
-  bebodh_crawler_db_mongo:
-    image: mongo
-    container_name: bebodh_crawler_db_mongo
-    ports:
-      - 1998:27017
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: rrijvy
-      MONGO_INITDB_ROOT_PASSWORD: password
-    network_mode: bebodh_crawler_network
-    volumes:
-      - mongodb_data:/data/db
+   bebodh_crawler_db_mongo:
+        image: mongo
+        container_name: bebodh_crawler_db_mongo
+        ports:
+            - 1998:27017
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: rrijvy
+            MONGO_INITDB_ROOT_PASSWORD: password
+        network_mode: bebodh_crawler_network
+        volumes:
+            - mongodb_data:/data/db
 
+   bebodh_crawler_api_net:
+        container_name: bebodh_crawler_api_net
+        build:
+            context: .
+            dockerfile: Dockerfile
+        ports:
+            - 1996:80
+        network_mode: bebodh_crawler_network
+        depends_on:
+            - bebodh_crawler_db_postgres
+            - bebodh_crawler_db_mongo
+  
+  
 volumes:
-  postgresql_data:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: "_db/postgresql_data"
-  mongodb_data:
-    driver: local  
-    driver_opts:
-      type: none
-      o: bind
-      device: "_db/mongodb_data"
+    postgresql_data:
+        driver: local
+        driver_opts:
+            type: none
+            o: bind
+            device: "_db/postgresql_data"
+
+    mongodb_data:
+        driver: local  
+        driver_opts:
+            type: none
+            o: bind
+            device: "_db/mongodb_data"
   
 

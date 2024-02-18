@@ -1,12 +1,14 @@
-﻿using Core.Models;
+﻿using BebodhCrawler.Extensions;
+using Core.Helpers;
+using Core.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System.Text;
 
 namespace BebodhCrawler.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class GoogleMapCrawlerController : ControllerBase
     {
         private readonly IHttpClientFactory _clientFactory;
@@ -19,14 +21,12 @@ namespace BebodhCrawler.Controllers
         [HttpPost("RunGoogleMapScrapper")]
         public async Task<IActionResult> RunGoogleMapScrapper(GoogleMapScrapperRequestModel requestModel)
         {
+            var currentUserId = this.GetCurrentUserId();
+            var currentUserName = this.GetCurrentUserName();
+
             var httpClient = _clientFactory.CreateClient();
-
-            var myContent = JsonConvert.SerializeObject(requestModel);
-            var buffer = System.Text.Encoding.UTF8.GetBytes(myContent);
-            var byteContent = new ByteArrayContent(buffer);
-            byteContent.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/json");
-
-            var response = await httpClient.PostAsync("http://localhost:8001/googlemapscrap/run", byteContent);
+            var requestBody = HttpClientHelper.GetByteArrayContent(requestModel);
+            var response = await httpClient.PostAsync("http://localhost:8000/googlemapscrap/run", requestBody);
             if (response.IsSuccessStatusCode)
             {
                 return Ok(response);
