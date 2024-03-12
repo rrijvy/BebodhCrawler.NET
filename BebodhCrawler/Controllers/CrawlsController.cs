@@ -3,6 +3,7 @@ using Core.Helpers;
 using Core.IRepositories;
 using Core.Models;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Driver;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,35 +13,45 @@ namespace BebodhCrawler.Controllers
     [ApiController]
     public class CrawlsController : ControllerBase
     {
-        private readonly IProxyRepository proxyRepository;
-        private readonly ICrawlRepository crawlRepository;
+        private readonly IProxyRepository _proxyRepository;
+        private readonly ICrawlRepository _crawlRepository;
 
         public CrawlsController(IProxyRepository proxyRepository, ICrawlRepository crawlRepository)
         {
-            this.proxyRepository = proxyRepository;
-            this.crawlRepository = crawlRepository;
+            _proxyRepository = proxyRepository;
+            _crawlRepository = crawlRepository;
         }
 
         [HttpPost("GetCrawls")]
         public async Task<ActionResult<List<Crawl>>> GetCrawls(CrawlRequestModel value)
         {
-            var result = await this.crawlRepository.GetAll();
+            var result = await _crawlRepository.GetAll();
             return Ok(result);
         }
 
-        [HttpPost("UpdateCrawls")]
-        public async Task<ActionResult> UpdateCrawls(CrawlRequestModel value)
+        [HttpPost("InitCrawl")]
+        public async Task<ActionResult> InitCrawl(CrawlRequestModel value)
         {
-            await this.crawlRepository.InsertOneAsync(new Crawl
+            await _crawlRepository.InsertOneAsync(new Crawl
             {
-                CrawlerName = value.CrawlerName,
-                OutputPath = value.OutputPath,
                 Progress = value.Progress,
                 AddedOn = Utility.GetCurrentUnixTime(),
             });
 
             return Ok();
         }
-    }
 
+        [HttpPost("UpdateCrawls")]
+        public async Task<ActionResult> UpdateCrawls(CrawlRequestModel requestModel)
+        {
+            var filterDefination = Builders<Crawl>.Filter.Eq(x => x.Id, requestModel.CrawlId);
+            var updateDefination = Builders<Crawl>.Update
+                .Set(x => x.Progress, requestModel.Progress)
+                .Set(x => x.OutputPath, requestModel.OutputPath);
+            var result = await _crawlRepository.UpdateOneAsync(filterDefination, updateDefination);
+            if (result.ModifiedCount > 0) return Ok();
+            return BadRequest();
+
+        }
+    }
 }

@@ -20,5 +20,6 @@ namespace Core.IRepositories
         Task DeleteByIdAsync(ObjectId id);
         Task DeleteOneAsync(Expression<Func<T, bool>> filterExpression);
         Task DeleteManyAsync(Expression<Func<T, bool>> filterExpression);
+        Task<UpdateResult> UpdateOneAsync(FilterDefinition<T> filterDefinition, UpdateDefinition<T> updateDefinition);
     }
 }

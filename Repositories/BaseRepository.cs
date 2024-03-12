@@ -4,12 +4,7 @@ using MongoDB.Driver;
 using Microsoft.Extensions.Options;
 using System.Linq.Expressions;
 using MongoDB.Bson;
-using Core.Entities;
-using MongoDB.Driver.Core.Configuration;
 using MongoDB.Driver.Linq;
-using Core.Helpers;
-using MongoDB.Bson.Serialization.Serializers;
-using MongoDB.Bson.Serialization;
 
 namespace Repositories
 {
@@ -108,6 +103,11 @@ namespace Repositories
         public virtual async Task InsertManyAsync(ICollection<T> documents)
         {
             await DbSet.InsertManyAsync(documents);
+        }
+
+        public virtual async Task<UpdateResult> UpdateOneAsync(FilterDefinition<T> filterDefinition, UpdateDefinition<T> updateDefinition)
+        {
+            return await DbSet.UpdateOneAsync(filterDefinition, updateDefinition);
         }
 
         public virtual async Task ReplaceOneAsync(ObjectId id, T document)

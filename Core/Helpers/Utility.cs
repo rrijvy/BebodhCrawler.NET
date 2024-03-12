@@ -156,5 +156,14 @@ namespace Core.Helpers
 
             throw new ArgumentException("Expression is not a valid property expression");
         }
+
+        public static Crawl InitCrawl(string? userId)
+        {
+            return new Crawl
+            {
+                AddedOn = GetCurrentUnixTime(),
+                UserId = userId ?? string.Empty,
+            };
+        }
     }
 }

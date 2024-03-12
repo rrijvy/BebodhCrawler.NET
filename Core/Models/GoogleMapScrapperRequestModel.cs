@@ -2,6 +2,7 @@
 {
     public class GoogleMapScrapperRequestModel
     {
-        public string SearchText { get; set; }
+        public string Queries { get; set; }
+        public string TaskId { get; set; }
     }
 }
