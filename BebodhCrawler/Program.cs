@@ -31,13 +31,13 @@ namespace BebodhCrawler
                 logging.AddConsole();
             });
 
-            //var mongoDbSettings = builder.Configuration.GetSection("MongoDB").Get<MongoDBSettings>();
-            //var pgHangfireConfig = builder.Configuration.GetSection("PgHangfireServer").Get<HangfireDbServerSettings>();
-            //var crawlerDbSettings = builder.Configuration.GetSection("PgServer").Get<DbServerSettings>();
+            var mongoDbSettings = builder.Configuration.GetSection("MongoDB").Get<MongoDBSettings>();
+            var pgHangfireConfig = builder.Configuration.GetSection("PgHangfireServer").Get<HangfireDbServerSettings>();
+            var crawlerDbSettings = builder.Configuration.GetSection("PgServer").Get<DbServerSettings>();
 
-            var mongoDbSettings = builder.Configuration.GetSection("MongoDB_Dev").Get<MongoDBSettings>();
-            var pgHangfireConfig = builder.Configuration.GetSection("PgHangfireServer_Dev").Get<HangfireDbServerSettings>();
-            var crawlerDbSettings = builder.Configuration.GetSection("PgServer_Dev").Get<DbServerSettings>();
+            //var mongoDbSettings = builder.Configuration.GetSection("MongoDB_Dev").Get<MongoDBSettings>();
+            //var pgHangfireConfig = builder.Configuration.GetSection("PgHangfireServer_Dev").Get<HangfireDbServerSettings>();
+            //var crawlerDbSettings = builder.Configuration.GetSection("PgServer_Dev").Get<DbServerSettings>();
 
             var jwtSettings = builder.Configuration.GetSection("JWTCred").Get<JwtSettings>();
             var crawlerConfig = builder.Configuration.GetSection("CrawlerConfig").Get<CrawlerConfig>();
