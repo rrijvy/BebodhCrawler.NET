@@ -73,7 +73,7 @@ namespace Repositories
             return await result.ToListAsync();
         }
 
-        public virtual async Task<IEnumerable<T>> FindAllAsync(FilterDefinition<T> filterDefinition = null, SortDefinition<T> sortDefinition = null)
+        public virtual async Task<IEnumerable<T>> FindAllAsync(FilterDefinition<T>? filterDefinition = null, SortDefinition<T>? sortDefinition = null)
         {
             if (filterDefinition != null && sortDefinition != null)
             {
@@ -123,6 +123,7 @@ namespace Repositories
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
             }
         }
 

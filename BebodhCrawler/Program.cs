@@ -16,6 +16,7 @@ using System.Text.Json.Serialization;
 using AutoMapper;
 using Hangfire.PostgreSql;
 using Npgsql;
+using BebodhCrawler.Hubs;
 
 namespace BebodhCrawler
 {
@@ -25,19 +26,16 @@ namespace BebodhCrawler
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Host.ConfigureLogging((context, logging) =>
-            {
-                logging.ClearProviders();
-                logging.AddConsole();
-            });
+            builder.Logging.ClearProviders();
+            builder.Logging.AddConsole();
 
-            var mongoDbSettings = builder.Configuration.GetSection("MongoDB").Get<MongoDBSettings>();
-            var pgHangfireConfig = builder.Configuration.GetSection("PgHangfireServer").Get<HangfireDbServerSettings>();
-            var crawlerDbSettings = builder.Configuration.GetSection("PgServer").Get<DbServerSettings>();
+            //var mongoDbSettings = builder.Configuration.GetSection("MongoDB").Get<MongoDBSettings>();
+            //var pgHangfireConfig = builder.Configuration.GetSection("PgHangfireServer").Get<HangfireDbServerSettings>();
+            //var crawlerDbSettings = builder.Configuration.GetSection("PgServer").Get<DbServerSettings>();
 
-            //var mongoDbSettings = builder.Configuration.GetSection("MongoDB_Dev").Get<MongoDBSettings>();
-            //var pgHangfireConfig = builder.Configuration.GetSection("PgHangfireServer_Dev").Get<HangfireDbServerSettings>();
-            //var crawlerDbSettings = builder.Configuration.GetSection("PgServer_Dev").Get<DbServerSettings>();
+            var mongoDbSettings = builder.Configuration.GetSection("MongoDB_Dev").Get<MongoDBSettings>();
+            var pgHangfireConfig = builder.Configuration.GetSection("PgHangfireServer_Dev").Get<HangfireDbServerSettings>();
+            var crawlerDbSettings = builder.Configuration.GetSection("PgServer_Dev").Get<DbServerSettings>();
 
             var jwtSettings = builder.Configuration.GetSection("JWTCred").Get<JwtSettings>();
             var crawlerConfig = builder.Configuration.GetSection("CrawlerConfig").Get<CrawlerConfig>();
@@ -151,6 +149,8 @@ namespace BebodhCrawler
 
             builder.Services.AddHangfireServer();
 
+            builder.Services.AddSignalR();
+
             var app = builder.Build();
 
             await EnsureCrawlerMasterDatabaseExists(app);
@@ -174,6 +174,8 @@ namespace BebodhCrawler
             app.UseHangfireDashboard();
 
             app.MapHangfireDashboard();
+
+            app.MapHub<SocketHub>("hubs");
 
             app.Run();
         }

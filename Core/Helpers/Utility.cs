@@ -80,7 +80,7 @@ namespace Core.Helpers
             }
         }
 
-        public static string? GetNodeInnerText(HtmlNode parentNode, string xpath, string attribute = null)
+        public static string? GetNodeInnerText(HtmlNode parentNode, string xpath, string? attribute = null)
         {
             try
             {
