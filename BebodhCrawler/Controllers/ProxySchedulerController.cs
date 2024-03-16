@@ -75,33 +75,41 @@ namespace BebodhCrawler.Controllers
         [HttpGet("GetAllRecurringSchedules")]
         public async Task<IActionResult> GetAllRecurringSchedules()
         {
-            var connection = JobStorage.Current.GetConnection();
-            var recurringJobs = connection.GetRecurringJobs();
-            var proxySchedules = await _proxyScheduleRepository.GetAll();
-            var hangfireRecurringJobs = new List<HangfireJob>();
-            foreach (var job in recurringJobs)
+            try
             {
-                var schedule = proxySchedules.FirstOrDefault(x => x.Id.ToString().Equals(job.Id));
-                var hangfireJob = new HangfireJob
+                var connection = JobStorage.Current.GetConnection();
+                var recurringJobs = connection.GetRecurringJobs();
+                var proxySchedules = await _proxyScheduleRepository.GetAll();
+                var hangfireRecurringJobs = new List<HangfireJob>();
+                foreach (var job in recurringJobs)
                 {
-                    JobId = job.Id,
-                    Cron = job.Cron,
-                    Queue = job.Queue,
-                    NextExecution = job.NextExecution,
-                    LastJobId = job.LastJobId,
-                    LastJobState = job.LastJobState,
-                    LastExecution = job.LastExecution,
-                    CreatedAt = job.CreatedAt,
-                    Removed = job.Removed,
-                    TimeZoneId = job.TimeZoneId,
-                    Error = job.Error,
-                    RetryAttempt = job.RetryAttempt,
-                    JobTitle = schedule?.Title ?? string.Empty
-                };
-                hangfireRecurringJobs.Add(hangfireJob);
+                    var schedule = proxySchedules.FirstOrDefault(x => x.Id.ToString().Equals(job.Id));
+                    var hangfireJob = new HangfireJob
+                    {
+                        JobId = job.Id,
+                        Cron = job.Cron,
+                        Queue = job.Queue,
+                        NextExecution = job.NextExecution,
+                        LastJobId = job.LastJobId,
+                        LastJobState = job.LastJobState,
+                        LastExecution = job.LastExecution,
+                        CreatedAt = job.CreatedAt,
+                        Removed = job.Removed,
+                        TimeZoneId = job.TimeZoneId,
+                        Error = job.Error,
+                        RetryAttempt = job.RetryAttempt,
+                        JobTitle = schedule?.Title ?? string.Empty
+                    };
+                    hangfireRecurringJobs.Add(hangfireJob);
+                }
+                connection.Dispose();
+                return Ok(hangfireRecurringJobs);
             }
-            connection.Dispose();
-            return Ok(hangfireRecurringJobs);
+            catch (Exception)
+            {
+                return Ok(new List<HangfireJob>());
+
+            }
         }
 
         [HttpGet("RunProxyRetriver")]
