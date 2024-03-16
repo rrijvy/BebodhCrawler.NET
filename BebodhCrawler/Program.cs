@@ -25,8 +25,8 @@ namespace BebodhCrawler
         {
             var builder = WebApplication.CreateBuilder(args);
 
-            builder.Logging.ClearProviders();
-            builder.Logging.AddConsole();
+            //builder.Logging.ClearProviders();
+            //builder.Logging.AddConsole();
 
             //var mongoDbSettings = builder.Configuration.GetSection("MongoDB").Get<MongoDBSettings>();
             //var pgHangfireConfig = builder.Configuration.GetSection("PgHangfireServer").Get<HangfireDbServerSettings>();
