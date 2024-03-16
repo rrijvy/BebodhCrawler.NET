@@ -3,6 +3,7 @@ using Core.Helpers;
 using Core.IRepositories;
 using Core.Models;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using MongoDB.Driver;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -44,7 +45,10 @@ namespace BebodhCrawler.Controllers
         [HttpPost("UpdateCrawls")]
         public async Task<ActionResult> UpdateCrawls(CrawlRequestModel requestModel)
         {
-            var filterDefination = Builders<Crawl>.Filter.Eq(x => x.Id, requestModel.CrawlId);
+            if (requestModel.TaskId.Equals(ObjectId.Empty))
+                return BadRequest();
+
+            var filterDefination = Builders<Crawl>.Filter.Eq(x => x.Id, requestModel.TaskId);
             var updateDefination = Builders<Crawl>.Update
                 .Set(x => x.Progress, requestModel.Progress)
                 .Set(x => x.OutputPath, requestModel.OutputPath);

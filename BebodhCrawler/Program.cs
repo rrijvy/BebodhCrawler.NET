@@ -16,7 +16,6 @@ using System.Text.Json.Serialization;
 using AutoMapper;
 using Hangfire.PostgreSql;
 using Npgsql;
-using BebodhCrawler.Hubs;
 
 namespace BebodhCrawler
 {
@@ -149,8 +148,6 @@ namespace BebodhCrawler
 
             builder.Services.AddHangfireServer();
 
-            builder.Services.AddSignalR();
-
             var app = builder.Build();
 
             await EnsureCrawlerMasterDatabaseExists(app);
@@ -174,8 +171,6 @@ namespace BebodhCrawler
             app.UseHangfireDashboard();
 
             app.MapHangfireDashboard();
-
-            app.MapHub<SocketHub>("hubs");
 
             app.Run();
         }
