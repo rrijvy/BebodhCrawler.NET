@@ -45,10 +45,14 @@ namespace BebodhCrawler.Controllers
         [HttpPost("UpdateCrawls")]
         public async Task<ActionResult> UpdateCrawls(CrawlRequestModel requestModel)
         {
-            if (requestModel.TaskId.Equals(ObjectId.Empty))
-                return BadRequest();
+            if (string.IsNullOrEmpty(requestModel.TaskId))
+                return BadRequest("Taskid required.");
 
-            var filterDefination = Builders<Crawl>.Filter.Eq(x => x.Id, requestModel.TaskId);
+            var canParse = ObjectId.TryParse(requestModel.TaskId, out ObjectId taskId);
+
+            if (!canParse) return BadRequest("Can't parse taskid.");
+
+            var filterDefination = Builders<Crawl>.Filter.Eq(x => x.Id, taskId);
             var updateDefination = Builders<Crawl>.Update
                 .Set(x => x.Progress, requestModel.Progress)
                 .Set(x => x.OutputPath, requestModel.OutputPath);

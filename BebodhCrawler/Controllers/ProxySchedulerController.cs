@@ -6,6 +6,7 @@ using Core.IServices;
 using Core.Models;
 using Hangfire;
 using Hangfire.Storage;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MongoDB.Bson;
 
@@ -13,6 +14,7 @@ namespace BebodhCrawler.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProxySchedulerController : ControllerBase
     {
         private readonly IProxyScheduleRepository _proxyScheduleRepository;
